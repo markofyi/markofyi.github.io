@@ -4208,7 +4208,7 @@ Config.Weapons = {\n${formattedLuaEntries}
                                 const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
                                     .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
 
-                                return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase()}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammotype = '${entry.ammotype}',\n\t \n},`;
+                                return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammotype = '${entry.ammotype}',\n\t \n},`;
                                 
                             });
                         } else {
@@ -4218,28 +4218,63 @@ Config.Weapons = {\n${formattedLuaEntries}
 
                     text = `${formattedLuaEntries.replaceAll("AMMO_RIFLE", "ammo-rifle").replaceAll("AMMO_PISTOL", "ammo-9").replaceAll("AMMO_SNIPER", "ammo-sniper").replaceAll("AMMO_SHOTGUN", "ammo-shotgun").replaceAll("AMMO_SMG", "ammo-9")}`
 
-                    // Iterate through each selected weapon and process its attachments
                     selectedNames.forEach(name => {
-                        if (attachmentMappings[name]) {
-                            attachmentMappings[name].forEach(entry => {
-                                if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-                                    text += `\n['${entry.name.replace("weapon_", "")}_${entry.attachment.replace("_attachment", "")}'] = {\n\tlabel = '${entry.attachment.replace("_attachment", "").replaceAll("_", " ").replace(/^./, str => str.toUpperCase())}',\n\tweight = 200,\n\ttype = '${entry.attachment.replace("_attachment", "").replace("_", "").replace(/\d+/g, "")}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
+    let componentCounters = {}; // Reset counters for each selected name
+    let previousEntryName = ""; // Track the previous entry name
 
-                                    /*
-                                    ['x19_clip1'] = {
-                                        label = 'Magazine 1',
-                                        weight = 200,
-                                        type = 'magazine',
-                                        client = {
-                                            component = {'COMPONENT_MARKOMODSX19_CLIP_01'},
-                                            usetime = 2500
-                                        }
-                                    },
-                                    */
-                                }
-                            });
-                        }
-                    });
+    if (attachmentMappings[name]) {
+        attachmentMappings[name].forEach(entry => {
+            if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
+
+                // Reset counters if the entry name changes
+                if (entry.name !== previousEntryName) {
+                    componentCounters = {};
+                    previousEntryName = entry.name;
+                }
+
+                const componentType = entry.attachment
+                    .replace("_attachment", "")
+                    .replace("_", "")
+                    .replace(/\d+/g, ""); // Remove all numbers
+
+                // Initialize or increment the counter for the component type
+                if (!componentCounters[componentType]) {
+                    componentCounters[componentType] = 1;
+                } else {
+                    componentCounters[componentType]++;
+                }
+
+                const labelNumber = componentCounters[componentType];
+
+                // Format the label by removing numbers, adding the entry name, and the counter
+                const formattedLabel = entry.name.replace("weapon_", "").replaceAll("_", " ").replace(/^./, str => str.toUpperCase()) + " " +
+                    entry.attachment
+                    .replace("_attachment", "")
+                    .replaceAll("_", "")
+                    .replace(/\d+/g, "") // Remove all numbers
+                    .replace(/^./, str => str.toUpperCase()) 
+                    + ` ${labelNumber}`; // Append the label number
+
+                text += `\n['${entry.name.replace("weapon_", "")}_${entry.attachment.replace("_attachment", "")}'] = {\n\tlabel = '${formattedLabel}',\n\tweight = 200,\n\ttype = '${componentType}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
+
+                /*
+                ['x19_clip1'] = {
+                    label = 'Magazine 1',
+                    weight = 200,
+                    type = 'magazine',
+                    client = {
+                        component = {'COMPONENT_MARKOMODSX19_CLIP_01'},
+                        usetime = 2500
+                    }
+                },
+                */
+            }
+        });
+    }
+});
+
+
+
 
 
                     // \n${formattedLuaEntries}
