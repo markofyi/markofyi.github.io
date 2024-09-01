@@ -83,6 +83,7 @@ const nameMappings = {
 // THE ORDER: 
 
 const attachmentMappings = {
+    "ZK Knife": [],
     "Virtus": [
         { name: 'weapon_virtus_1', attachment: 'frame_attachment', component: 'COMPONENT_MARKOMODS_VIRTUS_BODY1_2' },
         { name: 'weapon_virtus_1', attachment: 'frame_attachment_1', component: 'COMPONENT_MARKOMODS_VIRTUS_BODY2_2' },

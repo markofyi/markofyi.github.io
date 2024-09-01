@@ -170,6 +170,7 @@
             <select id="framework" class="dropdown" onchange="updateSelected()">
                 <option value="qb-core" selected>QB Core</option>
                 <option value="esx">ESX</option>
+                <option value="ox">OX Inventory</option>
             </select>
         </div>
         <div class="dropdown-container">
@@ -180,7 +181,8 @@
                 <label><input type="checkbox" value="Mutant" onchange="updateCheckedLabels()"> Mutant</label>
                 <label><input type="checkbox" value="Virtus" onchange="updateCheckedLabels()"> Virtus</label>
                 <label><input type="checkbox" value="M320" onchange="updateCheckedLabels()"> M320</label>
-                <label><input type="checkbox" value="Tactical Sniper" onchange="updateCheckedLabels()"> Tactical Sniper</label>
+                <label><input type="checkbox" value="Tactical Sniper" onchange="updateCheckedLabels()"> Tactical
+                    Sniper</label>
                 <label><input type="checkbox" value="AGC" onchange="updateCheckedLabels()"> AGC</label>
                 <label><input type="checkbox" value="Shotgun 590" onchange="updateCheckedLabels()"> Shotgun 590</label>
                 <label><input type="checkbox" value="Police M4" onchange="updateCheckedLabels()"> Police M4</label>
@@ -218,11 +220,13 @@
             &nbsp;
         </div>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('weapons.lua')">Download qb-core/shared/weapons.lua</button>
+            <button class="download-button" onclick="downloadFile('weapons.lua')">Download
+                qb-core/shared/weapons.lua</button>
             &nbsp;
         </div>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('items.lua')">Download qb-core/shared/items.lua</button>
+            <button class="download-button" onclick="downloadFile('items.lua')">Download
+                qb-core/shared/items.lua</button>
             &nbsp;
         </div>
         <div class="download-item">
@@ -234,6 +238,14 @@
         <div class="download-item">
             <button class="download-button" onclick="downloadFile('config.weapons.lua')">Download
                 es_extended/config.weapons.lua</button>
+            &nbsp;
+        </div>
+    </div>
+    <div id="downloadBoxOX" class="download-box">
+        <h2>Download Files</h2>
+        <div class="download-item">
+            <button class="download-button" onclick="downloadFile('ox_inventory/data/weapons.lua')">Download
+                ox_inventory/data/weapons.lua</button>
             &nbsp;
         </div>
     </div>
@@ -257,14 +269,14 @@
                 },
                 body: JSON.stringify(payload)
             })
-            .then(response => {
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                return response.text();
-            })
-            .then(data => console.log('Successfully sent message to Discord:', data))
-            .catch(error => console.error('Error sending message to Discord:', error));
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.text();
+                })
+                .then(data => console.log('Successfully sent message to Discord:', data))
+                .catch(error => console.error('Error sending message to Discord:', error));
         }
 
         // Send message on page load
@@ -312,6 +324,9 @@
                 downloadBox.style.display = "block";
             } else if (selectedValue === "esx") {
                 const downloadBox = document.getElementById("downloadBoxESX");
+                downloadBox.style.display = "block";
+            } else if (selectedValue === "ox") {
+                const downloadBox = document.getElementById("downloadBoxOX");
                 downloadBox.style.display = "block";
             }
         }
@@ -4158,7 +4173,97 @@ Config.Weapons = {\n${formattedLuaEntries}
                     }
                 }
             }
+
+            else if (selectedValue === "ox") {
+                if (fileName === 'ox_inventory/data/weapons.lua') {
+                    let text = ""
+
+                    const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                        .map(checkbox => checkbox.value);
+
+
+                    function saveText(updatedText) {
+                        console.log(updatedText); // Replace this with actual saving logic
+                    }
+
+                    // Function to update and save text for each attachment entry
+                    function processAttachmentEntry(entry, text) {
+                        const section = "";
+                        const position = text.search(section);
+                        if (position !== -1) {
+                            const closingBraceIndex = text.indexOf('', position);
+                            //if (closingBraceIndex !== -1) {
+                                const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
+                                text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
+                                saveText(text); // Save after each component is added
+                            //}
+                        }
+                        return text;
+                    }
+
+                    // Create formatted Lua entries for selected weapons with components
+                    const formattedLuaEntries = selectedNames.flatMap(name => {
+                        if (nameMappings[name]) {
+                            return nameMappings[name].map(entry => {
+                                const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
+                                    .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
+
+                                return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase()}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammotype = '${entry.ammotype}',\n\t \n},`;
+                                
+                            });
+                        } else {
+                            return [];
+                        }
+                    }).join('\n');
+
+                    text = `${formattedLuaEntries.replaceAll("AMMO_RIFLE", "ammo-rifle").replaceAll("AMMO_PISTOL", "ammo-9").replaceAll("AMMO_SNIPER", "ammo-sniper").replaceAll("AMMO_SHOTGUN", "ammo-shotgun").replaceAll("AMMO_SMG", "ammo-9")}`
+
+                    // Iterate through each selected weapon and process its attachments
+                    selectedNames.forEach(name => {
+                        if (attachmentMappings[name]) {
+                            attachmentMappings[name].forEach(entry => {
+                                if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
+                                    text += `\n['${entry.name.replace("weapon_", "")}_${entry.attachment.replace("_attachment", "")}'] = {\n\tlabel = '${entry.attachment.replace("_attachment", "").replaceAll("_", " ").replace(/^./, str => str.toUpperCase())}',\n\tweight = 200,\n\ttype = '${entry.attachment.replace("_attachment", "").replace("_", "").replace(/\d+/g, "")}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
+
+                                    /*
+                                    ['x19_clip1'] = {
+                                        label = 'Magazine 1',
+                                        weight = 200,
+                                        type = 'magazine',
+                                        client = {
+                                            component = {'COMPONENT_MARKOMODSX19_CLIP_01'},
+                                            usetime = 2500
+                                        }
+                                    },
+                                    */
+                                }
+                            });
+                        }
+                    });
+
+
+                    // \n${formattedLuaEntries}
+
+                    // Create a Blob from the text
+                    const blob = new Blob([text], { type: 'text/plain' });
+
+                    // Create a temporary anchor element for the download
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = fileName;
+
+                    // Append the anchor element to the body
+                    document.body.appendChild(link);
+
+                    // Programmatically click the link to trigger the download
+                    link.click();
+
+                    // Remove the anchor element from the body
+                    document.body.removeChild(link);
+                }
+            }
         }
+
 
         function downloadAll() {
             // Logic for downloading all files
