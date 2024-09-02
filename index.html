@@ -4208,7 +4208,7 @@ Config.Weapons = {\n${formattedLuaEntries}
                                 const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
                                     .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
 
-                                return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammotype = '${entry.ammotype}',\n\t \n},`;
+                                return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammoname = '${entry.ammotype}',\n\t \n},`;
                                 
                             });
                         } else {
