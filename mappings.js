@@ -10,7 +10,9 @@ const nameMappings = {
         { name: 'weapon_m320b', label: 'M320 B', caliber: '.357', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' }
     ],
     "Tactical Sniper": [
-        { name: 'weapon_tacticalsniper', label: 'Tactical Sniper', weapontype: 'Sniper Rifle', caliber: '.338 Lapua Magnum', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' }
+        { name: 'weapon_tacticalsniper', label: 'Tactical Sniper', weapontype: 'Sniper Rifle', caliber: '.338 Lapua Magnum', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' },
+        { name: 'weapon_tacticalsniper_tanodized', label: 'Tactical Sniper', weapontype: 'Sniper Rifle', caliber: '.338 Lapua Magnum', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' },
+        { name: 'weapon_tacticalsniper_fde', label: 'Tactical Sniper', weapontype: 'Sniper Rifle', caliber: '.338 Lapua Magnum', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' }
     ],
     "AGC": [
         { name: 'weapon_agc', label: 'AGC', weapontype: 'Submachine Gun', caliber: '.40', image: 'weapon_smg.png', ammotype: 'AMMO_SMG', damagereason: 'Ended / Plugged / Shot down / Floored', description: 'A handheld light weight machine gun' }
