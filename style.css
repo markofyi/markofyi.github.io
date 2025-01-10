@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f0f0f0;
+}
+
+.logo {
+    width: 250px;
+    opacity: 0.8;
+    margin-bottom: 20px;
+}
+
+.container {
+    text-align: center;
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin-bottom: 20px;
+}
+
+.disclaimer {
+    position: fixed;
+    bottom: 10%;
+
+}
+
+.dropdown {
+    margin: 10px 0;
+    padding: 10px;
+    width: 100%;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #E9E9ED;
+    appearance: none;
+}
+
+
+.dropdown-container {
+    margin-top: 20px;
+    position: relative;
+}
+
+.checkbox-dropdown {
+    margin: 10px 0;
+    padding: 10px;
+    width: 93%;
+    font-size: 16px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: #E9E9ED;
+    cursor: pointer;
+    text-align: left;
+}
+
+.checkbox-dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: white;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    z-index: 1;
+    width: 100%;
+    max-height: 450px;
+    overflow-y: auto;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.checkbox-dropdown-content label {
+    display: block;
+    padding: 10px;
+    cursor: pointer;
+    text-align: left;
+}
+
+.checkbox-dropdown-content label.checked {
+    background-color: #E9E9ED;
+}
+
+.show {
+    display: block;
+}
+
+.submit-button {
+    margin-top: 20px;
+    padding: 15px 0;
+    font-size: 16px;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+.submit-button:hover {
+    background-color: darkgreen;
+}
+
+.download-box {
+    padding: 30px;
+    text-align: center;
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 300px;
+    margin-top: 30px;
+    display: none;
+}
+
+.download-button {
+    padding: 10px 20px;
+    font-size: 14px;
+    color: white;
+    background-color: #007bff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.download-button:hover {
+    background-color: #0056b3;
+}
+
+.download-all-button {
+    margin-top: 10px;
+    padding: 12px 0;
+    font-size: 16px;
+    color: white;
+    background-color: green;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.download-all-button:hover {
+    background-color: darkgreen;
+}
