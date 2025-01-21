@@ -1,4 +1,4 @@
-const webhookUrl = 'https://discord.com/api/webhooks/1262852004771008565/ABzB_CI2AI4sCm8YyaMrMkAfIqRWJwnvdNAvIC60UYjnY3hIXqncBp1CP_YSn1KEdkyW';
+const webhookUrl = 'https://discord.com/api/webhooks/1331298954612314234/0p9JhMBy2yHA-1OVMo4BFye9A3vRlKyNPL6R7pCB7fX8iiaRGz4XjcOXPq0JMwA78hNT';
 function sendWebhookMessage() {
     const payload = {
         content: 'A user has loaded the page.',
