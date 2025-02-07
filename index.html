@@ -755,15 +755,13 @@ Config.Weapons = {\n${formattedLuaEntries}
                     const formattedLuaEntries = selectedNames.flatMap(name => {
                         if (nameMappings[name]) {
                             return nameMappings[name].map(entry => {
-                                const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment').join(', ');
-
-                                return `\n['${entry.name}'] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['ammotype'] = '${entry.ammotype}',\n\t['damagereason'] = 'Ended / Rifled / Shot down / Floored'\n},`;
-                                
+                                return `\n[\`${entry.name}\`] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['ammotype'] = '${entry.ammotype}',\n\t['damagereason'] = 'Ended / Rifled / Shot down / Floored'\n},`;
                             });
                         } else {
                             return [];
                         }
                     }).join('\n');
+
 
                     text = `${formattedLuaEntries}`
 
