@@ -11,7 +11,8 @@
 </head>
 
 <body>
-    <img src="https://dunb17ur4ymx4.cloudfront.net/webstore/logos/155f177e7d0b21bb523faa40dfbb54fb4c81c18c.png" alt="Logo" class="logo">
+    <img src="https://dunb17ur4ymx4.cloudfront.net/webstore/logos/155f177e7d0b21bb523faa40dfbb54fb4c81c18c.png"
+        alt="Logo" class="logo">
     <div class="container">
         <h1>Config Generator</h1>
         <div class="dropdown-container">
@@ -32,7 +33,8 @@
                 <label><input type="checkbox" value="Mutant" onchange="updateCheckedLabels()"> Mutant</label>
                 <label><input type="checkbox" value="Virtus" onchange="updateCheckedLabels()"> Virtus</label>
                 <label><input type="checkbox" value="M320" onchange="updateCheckedLabels()"> M320</label>
-                <label><input type="checkbox" value="Tactical Sniper" onchange="updateCheckedLabels()"> Tactical Sniper</label>
+                <label><input type="checkbox" value="Tactical Sniper" onchange="updateCheckedLabels()"> Tactical
+                    Sniper</label>
                 <label><input type="checkbox" value="AGC" onchange="updateCheckedLabels()"> AGC</label>
                 <label><input type="checkbox" value="Shotgun 590" onchange="updateCheckedLabels()"> Shotgun 590</label>
                 <label><input type="checkbox" value="Police M4" onchange="updateCheckedLabels()"> Police M4</label>
@@ -70,11 +72,13 @@
             &nbsp;
         </div>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('weapons.lua')">Download qb-core/shared/weapons.lua</button>
+            <button class="download-button" onclick="downloadFile('weapons.lua')">Download
+                qb-core/shared/weapons.lua</button>
             &nbsp;
         </div>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('items.lua')">Download qb-core/shared/items.lua</button>
+            <button class="download-button" onclick="downloadFile('items.lua')">Download
+                qb-core/shared/items.lua</button>
             &nbsp;
         </div>
         <div class="download-item">
@@ -84,32 +88,37 @@
     <div id="downloadBoxESX" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('config.weapons.lua')">Download es_extended/config.weapons.lua</button>
+            <button class="download-button" onclick="downloadFile('config.weapons.lua')">Download
+                es_extended/config.weapons.lua</button>
             &nbsp;
         </div>
     </div>
     <div id="downloadBoxOX" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('ox_inventory/data/weapons.lua')">Download ox_inventory/data/weapons.lua</button>
+            <button class="download-button" onclick="downloadFile('ox_inventory/data/weapons.lua')">Download
+                ox_inventory/data/weapons.lua</button>
             &nbsp;
         </div>
     </div>
     <div id="downloadBoxQS" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
-            <button class="download-button" onclick="downloadFile('qb-core/shared/items.lua')">Download qb-core/shared/items.lua</button>
-            <button class="download-button" onclick="downloadFile('qb-core/shared/weapons.lua')">Download qb-core/shared/weapons.lua</button>
-            <button class="download-button" onclick="downloadFile('qs-inventory\config\weapons.lua')">Download qs-inventory\ config\weapons.lua</button>
+            <button class="download-button" onclick="downloadFile('qb-core/shared/items.lua')">Download
+                qb-core/shared/items.lua</button>
+            <button class="download-button" onclick="downloadFile('qb-core/shared/weapons.lua')">Download
+                qb-core/shared/weapons.lua</button>
+            <button class="download-button" onclick="downloadFile('qs-inventory\config\weapons.lua')">Download
+                qs-inventory\ config\weapons.lua</button>
             &nbsp;
         </div>
     </div>
     <label class="disclaimer">Before adding any of these files into your server make sure to make backups of the files
         you will be editing or replacing.</label>
-        <script src="mappings.js"></script>
-        <script src="swm.js"></script>
-        <script src="qbcore.js"></script>
-        <script src="esx.js"></script>
+    <script src="mappings.js"></script>
+    <script src="swm.js"></script>
+    <script src="qbcore.js"></script>
+    <script src="esx.js"></script>
     <script>
         function toggleCheckboxDropdown() {
             document.getElementById("checkboxDropdownContent").classList.toggle("show");
@@ -529,9 +538,9 @@ Config.Weapons = {\n${formattedLuaEntries}
                         if (position !== -1) {
                             const closingBraceIndex = text.indexOf('', position);
                             //if (closingBraceIndex !== -1) {
-                                const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                                text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
-                                saveText(text); // Save after each component is added
+                            const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
+                            text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
+                            saveText(text); // Save after each component is added
                             //}
                         }
                         return text;
@@ -545,7 +554,7 @@ Config.Weapons = {\n${formattedLuaEntries}
                                     .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
 
                                 return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammoname = '${entry.ammotype}',\n\t \n},`;
-                                
+
                             });
                         } else {
                             return [];
@@ -555,48 +564,42 @@ Config.Weapons = {\n${formattedLuaEntries}
                     text = `${formattedLuaEntries.replaceAll("AMMO_RIFLE", "ammo-rifle").replaceAll("AMMO_PISTOL", "ammo-9").replaceAll("AMMO_SNIPER", "ammo-sniper").replaceAll("AMMO_SHOTGUN", "ammo-shotgun").replaceAll("AMMO_SMG", "ammo-9")}`
 
                     selectedNames.forEach(name => {
-                        let componentCounters = {}; // Reset counters for each selected name
-                        let previousEntryName = ""; // Track the previous entry name
+                        let componentCounters = {}; // Key: weaponPrefix|componentType
 
                         if (attachmentMappings[name]) {
                             attachmentMappings[name].forEach(entry => {
-                                if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-
-                                    // Reset counters if the entry name changes
-                                    if (entry.name !== previousEntryName) {
-                                        componentCounters = {};
-                                        previousEntryName = entry.name;
-                                    }
+                                if (entry.attachment !== 'smallscope_attachment') {
+                                    const weaponPrefix = entry.name.replace("weapon_", ""); // e.g. x17m or x17ms
 
                                     const componentType = entry.attachment
                                         .replace("_attachment", "")
-                                        .replace("_", "")
-                                        .replace(/\d+/g, ""); // Remove all numbers
+                                        .replaceAll("_", "")
+                                        .replace(/\d+/g, ""); // e.g. clip, barrel
 
-                                    // Initialize or increment the counter for the component type
-                                    if (!componentCounters[componentType]) {
-                                        componentCounters[componentType] = 1;
+                                    const counterKey = `${weaponPrefix}|${componentType}`;
+
+                                    // Initialize or increment the counter for this specific weapon+type
+                                    if (!componentCounters[counterKey]) {
+                                        componentCounters[counterKey] = 1;
                                     } else {
-                                        componentCounters[componentType]++;
+                                        componentCounters[counterKey]++;
                                     }
 
-                                    const labelNumber = componentCounters[componentType];
+                                    const labelNumber = componentCounters[counterKey];
 
-                                    // Format the label by removing numbers, adding the entry name, and the counter
-                                    const formattedLabel = entry.name.replace("weapon_", "").replaceAll("_", " ").replace(/^./, str => str.toUpperCase()) + " " +
-                                        entry.attachment
-                                        .replace("_attachment", "")
-                                        .replaceAll("_", "")
-                                        .replace(/\d+/g, "") // Remove all numbers
-                                        .replace(/^./, str => str.toUpperCase()) 
-                                        + ` ${labelNumber}`; // Append the label number
+                                    const formattedLabel = weaponPrefix.toUpperCase() + " " +
+                                        componentType.charAt(0).toUpperCase() + componentType.slice(1) + ` ${labelNumber}`;
 
-                                    text += `\n['${entry.name.replace("weapon_", "")}_${entry.attachment.replace("_attachment", "")}'] = {\n\tlabel = '${formattedLabel}',\n\tweight = 200,\n\ttype = '${componentType}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
+                                    const formattedEntryName = `${weaponPrefix}_${entry.attachment.replace("_attachment", "")}`;
 
+                                    text += `\n['${formattedEntryName}'] = {\n\tlabel = '${formattedLabel}',\n\tweight = 200,\n\ttype = '${componentType}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
                                 }
                             });
                         }
                     });
+
+
+
 
                     // Create a Blob from the text
                     const blob = new Blob([text], { type: 'text/plain' });
@@ -635,7 +638,7 @@ Config.Weapons = {\n${formattedLuaEntries}
                                 const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment').join(', ');
 
                                 return `\n['${entry.name}'] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['weight'] = 1000,\n\t['type'] = 'weapon',\n\t['ammotype'] = '${entry.ammotype}',\n\t['image'] = '${entry.name}.png',\n\t['unique'] = true,\n\t['useable'] = false,\n\t['description'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}'\n},`;
-                                
+
                             });
                         } else {
                             return [];
@@ -751,7 +754,7 @@ Config.Weapons = {\n${formattedLuaEntries}
                     const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
                         .map(checkbox => checkbox.value);
 
-                    
+
                     // This generates the weapon code
                     const formattedLuaEntries = selectedNames.flatMap(name => {
                         if (nameMappings[name]) {
@@ -954,7 +957,7 @@ Config.Weapons = {\n${formattedLuaEntries}
             }
         }
 
-        
+
 
 
         function downloadAll() {
