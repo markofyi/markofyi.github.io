@@ -2142,6 +2142,12 @@ let configlua_attachments = `Config = Config or {}
         flashlight_attachment_7 = {
         },
 
+        flashlight_attachment_8 = {
+        },
+
+        flashlight_attachment_9 = {
+        },
+
         -- Grips
 
         grip_attachment_1 = {
@@ -2183,6 +2189,21 @@ let configlua_attachments = `Config = Config or {}
         },
 
         frame_attachment_4 = {
+        },
+
+        frame_attachment_5 = {
+        },
+
+        frame_attachment_6 = {
+        },
+
+        frame_attachment_7 = {
+        },
+
+        frame_attachment_8 = {
+        },
+
+        frame_attachment_9 = {
         },
 
         -- Scopes
