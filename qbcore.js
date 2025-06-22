@@ -1,4 +1,4 @@
-let weaponslua = `QBShared = QBShared or {}
+        let weaponslua = `QBShared = QBShared or {}
         QBShared.Weapons = {
             -- // WEAPONS
             -- Melee
@@ -549,6 +549,11 @@ QBShared.Items = {
     frame_attachment_2            = { name = 'frame_attachment_2', label = 'Frame 2', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
     frame_attachment_3            = { name = 'frame_attachment_3', label = 'Frame 3', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
     frame_attachment_4            = { name = 'frame_attachment_4', label = 'Frame 4', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_5            = { name = 'frame_attachment_4', label = 'Frame 5', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_6            = { name = 'frame_attachment_4', label = 'Frame 6', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_7            = { name = 'frame_attachment_4', label = 'Frame 7', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_8            = { name = 'frame_attachment_4', label = 'Frame 8', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_9            = { name = 'frame_attachment_4', label = 'Frame 9', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
     
     misc_attachment          = { name = 'misc_attachment', label = 'Misc', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
     misc_attachment_1        = { name = 'misc_attachment_1', label = 'Misc 1', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
@@ -571,6 +576,8 @@ QBShared.Items = {
     flashlight_attachment_5        = { name = 'flashlight_attachment_5', label = 'Flashlight 5', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
     flashlight_attachment_6        = { name = 'flashlight_attachment_6', label = 'Flashlight 6', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
     flashlight_attachment_7        = { name = 'flashlight_attachment_7', label = 'Flashlight 7', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
+    flashlight_attachment_8        = { name = 'flashlight_attachment_8', label = 'Flashlight 8', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
+    flashlight_attachment_9        = { name = 'flashlight_attachment_9', label = 'Flashlight 9', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
 
     clip_attachment_1            = { name = 'clip_attachment_1', label = 'Clip 1', weight = 1000, type = 'item', image = 'clip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A clip for a weapon' },
     clip_attachment_2            = { name = 'clip_attachment_2', label = 'Clip 2', weight = 1000, type = 'item', image = 'clip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A clip for a weapon' },
@@ -702,6 +709,11 @@ QBShared.Items = {
     frame_attachment_2            = { name = 'frame_attachment_2', label = 'Frame 2', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
     frame_attachment_3            = { name = 'frame_attachment_3', label = 'Frame 3', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
     frame_attachment_4            = { name = 'frame_attachment_4', label = 'Frame 4', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_5            = { name = 'frame_attachment_5', label = 'Frame 5', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_6            = { name = 'frame_attachment_6', label = 'Frame 6', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_7            = { name = 'frame_attachment_7', label = 'Frame 7', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_8            = { name = 'frame_attachment_8', label = 'Frame 8', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
+    frame_attachment_9            = { name = 'frame_attachment_9', label = 'Frame 9', weight = 1000, type = 'item', image = 'grip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A frame for a weapon' },
     
     misc_attachment          = { name = 'misc_attachment', label = 'Misc', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
     misc_attachment_1        = { name = 'misc_attachment_1', label = 'Misc 1', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = '' },
@@ -724,6 +736,8 @@ QBShared.Items = {
     flashlight_attachment_5        = { name = 'flashlight_attachment_5', label = 'Flashlight 5', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
     flashlight_attachment_6        = { name = 'flashlight_attachment_6', label = 'Flashlight 6', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
     flashlight_attachment_7        = { name = 'flashlight_attachment_7', label = 'Flashlight 7', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
+    flashlight_attachment_8        = { name = 'flashlight_attachment_8', label = 'Flashlight 8', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
+    flashlight_attachment_9        = { name = 'flashlight_attachment_9', label = 'Flashlight 9', weight = 1000, type = 'item', image = 'flashlight_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A flashlight for a weapon' },
 
     clip_attachment_1            = { name = 'clip_attachment_1', label = 'Clip 1', weight = 1000, type = 'item', image = 'clip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A clip for a weapon' },
     clip_attachment_2            = { name = 'clip_attachment_2', label = 'Clip 2', weight = 1000, type = 'item', image = 'clip_attachment.png', unique = false, useable = true, shouldClose = true, combinable = nil, description = 'A clip for a weapon' },
@@ -1542,6 +1556,12 @@ let configlua = `Config = Config or {}
         flashlight_attachment_7 = {
         },
 
+        flashlight_attachment_8 = {
+        },
+
+        flashlight_attachment_9 = {
+        },
+
         -- Grips
 
         grip_attachment_1 = {
@@ -1583,6 +1603,21 @@ let configlua = `Config = Config or {}
         },
 
         frame_attachment_4 = {
+        },
+
+        frame_attachment_5 = {
+        },
+
+        frame_attachment_6 = {
+        },
+
+        frame_attachment_7 = {
+        },
+
+        frame_attachment_8 = {
+        },
+
+        frame_attachment_9 = {
         },
 
         -- Scopes
