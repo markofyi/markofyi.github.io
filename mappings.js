@@ -618,6 +618,7 @@ const attachmentMappings = {
         { name: 'weapon_tacticalsniper_fde', attachment: 'scope_attachment_7', component: 'COMPONENT_MARKOMODS_SHARED_ZOOMSCOPE_11' },
     ],
     "AGC": [
+        { name: 'weapon_agc', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODSAGC_CLIP_01' },
         { name: 'weapon_agc', attachment: 'stock_attachment', component: 'COMPONENT_MARKOMODSAGC_STOCK_01' },
         { name: 'weapon_agc', attachment: 'stock_attachment_1', component: 'COMPONENT_MARKOMODSAGC_STOCK_02' },
         { name: 'weapon_agc', attachment: 'stock_attachment_2', component: 'COMPONENT_MARKOMODSAGC_STOCK_03' },

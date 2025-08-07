@@ -17,90 +17,82 @@
         <h1>Config Generator</h1>
         <div class="dropdown-container">
             <label for="framework">Select Framework</label>
-            <select id="framework" class="dropdown" onchange="updateSelected()">
+            <select id="framework" class="dropdown">
                 <option value="qb-core" selected>QB Core</option>
+                <option value="qb-shops">QB Shops Config</option>
                 <option value="esx">ESX</option>
                 <option value="ox">OX Inventory</option>
+                <option value="ox-shops">OX Shops Config</option>
                 <option value="qs">Quasar Inventory (3.0+, QB)</option>
             </select>
         </div>
+
         <div class="dropdown-container">
             <label for="names">Select Weapons</label>
-            <div id="names" class="dropdown checkbox-dropdown" onclick="toggleCheckboxDropdown()">Weapons</div>
-            <div id="checkboxDropdownContent" class="checkbox-dropdown-content">
-                <label><input type="checkbox" value="X17 Modular" onchange="updateCheckedLabels()"> X17 Modular</label>
-                <label><input type="checkbox" value="MK18" onchange="updateCheckedLabels()"> MK18</label>
-                <label><input type="checkbox" value="Mutant" onchange="updateCheckedLabels()"> Mutant</label>
-                <label><input type="checkbox" value="Virtus" onchange="updateCheckedLabels()"> Virtus</label>
-                <label><input type="checkbox" value="M320" onchange="updateCheckedLabels()"> M320</label>
-                <label><input type="checkbox" value="Tactical Sniper" onchange="updateCheckedLabels()"> Tactical
-                    Sniper</label>
-                <label><input type="checkbox" value="AGC" onchange="updateCheckedLabels()"> AGC</label>
-                <label><input type="checkbox" value="Shotgun 590" onchange="updateCheckedLabels()"> Shotgun 590</label>
-                <label><input type="checkbox" value="Police M4" onchange="updateCheckedLabels()"> Police M4</label>
-                <label><input type="checkbox" value="X19" onchange="updateCheckedLabels()"> X19</label>
-                <label><input type="checkbox" value="Revolver" onchange="updateCheckedLabels()"> Revolver</label>
-                <label><input type="checkbox" value="MB47" onchange="updateCheckedLabels()"> MB47</label>
-                <label><input type="checkbox" value="R9" onchange="updateCheckedLabels()"> R9</label>
-                <label><input type="checkbox" value="L80" onchange="updateCheckedLabels()"> L80</label>
-                <label><input type="checkbox" value="KVR" onchange="updateCheckedLabels()"> KVR</label>
-                <label><input type="checkbox" value="X17" onchange="updateCheckedLabels()"> X17</label>
-                <label><input type="checkbox" value="X45" onchange="updateCheckedLabels()"> X45</label>
-                <label><input type="checkbox" value="A45" onchange="updateCheckedLabels()"> A45</label>
-                <label><input type="checkbox" value="ZKKnife" onchange="updateCheckedLabels()"> ZK Knife</label>
-                <label><input type="checkbox" value="MI9" onchange="updateCheckedLabels()"> MI9</label>
-                <label><input type="checkbox" value="KTB" onchange="updateCheckedLabels()"> KTB</label>
-                <label><input type="checkbox" value="C36" onchange="updateCheckedLabels()"> C36</label>
-                <label><input type="checkbox" value="2S" onchange="updateCheckedLabels()"> 2S</label>
-                <label><input type="checkbox" value="2011" onchange="updateCheckedLabels()"> 2011</label>
-                <label><input type="checkbox" value="P5" onchange="updateCheckedLabels()"> P5</label>
-            </div>
+            <div id="names" class="dropdown checkbox-dropdown">Weapons</div>
+            <div id="checkboxDropdownContent" class="checkbox-dropdown-content"></div>
         </div>
+
         <div class="dropdown-container">
             <label for="generate">Options</label>
-            <select id="generate" class="dropdown" onchange="updateSelectedConfig()">
+            <select id="generate" class="dropdown">
                 <option value="entire-config" selected>Generate Entire Config</option>
                 <option value="only-weapon">Generate Only Weapon Code</option>
             </select>
         </div>
-        <button class="submit-button" onclick="submitForm()">Generate</button>
+
+        <button class="submit-button" id="generateBtn">Generate</button>
     </div>
+
     <div id="downloadBox" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
             <button class="download-button" onclick="downloadFile('config.lua')">Download qb-weapons/config.lua</button>
-            &nbsp;
         </div>
         <div class="download-item">
             <button class="download-button" onclick="downloadFile('weapons.lua')">Download
                 qb-core/shared/weapons.lua</button>
-            &nbsp;
         </div>
         <div class="download-item">
             <button class="download-button" onclick="downloadFile('items.lua')">Download
                 qb-core/shared/items.lua</button>
-            &nbsp;
         </div>
         <div class="download-item">
             <button class="download-all-button" onclick="downloadAll()">Download All Files</button>
         </div>
     </div>
+
+    <div id="downloadBoxQBShop" class="download-box">
+        <h2>Download Files</h2>
+        <div class="download-item">
+            <button class="download-button" onclick="downloadFile('qb-shops/config.lua')">Download
+                qb-shops/config.lua</button>
+        </div>
+    </div>
+    <div id="downloadBoxOXShop" class="download-box">
+        <h2>Download Files</h2>
+        <div class="download-item">
+            <button class="download-button" onclick="downloadFile('qb-shops/config.lua')">Download
+                qb-shops/config.lua</button>
+        </div>
+    </div>
+
     <div id="downloadBoxESX" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
             <button class="download-button" onclick="downloadFile('config.weapons.lua')">Download
                 es_extended/config.weapons.lua</button>
-            &nbsp;
         </div>
     </div>
+
     <div id="downloadBoxOX" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
             <button class="download-button" onclick="downloadFile('ox_inventory/data/weapons.lua')">Download
                 ox_inventory/data/weapons.lua</button>
-            &nbsp;
         </div>
     </div>
+
     <div id="downloadBoxQS" class="download-box">
         <h2>Download Files</h2>
         <div class="download-item">
@@ -108,412 +100,1455 @@
                 qb-core/shared/items.lua</button>
             <button class="download-button" onclick="downloadFile('qb-core/shared/weapons.lua')">Download
                 qb-core/shared/weapons.lua</button>
-            <button class="download-button" onclick="downloadFile('qs-inventory\config\weapons.lua')">Download
-                qs-inventory\ config\weapons.lua</button>
-            &nbsp;
+            <button class="download-button" onclick="downloadFile('qs-inventory/config/weapons.lua')">Download
+                qs-inventory/config/weapons.lua</button>
         </div>
     </div>
-    <label class="disclaimer">Before adding any of these files into your server make sure to make backups of the files
-        you will be editing or replacing.</label>
-    <script src="mappings.js"></script>
-    <script src="swm.js"></script>
-    <script src="qbcore.js"></script>
-    <script src="esx.js"></script>
+
+    <label class="disclaimer">
+        Before adding any of these files into your server make sure to make backups of the files you will be editing or
+        replacing.
+    </label>
+
     <script>
-        function toggleCheckboxDropdown() {
-            document.getElementById("checkboxDropdownContent").classList.toggle("show");
-        }
+        const weapons = [
+            "X17 Modular", "MK18", "Mutant", "Virtus", "M320", "Tactical Sniper", "AGC", "Shotgun 590",
+            "Police M4", "X19", "Revolver", "MB47", "R9", "L80", "KVR", "X17", "X45", "A45",
+            "ZKKnife", "MI9", "KTB", "C36", "2S", "2011", "P5"
+        ];
 
-        window.onclick = function (event) {
-            const dropdown = document.getElementById("checkboxDropdownContent");
-            const toggleButton = document.getElementById("names");
+        let selectedValue = "qb-core";
+        let selectedValueConfig = "entire-config";
 
-            if (!toggleButton.contains(event.target) && !dropdown.contains(event.target)) {
-                if (dropdown.classList.contains('show')) {
-                    dropdown.classList.remove('show');
-                }
-            }
-        }
-
-        let selectedValue = "qb-core"
-        let selectedValueConfig = "entire-config"
-
-        function updateSelected() {
-            const dropdown = document.getElementById('framework');
-            selectedValue = dropdown.value;
-            console.log('Selected framework: ' + selectedValue);
-        }
-        document.addEventListener('DOMContentLoaded', updateSelected);
-
-        function updateSelectedConfig() {
-            const dropdown = document.getElementById('generate');
-            selectedValueConfig = dropdown.value;
-            console.log('Selected config: ' + selectedValueConfig);
-        }
-        document.addEventListener('DOMContentLoaded', updateSelectedConfig);
-
-        function submitForm() {
-            const downloadBox = document.getElementById("downloadBox");
-            downloadBox.style.display = "none";
-            if (selectedValue === "qb-core") {
-                const downloadBox = document.getElementById("downloadBox");
-                downloadBox.style.display = "block";
-            } else if (selectedValue === "esx") {
-                const downloadBox = document.getElementById("downloadBoxESX");
-                downloadBox.style.display = "block";
-            } else if (selectedValue === "ox") {
-                const downloadBox = document.getElementById("downloadBoxOX");
-                downloadBox.style.display = "block";
-            } else if (selectedValue === "qs") {
-                const downloadBox = document.getElementById("downloadBoxQS");
-                downloadBox.style.display = "block";
-            }
+        function renderWeaponCheckboxes() {
+            const container = document.getElementById('checkboxDropdownContent');
+            weapons.forEach(weapon => {
+                const label = document.createElement('label');
+                const input = document.createElement('input');
+                input.type = 'checkbox';
+                input.value = weapon;
+                input.onchange = updateCheckedLabels;
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(` ${weapon}`));
+                container.appendChild(label);
+            });
         }
 
         function updateCheckedLabels() {
             const checkboxes = document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]');
             checkboxes.forEach((checkbox) => {
                 const label = checkbox.parentElement;
-                if (checkbox.checked) {
-                    label.classList.add('checked');
-                } else {
-                    label.classList.remove('checked');
+                label.classList.toggle('checked', checkbox.checked);
+            });
+        }
+
+        function toggleCheckboxDropdown() {
+            document.getElementById("checkboxDropdownContent").classList.toggle("show");
+        }
+
+        function updateSelected() {
+            selectedValue = document.getElementById('framework').value;
+            console.log('Selected framework:', selectedValue);
+        }
+
+        function updateSelectedConfig() {
+            selectedValueConfig = document.getElementById('generate').value;
+            console.log('Selected config:', selectedValueConfig);
+        }
+
+        function submitForm() {
+            document.querySelectorAll('.download-box').forEach(box => box.style.display = 'none');
+
+            const boxMap = {
+                "qb-core": "downloadBox",
+                "qb-shops": "downloadBoxQBShop",
+                "esx": "downloadBoxESX",
+                "ox": "downloadBoxOX",
+                "ox-shops": "downloadBoxOXShop",
+                "qs": "downloadBoxQS"
+            };
+
+            const selectedBoxId = boxMap[selectedValue];
+            if (selectedBoxId) {
+                document.getElementById(selectedBoxId).style.display = 'block';
+            }
+        }
+
+        function initListeners() {
+            document.getElementById('framework').addEventListener('change', updateSelected);
+            document.getElementById('generate').addEventListener('change', updateSelectedConfig);
+            document.getElementById('names').addEventListener('click', toggleCheckboxDropdown);
+            document.getElementById('generateBtn').addEventListener('click', submitForm);
+
+            window.addEventListener('click', function (event) {
+                const dropdown = document.getElementById("checkboxDropdownContent");
+                const toggleButton = document.getElementById("names");
+                if (!toggleButton.contains(event.target) && !dropdown.contains(event.target)) {
+                    dropdown.classList.remove("show");
                 }
             });
         }
 
+        document.addEventListener('DOMContentLoaded', () => {
+            updateSelected();
+            updateSelectedConfig();
+            renderWeaponCheckboxes();
+            initListeners();
+        });
+
         function downloadFile(fileName) {
             if (selectedValue === "qb-core") {
+                const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked')).map(cb => cb.value);
                 let text = "";
-                let attachments = "";
 
-                if (fileName === 'weapons.lua') {
-                    if (selectedValue === "qb-core") {
-                        if (selectedValueConfig === "entire-config") {
-                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                                .map(checkbox => checkbox.value);
+                const formatWeaponEntry = entry => `	['${entry.name}'] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`;
+                const formatItemEntry = entry => `	${entry.name} = { name = '${entry.name}', label = '${entry.label}', weight = 1000, type = 'weapon', ammotype = '${entry.ammotype}', image = '${entry.image}', unique = true, useable = false, description =  '${entry.description}'},`;
+                const formatDurabilityEntry = entry => `	${entry.name} = 0.15,`;
+                const formatAttachmentEntry = entry => `    ${entry.name} = '${entry.component}',\n`;
 
-                            const formattedLuaEntries = selectedNames.flatMap(name => {
-                                if (nameMappings[name]) {
-                                    return nameMappings[name].map(entry => `\t['${entry.name}'] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`);
-                                } else {
-                                    return [];
-                                }
-                            }).join('\n');
+                const insertBeforeClosingBrace = (source, marker, insertText) => {
+                    const start = source.indexOf(marker) + marker.length;
+                    const end = source.indexOf('}', start);
+                    return end !== -1 ? source.slice(0, end) + insertText + source.slice(end) : source;
+                };
 
-                            text = weaponslua + `\n${formattedLuaEntries}\n}\n`;
-                        } else if (selectedValueConfig === "only-weapon") {
-                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                                .map(checkbox => checkbox.value);
-
-                            const formattedLuaEntries = selectedNames.flatMap(name => {
-                                if (nameMappings[name]) {
-                                    return nameMappings[name].map(entry => `\t['${entry.name}'] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`);
-                                } else {
-                                    return [];
-                                }
-                            }).join('\n');
-
-                            text = `QBShared = QBShared or {}
-        QBShared.Weapons = {\n${formattedLuaEntries}\n}\n`;
-                        }
-                    }
-
-                } else if (fileName === 'items.lua') {
-                    if (selectedValue === "qb-core") {
-                        if (selectedValueConfig === "entire-config") {
-                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                                .map(checkbox => checkbox.value);
-
-                            const formattedLuaEntries = selectedNames.flatMap(name => {
-                                if (nameMappings[name]) {
-                                    return nameMappings[name].map(entry => `\t${entry.name} = { name = '${entry.name}', label = '${entry.label}', weight = 1000, type = 'weapon', ammotype = '${entry.ammotype}', image = '${entry.image}', unique = true, useable = false, description =  '${entry.description}'},`);
-                                } else {
-                                    return [];
-                                }
-                            }).join('\n');
-
-                            text = itemslua + `\n${formattedLuaEntries}\n}\n`;
-                        } else if (selectedValueConfig === "only-weapon") {
-                            // Gather selected names from checkboxes
-                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                                .map(checkbox => checkbox.value);
-
-                            const formattedLuaEntries = selectedNames.flatMap(name => {
-                                if (nameMappings[name]) {
-                                    return nameMappings[name].map(entry => `\t${entry.name} = { name = '${entry.name}', label = '${entry.label}', weight = 1000, type = 'weapon', ammotype = '${entry.ammotype}', image = '${entry.image}', unique = true, useable = false, description =  '${entry.description}'},`);
-                                } else {
-                                    return [];
-                                }
-                            }).join('\n');
-
-                            text = itemslua_attachments + `\n${formattedLuaEntries}\n}\n`;
-                        }
-                    }
-                } else if (fileName === 'config.lua') {
-                    if (selectedValue === "qb-core") {
-                        if (selectedValueConfig === "entire-config") {
-                            text = configlua;
-
-                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                                .map(checkbox => checkbox.value);
-
-                            function processAttachmentEntry(entry) {
-                                const section = entry.attachment + " = \\{";
-                                const regex = new RegExp(section);
-                                const position = text.search(regex);
-                                if (position !== -1) {
-                                    const closingBraceIndex = text.indexOf('}', position);
-                                    if (closingBraceIndex !== -1) {
-                                        const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                                        text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
-                                    }
+                const processAttachments = (textBlock, name) => {
+                    const entries = attachmentMappings[name] || [];
+                    entries.forEach(entry => {
+                        if (entry.attachment !== 'smallscope_attachment') {
+                            const regex = new RegExp(entry.attachment + " = \\{");
+                            const position = textBlock.search(regex);
+                            if (position !== -1) {
+                                const end = textBlock.indexOf('}', position);
+                                if (end !== -1) {
+                                    const formatted = formatAttachmentEntry(entry);
+                                    textBlock = textBlock.slice(0, end) + formatted + textBlock.slice(end);
                                 }
                             }
-
-                            selectedNames.forEach(name => {
-                                let formattedLuaEntries = '';
-                                if (nameMappings[name]) {
-                                    formattedLuaEntries = nameMappings[name].map(entry => `\t${entry.name} = 0.15,`).join('\n');
-                                }
-
-                                // Insert durability entries
-                                let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
-                                let closingBraceIndex = text.indexOf('}', position);
-                                if (closingBraceIndex !== -1) {
-                                    text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
-                                }
-
-                                // Process each attachment entry one by one
-                                if (attachmentMappings[name]) {
-                                    attachmentMappings[name].forEach(entry => {
-                                        if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-                                            processAttachmentEntry(entry);
-                                        }
-                                    });
-                                }
-
-                            });
-                        } else if (selectedValueConfig === "only-weapon") {
-                            text = configlua_attachments;
-
-                            // Gather selected names from checkboxes
-                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                                .map(checkbox => checkbox.value);
-
-                            // Function to update and save text for each attachment entry
-                            function processAttachmentEntry(entry) {
-                                const section = entry.attachment + " = \\{";
-                                const regex = new RegExp(section);
-                                const position = text.search(regex);
-                                if (position !== -1) {
-                                    const closingBraceIndex = text.indexOf('}', position);
-                                    if (closingBraceIndex !== -1) {
-                                        const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                                        text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
-                                    }
-                                }
-                            }
-
-                            // Iterate through each selected weapon and process its attachments
-                            selectedNames.forEach(name => {
-                                // Prepare the formatted Lua text for durability
-                                let formattedLuaEntries = '';
-                                if (nameMappings[name]) {
-                                    formattedLuaEntries = nameMappings[name].map(entry => `\t${entry.name} = 0.15,`).join('\n');
-                                }
-
-                                // Insert durability entries
-                                let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
-                                let closingBraceIndex = text.indexOf('}', position);
-                                if (closingBraceIndex !== -1) {
-                                    text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
-                                }
-
-                                // Process each attachment entry one by one
-                                if (attachmentMappings[name]) {
-                                    attachmentMappings[name].forEach(entry => {
-                                        if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-                                            processAttachmentEntry(entry);
-                                        }
-                                    });
-                                }
-
-                            });
                         }
-                    }
-                } else {
-                    text = "Example text content for download.";
+                    });
+                    return textBlock;
+                };
+
+                // New function: Group attachments and append single (Fits ...) label listing all fitting weapons
+                function addGroupedFitsLabels(itemsluaText, selectedWeaponNames) {
+                    // Map attachment key → Set of weapons that fit it
+                    const attachmentToWeapons = {};
+
+                    selectedWeaponNames.forEach(weaponName => {
+                        const attachments = attachmentMappings[weaponName] || [];
+                        attachments.forEach(att => {
+                            if (!attachmentToWeapons[att.attachment]) {
+                                attachmentToWeapons[att.attachment] = new Set();
+                            }
+                            attachmentToWeapons[att.attachment].add(weaponName);
+                        });
+                    });
+
+                    Object.entries(attachmentToWeapons).forEach(([attachmentKey, weaponsSet]) => {
+                        // Format weapons list nicely: capitalize words, replace underscores with spaces
+                        const weaponsList = Array.from(weaponsSet)
+                            .map(w => w.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))
+                            .join(', ');
+
+                        const regex = new RegExp(`(${attachmentKey}\\s*=\\s*\\{[^}]*label\\s*=\\s*')([^']*)(')`, 'g');
+
+                        itemsluaText = itemsluaText.replace(regex, (match, p1, label, p3) => {
+                            // Remove existing (Fits ...) suffix to avoid duplicates
+                            label = label.replace(/\s*\(Fits [^)]+\)/gi, '');
+                            return `${p1}${label} (Fits ${weaponsList})${p3}`;
+                        });
+                    });
+
+                    return itemsluaText;
                 }
 
+                const generateLuaBlock = (template, formatter) => {
+                    const block = selectedNames.flatMap(name =>
+                        nameMappings[name]?.map(formatter) || []
+                    ).join('\n');
+                    return template + `\n${block}\n}\n`;
+                };
 
-                // Create a Blob from the text
+                switch (fileName) {
+                    case 'weapons.lua':
+                        text = selectedValueConfig === "entire-config"
+                            ? generateLuaBlock(weaponslua, formatWeaponEntry)
+                            : generateLuaBlock("QBShared = QBShared or {}\nQBShared.Weapons = {", formatWeaponEntry);
+                        break;
+
+                    case 'items.lua':
+                        let itemsLuaText = selectedValueConfig === "entire-config"
+                            ? itemslua
+                            : itemslua_attachments;
+
+                        // Add grouped (Fits WEAPON1, WEAPON2) labels for attachments
+                        itemsLuaText = addGroupedFitsLabels(itemsLuaText, selectedNames);
+
+                        text = generateLuaBlock(itemsLuaText, formatItemEntry);
+                        break;
+
+                    case 'config.lua':
+                        text = selectedValueConfig === "entire-config" ? configlua : configlua_attachments;
+
+                        selectedNames.forEach(name => {
+                            const durabilityBlock = nameMappings[name]?.map(formatDurabilityEntry).join('\n') || "";
+                            text = insertBeforeClosingBrace(text, 'Config.DurabilityMultiplier = {', durabilityBlock + '\n');
+
+                            if (attachmentMappings[name]) {
+                                text = processAttachments(text, name);
+                            }
+                        });
+                        break;
+
+                    default:
+                        text = "Example text content for download.";
+                }
+
                 const blob = new Blob([text], { type: 'text/plain' });
-
-                // Create a temporary anchor element for the download
                 const link = document.createElement('a');
                 link.href = URL.createObjectURL(blob);
                 link.download = fileName;
-
-                // Append the anchor element to the body
                 document.body.appendChild(link);
-
-                // Programmatically click the link to trigger the download
                 link.click();
-
-                // Remove the anchor element from the body
                 document.body.removeChild(link);
-            } else if (selectedValue === "esx") {
-                if (fileName === 'config.weapons.lua') {
+
+
+            } else if (selectedValue === "qb-shops") {
+                if (fileName === 'qb-shops/config.lua') {
                     if (selectedValueConfig === "entire-config") {
-                        let text = ""
                         const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(checkbox => checkbox.value);
+                            .map(cb => cb.value);
 
-                        // Function to update and save text for each attachment entry
-                        function processAttachmentEntry(entry, text) {
-                            const section = entry.attachment + " = \\{";
-                            const regex = new RegExp(section);
-                            const position = text.search(regex);
-                            if (position !== -1) {
-                                const closingBraceIndex = text.indexOf('}', position);
-                                if (closingBraceIndex !== -1) {
-                                    const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                                    text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
+                        const weaponPrice = 4000;
+                        const attachmentPrice = 500;
+
+                        const allProducts = [];
+                        const existingNames = new Set();
+
+                        selectedNames.forEach(weaponKey => {
+                            // Add weapons from nameMappings
+                            const weaponsArray = nameMappings[weaponKey];
+                            if (!weaponsArray) {
+                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            weaponsArray.forEach(weapon => {
+                                const weaponName = weapon.name.toLowerCase();
+                                if (!existingNames.has(weaponName)) {
+                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                    existingNames.add(weaponName);
                                 }
-                            }
-                            return text;
-                        }
+                            });
 
-                        // Create formatted Lua entries for selected weapons with components
-                        const formattedLuaEntries = selectedNames.flatMap(name => {
-                            if (nameMappings[name]) {
-                                return nameMappings[name].map(entry => {
-                                    const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
-                                        .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
-
-                                    return `\t{ name = '${entry.name}', label = TranslateCap('${entry.name}'), components = { ${components} }},`;
-                                });
-                            } else {
-                                return [];
+                            // Add attachments from attachmentMappings
+                            const attachmentsArray = attachmentMappings[weaponKey];
+                            if (!attachmentsArray) {
+                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                return;
                             }
-                        }).join('\n');
 
-                        // Insert durability entries
-                        if (formattedLuaEntries) {
-                            let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
-                            let closingBraceIndex = text.indexOf('}', position);
-                            if (closingBraceIndex !== -1) {
-                                text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
-                            }
-                        }
-
-                        // Iterate through each selected weapon and process its attachments
-                        selectedNames.forEach(name => {
-                            if (attachmentMappings[name]) {
-                                attachmentMappings[name].forEach(entry => {
-                                    if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-                                        text = processAttachmentEntry(entry, text);
-                                    }
-                                });
-                            }
+                            attachmentsArray.forEach(attObj => {
+                                const attName = attObj.attachment.toLowerCase();
+                                if (!existingNames.has(attName)) {
+                                    allProducts.push({ name: attName, price: attachmentPrice, amount: 5, requiredLicense: 'weapon' });
+                                    existingNames.add(attName);
+                                }
+                            });
                         });
 
+                        // Format the product entries (without wrapping ['weapons'] = { } )
+                        const productEntries = allProducts.map(p => {
+                            return `        { name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
+                        }).join(',\n');
+                        const qbShopsConfigBase = `-- full qb-shops config.lua text goes here as a string
+Config = {}
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
 
-                        text = configweaponslua + `\n${formattedLuaEntries}
-}`
-                        const blob = new Blob([text], { type: 'text/plain' });
+-- Deliveries
+Config.ShopsInvJsonFile = './json/shops-inventory.json'
+Config.TruckDeposit = 125
+Config.MaxDeliveries = 20
+Config.DeliveryPrice = 500
+Config.RewardItem = 'cryptostick'
+Config.Fuel = 'LegacyFuel'
 
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = fileName;
-
-                        document.body.appendChild(link);
-
-                        link.click();
-
-                        document.body.removeChild(link);
-                    } else if (selectedValueConfig === "only-weapon") {
-                        let text = ""
-
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(checkbox => checkbox.value);
-
-
-                        function processAttachmentEntry(entry, text) {
-                            const section = entry.attachment + " = \\{";
-                            const regex = new RegExp(section);
-                            const position = text.search(regex);
-                            if (position !== -1) {
-                                const closingBraceIndex = text.indexOf('}', position);
-                                if (closingBraceIndex !== -1) {
-                                    const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                                    text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
-                                }
-                            }
-                            return text;
-                        }
-
-                        const formattedLuaEntries = selectedNames.flatMap(name => {
-                            if (nameMappings[name]) {
-                                return nameMappings[name].map(entry => {
-                                    const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
-                                        .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
-
-                                    return `\t{ name = '${entry.name}', label = TranslateCap('${entry.name}'), components = { ${components} }},`;
-                                });
-                            } else {
-                                return [];
-                            }
-                        }).join('\n');
-
-                        if (formattedLuaEntries) {
-                            let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
-                            let closingBraceIndex = text.indexOf('}', position);
-                            if (closingBraceIndex !== -1) {
-                                text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
-                            }
-                        }
-
-                        selectedNames.forEach(name => {
-                            if (attachmentMappings[name]) {
-                                attachmentMappings[name].forEach(entry => {
-                                    if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-                                        text = processAttachmentEntry(entry, text);
-                                    }
-                                });
-                            }
-                        });
-
-                        text = `Config.DefaultWeaponTints = {
-    [0] = TranslateCap("tint_default"),
-    [1] = TranslateCap("tint_green"),
-    [2] = TranslateCap("tint_gold"),
-    [3] = TranslateCap("tint_pink"),
-    [4] = TranslateCap("tint_army"),
-    [5] = TranslateCap("tint_lspd"),
-    [6] = TranslateCap("tint_orange"),
-    [7] = TranslateCap("tint_platinum"),
+Config.DeliveryLocations = {
+    ['main'] = { label = 'GO Postal', coords = vector4(69.0862, 127.6753, 79.2123, 156.7736) },
+    ['vehicleWithdraw'] = vector4(71.9318, 120.8389, 79.0823, 160.5110),
+    ['vehicleDeposit'] = vector3(62.7282, 124.9846, 79.0926),
+    ['stores'] = {} -- auto generated
 }
 
-Config.Weapons = {\n${formattedLuaEntries}
-}`
+Config.Vehicles = {
+    ['boxville2'] = { ['label'] = 'Boxville StepVan', ['cargodoors'] = { [0] = 2, [1] = 3 }, ['trunkpos'] = 1.5 },
+}
 
-                        // Create a Blob from the text
-                        const blob = new Blob([text], { type: 'text/plain' });
+Config.Products = {
+    ['normal'] = {
+        { name = 'tosti',         price = 2,   amount = 50 },
+        { name = 'water_bottle',  price = 2,   amount = 50 },
+        { name = 'kurkakola',     price = 2,   amount = 50 },
+        { name = 'twerks_candy',  price = 2,   amount = 50 },
+        { name = 'snikkel_candy', price = 2,   amount = 50 },
+        { name = 'sandwich',      price = 2,   amount = 50 },
+        { name = 'beer',          price = 7,   amount = 50 },
+        { name = 'whiskey',       price = 10,  amount = 50 },
+        { name = 'vodka',         price = 12,  amount = 50 },
+        { name = 'bandage',       price = 100, amount = 50 },
+        { name = 'lighter',       price = 2,   amount = 50 },
+        { name = 'rolling_paper', price = 2,   amount = 5000 },
+    },
+    ['liquor'] = {
+        { name = 'beer',    price = 7,  amount = 50 },
+        { name = 'whiskey', price = 10, amount = 50 },
+        { name = 'vodka',   price = 12, amount = 50 },
+    },
+    ['hardware'] = {
+        { name = 'lockpick',          price = 200, amount = 50 },
+        { name = 'weapon_wrench',     price = 250, amount = 250 },
+        { name = 'weapon_hammer',     price = 250, amount = 250 },
+        { name = 'repairkit',         price = 250, amount = 50, requiredJob = { 'mechanic', 'police' } },
+        { name = 'screwdriverset',    price = 350, amount = 50 },
+        { name = 'phone',             price = 850, amount = 50 },
+        { name = 'radio',             price = 250, amount = 50 },
+        { name = 'binoculars',        price = 50,  amount = 50 },
+        { name = 'firework1',         price = 50,  amount = 50 },
+        { name = 'firework2',         price = 50,  amount = 50 },
+        { name = 'firework3',         price = 50,  amount = 50 },
+        { name = 'firework4',         price = 50,  amount = 50 },
+        { name = 'fitbit',            price = 400, amount = 150 },
+        { name = 'cleaningkit',       price = 150, amount = 150 },
+        { name = 'advancedrepairkit', price = 500, amount = 50, requiredJob = 'mechanic' },
+    },
+    ['weedshop'] = {
+        { name = 'joint',          price = 10,  amount = 50 },
+        { name = 'weapon_poolcue', price = 100, amount = 50 },
+        { name = 'weed_nutrition', price = 20,  amount = 50 },
+        { name = 'empty_weed_bag', price = 2,   amount = 1000 },
+        { name = 'rolling_paper',  price = 2,   amount = 1000 },
+    },
+    ['gearshop'] = {
+        { name = 'diving_gear', price = 2500, amount = 10 },
+        { name = 'jerry_can',   price = 200,  amount = 50 },
+    },
+    ['leisureshop'] = {
+        { name = 'parachute',   price = 2500, amount = 10 },
+        { name = 'binoculars',  price = 50,   amount = 50 },
+        { name = 'diving_gear', price = 2500, amount = 10 },
+        { name = 'diving_fill', price = 500,  amount = 10 },
+    },
+    ['weapons'] = {
+        { name = 'weapon_knife',         price = 250,  amount = 250 },
+        { name = 'weapon_bat',           price = 250,  amount = 250 },
+        { name = 'weapon_hatchet',       price = 250,  amount = 250 },
+        { name = 'pistol_ammo',          price = 250,  amount = 250, requiredLicense = 'weapon' },
+        { name = 'weapon_pistol',        price = 2500, amount = 5,   requiredLicense = 'weapon' },
+        { name = 'weapon_snspistol',     price = 1500, amount = 5,   requiredLicense = 'weapon' },
+        { name = 'weapon_vintagepistol', price = 4000, amount = 5,   requiredLicense = 'weapon' },
+    },
+    ['blackmarket'] = {
+        { name = 'security_card_01',  price = 5000, amount = 50 },
+        { name = 'security_card_02',  price = 5000, amount = 50 },
+        { name = 'advanced_lockpick', price = 5000, amount = 50 },
+        { name = 'electronickit',     price = 5000, amount = 50 },
+        { name = 'gatecrack',         price = 5000, amount = 50 },
+        { name = 'thermite',          price = 5000, amount = 50 },
+        { name = 'trojan_usb',        price = 5000, amount = 50 },
+        { name = 'drill',             price = 5000, amount = 50 },
+        { name = 'radioscanner',      price = 5000, amount = 50 },
+        { name = 'cryptostick',       price = 5000, amount = 50 },
+        { name = 'joint',             price = 5000, amount = 50 },
+        { name = 'cokebaggy',         price = 5000, amount = 50 },
+        { name = 'crack_baggy',       price = 5000, amount = 50 },
+        { name = 'xtcbaggy',          price = 5000, amount = 50 },
+        { name = 'coke_brick',        price = 5000, amount = 50 },
+        { name = 'weed_brick',        price = 5000, amount = 50 },
+        { name = 'coke_small_brick',  price = 5000, amount = 50 },
+        { name = 'oxy',               price = 5000, amount = 50 },
+        { name = 'meth',              price = 5000, amount = 50 },
+        { name = 'weed_whitewidow',   price = 5000, amount = 50 },
+        { name = 'weed_skunk',        price = 5000, amount = 50 },
+        { name = 'weed_purplehaze',   price = 5000, amount = 50 },
+        { name = 'weed_ogkush',       price = 5000, amount = 50 },
+        { name = 'weed_amnesia',      price = 5000, amount = 50 },
+        { name = 'weed_ak47',         price = 5000, amount = 50 },
+        { name = 'markedbills',       price = 5000, amount = 50, info = { worth = 5000 } },
+    },
+    ['prison'] = {
+        { name = 'sandwich',     price = 4, amount = 50 },
+        { name = 'water_bottle', price = 4, amount = 50 },
+    },
+    ['police'] = {
+        { name = 'weapon_pistol',       price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_PI_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_stungun',      price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_pumpshotgun',  price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_smg',          price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_SCOPE_MACRO_02', label = '1x Scope' }, { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_carbinerifle', price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' }, { component = 'COMPONENT_AT_SCOPE_MEDIUM', label = '3x Scope' } } } },
+        { name = 'weapon_nightstick',   price = 0, amount = 50 },
+        { name = 'weapon_flashlight',   price = 0, amount = 50 },
+        { name = 'pistol_ammo',         price = 0, amount = 50 },
+        { name = 'smg_ammo',            price = 0, amount = 50 },
+        { name = 'shotgun_ammo',        price = 0, amount = 50 },
+        { name = 'rifle_ammo',          price = 0, amount = 50 },
+        { name = 'handcuffs',           price = 0, amount = 50 },
+        { name = 'empty_evidence_bag',  price = 0, amount = 50 },
+        { name = 'police_stormram',     price = 0, amount = 50 },
+        { name = 'armor',               price = 0, amount = 50 },
+        { name = 'radio',               price = 0, amount = 50 },
+        { name = 'heavyarmor',          price = 0, amount = 50 },
+    },
+    ['ambulance'] = {
+        { name = 'radio',                   price = 0, amount = 50 },
+        { name = 'bandage',                 price = 0, amount = 50 },
+        { name = 'painkillers',             price = 0, amount = 50 },
+        { name = 'firstaid',                price = 0, amount = 50 },
+        { name = 'weapon_flashlight',       price = 0, amount = 50 },
+        { name = 'weapon_fireextinguisher', price = 0, amount = 50 },
+    },
+    ['mechanic'] = {
+        { name = 'veh_toolbox',       price = 5000, amount = 50 },
+        { name = 'veh_armor',         price = 5000, amount = 50 },
+        { name = 'veh_brakes',        price = 5000, amount = 50 },
+        { name = 'veh_engine',        price = 5000, amount = 50 },
+        { name = 'veh_suspension',    price = 5000, amount = 50 },
+        { name = 'veh_transmission',  price = 5000, amount = 50 },
+        { name = 'veh_turbo',         price = 5000, amount = 50 },
+        { name = 'veh_interior',      price = 5000, amount = 50 },
+        { name = 'veh_exterior',      price = 5000, amount = 50 },
+        { name = 'veh_wheels',        price = 5000, amount = 50 },
+        { name = 'veh_neons',         price = 5000, amount = 50 },
+        { name = 'veh_xenons',        price = 5000, amount = 50 },
+        { name = 'veh_tint',          price = 5000, amount = 50 },
+        { name = 'veh_plates',        price = 5000, amount = 50 },
+        { name = 'nitrous',           price = 5000, amount = 50 },
+        { name = 'tunerlaptop',       price = 5000, amount = 50 },
+        { name = 'repairkit',         price = 5000, amount = 50 },
+        { name = 'advancedrepairkit', price = 5000, amount = 50 },
+        { name = 'tirerepairkit',     price = 5000, amount = 50 },
+    }
+}
 
-                        // Create a temporary anchor element for the download
+Config.Locations = {
+    -- 24/7 Locations
+    ['247supermarket'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(24.47, -1346.62, 29.5, 271.66),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(26.45, -1315.51, 29.62, 0.07),
+        ['useStock'] = true
+    },
+
+    ['247supermarket2'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(-3039.54, 584.38, 7.91, 17.27),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-3047.95, 590.71, 7.62, 19.53)
+    },
+
+    ['247supermarket3'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(-3242.97, 1000.01, 12.83, 357.57),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-3245.76, 1005.25, 12.83, 269.45)
+    },
+
+    ['247supermarket4'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(1728.07, 6415.63, 35.04, 242.95),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1741.76, 6419.61, 35.04, 6.83)
+    },
+
+    ['247supermarket5'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(1959.82, 3740.48, 32.34, 301.57),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1963.81, 3750.09, 32.26, 302.46)
+    },
+
+    ['247supermarket6'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(549.13, 2670.85, 42.16, 99.39),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(541.54, 2663.53, 42.17, 120.51)
+    },
+
+    ['247supermarket7'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(2677.47, 3279.76, 55.24, 335.08),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2662.19, 3264.95, 55.24, 168.55)
+    },
+
+    ['247supermarket8'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(2556.66, 380.84, 108.62, 356.67),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2553.24, 399.73, 108.56, 344.86)
+    },
+
+    ['247supermarket9'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(372.66, 326.98, 103.57, 253.73),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(379.97, 357.3, 102.56, 26.42)
+    },
+
+    -- LTD Gasoline Locations
+    ['ltdgasoline'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(-47.02, -1758.23, 29.42, 45.05),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-40.51, -1747.45, 29.29, 326.39)
+    },
+
+    ['ltdgasoline2'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(-706.06, -913.97, 19.22, 88.04),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-702.89, -917.44, 19.21, 181.96)
+    },
+
+    ['ltdgasoline3'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(-1820.02, 794.03, 138.09, 135.45),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1829.29, 801.49, 138.41, 41.39)
+    },
+
+    ['ltdgasoline4'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(1164.71, -322.94, 69.21, 101.72),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1160.62, -312.06, 69.28, 3.77)
+    },
+
+    ['ltdgasoline5'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(1697.87, 4922.96, 42.06, 324.71),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1702.68, 4917.28, 42.22, 139.27)
+    },
+
+    -- Rob's Liquor Locations
+    ['robsliquor'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(-1221.58, -908.15, 12.33, 35.49),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1226.92, -901.82, 12.28, 213.26)
+    },
+
+    ['robsliquor2'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(-1486.59, -377.68, 40.16, 139.51),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1468.29, -387.61, 38.79, 220.13)
+    },
+
+    ['robsliquor3'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(-2966.39, 391.42, 15.04, 87.48),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-2961.49, 376.25, 15.02, 111.41)
+    },
+
+    ['robsliquor4'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(1165.17, 2710.88, 38.16, 179.43),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1194.52, 2722.21, 38.62, 9.37)
+    },
+
+    ['robsliquor5'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(1134.2, -982.91, 46.42, 277.24),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1129.73, -989.27, 45.97, 280.98)
+    },
+
+    -- Hardware Store Locations
+    ['hardware'] = {
+        ['label'] = 'Hardware Store',
+        ['coords'] = vector4(45.68, -1749.04, 29.61, 53.13),
+        ['ped'] = 'mp_m_waremech_01',
+        ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-wrench',
+        ['targetLabel'] = 'Open Hardware Store',
+        ['products'] = Config.Products['hardware'],
+        ['showblip'] = true,
+        ['blipsprite'] = 402,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(89.15, -1745.29, 30.09, 315.25)
+    },
+
+    ['hardware2'] = {
+        ['label'] = 'Hardware Store',
+        ['coords'] = vector4(2747.71, 3472.85, 55.67, 255.08),
+        ['ped'] = 'mp_m_waremech_01',
+        ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-wrench',
+        ['targetLabel'] = 'Open Hardware Store',
+        ['products'] = Config.Products['hardware'],
+        ['showblip'] = true,
+        ['blipsprite'] = 402,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2704.68, 3457.21, 55.54, 176.28)
+    },
+
+    ['hardware3'] = {
+        ['label'] = 'Hardware Store',
+        ['coords'] = vector4(-421.83, 6136.13, 31.88, 228.2),
+        ['ped'] = 'mp_m_waremech_01',
+        ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-wrench',
+        ['targetLabel'] = 'Hardware Store',
+        ['products'] = Config.Products['hardware'],
+        ['showblip'] = true,
+        ['blipsprite'] = 402,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-438.25, 6146.9, 31.48, 136.99)
+    },
+
+    -- Ammunation Locations
+    ['ammunation'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-661.96, -933.53, 21.83, 177.05),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-660.61, -938.14, 21.83, 167.22)
+    },
+    ['ammunation2'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(809.68, -2159.13, 29.62, 1.43),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(820.97, -2146.7, 28.71, 359.98)
+    },
+    ['ammunation3'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(1692.67, 3761.38, 34.71, 227.65),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1687.17, 3755.47, 34.34, 163.69)
+    },
+    ['ammunation4'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-331.23, 6085.37, 31.45, 228.02),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-341.72, 6098.49, 31.32, 11.05)
+    },
+    ['ammunation5'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(253.63, -51.02, 69.94, 72.91),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(249.0, -50.64, 69.94, 60.71)
+    },
+    ['ammunation6'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(23.0, -1105.67, 29.8, 162.91),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-5.82, -1107.48, 29.0, 164.32)
+    },
+    ['ammunation7'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(2567.48, 292.59, 108.73, 349.68),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2578.77, 285.53, 108.61, 277.2)
+    },
+    ['ammunation8'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-1118.59, 2700.05, 18.55, 221.89),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1127.67, 2708.18, 18.8, 41.76)
+    },
+    ['ammunation9'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(841.92, -1035.32, 28.19, 1.56),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(847.83, -1020.36, 27.88, 88.29)
+    },
+    ['ammunation10'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-1304.19, -395.12, 36.7, 75.03),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1302.44, -385.23, 36.62, 303.79)
+    },
+    ['ammunation11'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-3173.31, 1088.85, 20.84, 244.18),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-3183.6, 1084.35, 20.84, 68.13)
+    },
+
+    -- Weedshop Locations
+    ['weedshop'] = {
+        ['label'] = 'Smoke On The Water',
+        ['coords'] = vector4(-1168.26, -1573.2, 4.66, 105.24),
+        ['ped'] = 'a_m_y_hippy_01',
+        ['scenario'] = 'WORLD_HUMAN_AA_SMOKE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-cannabis',
+        ['targetLabel'] = 'Open Weed Shop',
+        ['products'] = Config.Products['weedshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 140,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1162.13, -1568.57, 4.39, 328.52)
+    },
+
+    -- Sea Word Locations
+    ['seaword'] = {
+        ['label'] = 'Sea Word',
+        ['coords'] = vector4(-1687.03, -1072.18, 13.15, 52.93),
+        ['ped'] = 'a_m_y_beach_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_IMPATIENT',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-fish',
+        ['targetLabel'] = 'Sea Word',
+        ['products'] = Config.Products['gearshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1674.18, -1073.7, 13.15, 333.56)
+    },
+
+    -- Leisure Shop Locations
+    ['leisureshop'] = {
+        ['label'] = 'Leisure Shop',
+        ['coords'] = vector4(-1505.91, 1511.95, 115.29, 257.13),
+        ['ped'] = 'a_m_y_beach_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-leaf',
+        ['targetLabel'] = 'Open Leisure Shop',
+        ['products'] = Config.Products['leisureshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2)
+    },
+
+    ['police'] = {
+        ['label'] = 'Police Shop',
+        ['coords'] = vector4(461.8498, -981.0677, 30.6896, 91.5892),
+        ['ped'] = 'mp_m_securoguard_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Armory',
+        ['products'] = Config.Products['police'],
+        ['delivery'] = vector4(459.0441, -1008.0366, 28.2627, 271.4695),
+        ['requiredJob'] = 'police',
+    },
+
+    ['ambulance'] = {
+        ['label'] = 'Ambulance Shop',
+        ['coords'] = vector4(309.93, -602.94, 43.29, 71.0820),
+        ['ped'] = 's_m_m_doctor_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-hand',
+        ['targetLabel'] = 'Open Armory',
+        ['products'] = Config.Products['ambulance'],
+        ['delivery'] = vector4(283.5821, -614.8570, 43.3792, 159.2903),
+        ['requiredJob'] = 'ambulance'
+    },
+
+    ['mechanic'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-343.66, -140.78, 39.02, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-354.3936, -128.2882, 39.4307, 251.4931),
+        ['requiredJob'] = 'mechanic',
+    },
+
+    ['mechanic2'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(1189.36, 2641.00, 38.44, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(1189.9852, 2651.1873, 37.8351, 317.7137),
+        ['requiredJob'] = 'mechanic2'
+    },
+
+    ['mechanic3'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-1156.56, -1999.85, 13.19, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1131.9661, -1972.0144, 13.1603, 358.8637),
+        ['requiredJob'] = 'mechanic3'
+    },
+
+    ['bennys'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-195.80, -1318.24, 31.08, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-232.5028, -1311.7202, 31.2960, 180.3716),
+        ['requiredJob'] = 'bennys'
+    },
+
+    ['beeker'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(100.92, 6616.00, 32.47, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(119.3033, 6626.7358, 31.9558, 46.1566),
+        ['requiredJob'] = 'beeker'
+    },
+
+    ['prison'] = {
+        ['label'] = 'Canteen Shop',
+        ['coords'] = vector4(1777.59, 2560.52, 44.62, 187.83),
+        ['ped'] = false,
+        ['products'] = Config.Products['prison'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1845.8175, 2585.9312, 45.6721, 96.7577)
+    },
+
+    ['blackmarket'] = {
+        ['label'] = 'Black Market',
+        ['coords'] = vector4(-594.7032, -1616.3647, 33.0105, 170.6846),
+        ['ped'] = 'a_m_y_smartcaspat_01',
+        ['scenario'] = 'WORLD_HUMAN_AA_SMOKE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-clipboard',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['blackmarket'],
+        ['delivery'] = vector4(-428.6385, -1728.1962, 19.7838, 75.6646)
+    },
+}`;
+
+                        // Inject weapons block after `Config.Products = {`
+                        const injectedConfig = qbShopsConfigBase.replace(
+                            /(\['weapons'\]\s*=\s*{\s*)/,
+                            `$1\n${productEntries}\n`
+                        );
+
+                        // Create and download the updated config.lua file
+                        const blob = new Blob([injectedConfig], { type: 'text/plain' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = 'config.lua';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                    else if (selectedValueConfig === "only-weapon") {
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(cb => cb.value);
+
+                        const weaponPrice = 4000;
+                        const attachmentPrice = 500;
+
+                        const allProducts = [];
+                        const existingNames = new Set();
+
+                        selectedNames.forEach(weaponKey => {
+                            // Add weapons from nameMappings
+                            const weaponsArray = nameMappings[weaponKey];
+                            if (!weaponsArray) {
+                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            weaponsArray.forEach(weapon => {
+                                const weaponName = weapon.name.toLowerCase();
+                                if (!existingNames.has(weaponName)) {
+                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                    existingNames.add(weaponName);
+                                }
+                            });
+
+                            // Add attachments from attachmentMappings
+                            const attachmentsArray = attachmentMappings[weaponKey];
+                            if (!attachmentsArray) {
+                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            attachmentsArray.forEach(attObj => {
+                                const attName = attObj.attachment.toLowerCase();
+                                if (!existingNames.has(attName)) {
+                                    allProducts.push({ name: attName, price: attachmentPrice, amount: 5, requiredLicense: 'weapon' });
+                                    existingNames.add(attName);
+                                }
+                            });
+                        });
+
+                        const formatted = `Config.Products = {
+    ['weapons'] = {
+        ${allProducts.map(p => {
+                            return `{ name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
+                        }).join(',\n        ')}
+    },
+}`;
+
+                        const blob = new Blob([formatted], { type: 'text/plain' });
                         const link = document.createElement('a');
                         link.href = URL.createObjectURL(blob);
                         link.download = fileName;
-
-                        // Append the anchor element to the body
                         document.body.appendChild(link);
-
-                        // Programmatically click the link to trigger the download
                         link.click();
+                        document.body.removeChild(link);
+                    }
+                }
+            } else if (selectedValue === "esx") {
+                if (fileName === 'config.weapons.lua') {
 
-                        // Remove the anchor element from the body
+                    const luaBeautify = (code) => {
+                        const indentString = '  ';
+                        let indentLevel = 0;
+                        let inString = false;
+                        let stringChar = null;
+                        let inComment = false;
+                        let output = '';
+                        let buffer = '';
+                        let i = 0;
+
+                        const flushBuffer = () => {
+                            const trimmed = buffer.trim();
+                            if (trimmed.length > 0) {
+                                output += indentString.repeat(indentLevel) + trimmed + '\n';
+                            }
+                            buffer = '';
+                        };
+
+                        while (i < code.length) {
+                            const char = code[i];
+                            const nextTwo = code.substr(i, 2);
+
+                            // Handle comments
+                            if (!inString && nextTwo === '--') {
+                                flushBuffer();
+                                inComment = true;
+                                output += indentString.repeat(indentLevel) + '--';
+                                i += 2;
+                                continue;
+                            }
+
+                            if (inComment) {
+                                output += char;
+                                if (char === '\n') {
+                                    inComment = false;
+                                }
+                                i++;
+                                continue;
+                            }
+
+                            // Handle strings
+                            if (!inString && (char === '"' || char === "'")) {
+                                inString = true;
+                                stringChar = char;
+                                buffer += char;
+                                i++;
+                                continue;
+                            } else if (inString) {
+                                buffer += char;
+                                if (char === stringChar) {
+                                    inString = false;
+                                    stringChar = null;
+                                }
+                                i++;
+                                continue;
+                            }
+
+                            // Handle opening brace
+                            if (char === '{') {
+                                flushBuffer();
+                                output += indentString.repeat(indentLevel) + '{\n';
+                                indentLevel++;
+                                i++;
+                                continue;
+                            }
+
+                            // Handle closing brace possibly followed by comma
+                            if (char === '}') {
+                                flushBuffer();
+                                indentLevel = Math.max(indentLevel - 1, 0);
+
+                                // Peek next chars to check if a comma follows immediately
+                                let j = i + 1;
+                                while (code[j] === ' ' || code[j] === '\t' || code[j] === '\n' || code[j] === '\r') {
+                                    j++;
+                                }
+                                const commaFollows = code[j] === ',';
+
+                                if (commaFollows) {
+                                    // Output closing brace and comma on the same line
+                                    output += indentString.repeat(indentLevel) + '},\n';
+                                    i = j + 1; // Skip past comma
+                                } else {
+                                    output += indentString.repeat(indentLevel) + '}\n';
+                                    i++;
+                                }
+                                continue;
+                            }
+
+                            // Handle commas that are not after closing braces
+                            if (char === ',') {
+                                buffer += ',';
+                                flushBuffer();
+                                i++;
+                                continue;
+                            }
+
+                            // Handle newlines
+                            if (char === '\n') {
+                                flushBuffer();
+                                i++;
+                                continue;
+                            }
+
+                            // Regular characters
+                            buffer += char;
+                            i++;
+                        }
+
+                        flushBuffer();
+                        return output.trim();
+                    };
+
+
+
+
+
+                    if (selectedValueConfig === "entire-config") {
+                        let text = ""; // original config text (assumed assigned elsewhere)
+
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(checkbox => checkbox.value);
+
+                        const processAttachmentEntry = (entry, textBlock) => {
+                            if (entry.attachment === 'smallscope_attachment') return textBlock; // skip
+
+                            const regex = new RegExp(entry.attachment + " = \\{");
+                            const position = textBlock.search(regex);
+                            if (position !== -1) {
+                                const end = textBlock.indexOf('}', position);
+                                if (end !== -1) {
+                                    const formatted = formatAttachmentEntry(entry);
+                                    textBlock = textBlock.slice(0, end) + formatted + textBlock.slice(end);
+                                }
+                            }
+                            return textBlock;
+                        };
+
+                        // Create formatted Lua entries for selected weapons with components
+                        const formattedLuaEntriesRaw = selectedNames.flatMap(name => {
+                            if (!nameMappings[name]) return [];
+
+                            return nameMappings[name].map(entry => {
+                                const uniqueAttachments = new Map();
+                                (attachmentMappings[name] || []).forEach(att => {
+                                    if (att.attachment !== 'smallscope_attachment') {
+                                        uniqueAttachments.set(att.attachment + att.component, att);
+                                    }
+                                });
+
+                                const components = Array.from(uniqueAttachments.values())
+                                    .map(att => `{ name = "${att.attachment}", label = TranslateCap("component_${att.attachment}"), hash = "${att.component}" }`)
+                                    .join(',');
+
+                                return `{
+name = "${entry.name.toUpperCase()}",
+label = TranslateCap("${entry.name.toLowerCase()}"),
+ammo = { label = TranslateCap("ammo_rounds"), hash = "${entry.ammotype || 'AMMO_PISTOL'}" },
+tints = Config.DefaultWeaponTints,
+components = {${components}},
+},`;
+                            });
+                        }).join('\n\n');
+
+                        // Beautify only the generated Lua entries (weapon code)
+                        const beautifiedLuaEntries = luaBeautify(`{\n${formattedLuaEntriesRaw}\n}`);
+
+                        // Insert durability entries in the original config text
+                        if (formattedLuaEntriesRaw) {
+                            let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
+                            let closingBraceIndex = text.indexOf('}', position);
+                            if (closingBraceIndex !== -1) {
+                                text = text.slice(0, closingBraceIndex) + beautifiedLuaEntries + '\n' + text.slice(closingBraceIndex);
+                            }
+                        }
+
+                        // Process attachments on the entire config text (unchanged)
+                        selectedNames.forEach(name => {
+                            if (attachmentMappings[name]) {
+                                attachmentMappings[name].forEach(entry => {
+                                    if (entry.attachment !== 'smallscope_attachment') {
+                                        text = processAttachmentEntry(entry, text);
+                                    }
+                                });
+                            }
+                        });
+
+                        text = configweaponslua + `\n${beautifiedLuaEntries}\n}`;
+
+                        const blob = new Blob([text], { type: 'text/plain' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else if (selectedValueConfig === "only-weapon") {
+                        let text = "";
+
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(checkbox => checkbox.value);
+
+                        function processAttachmentEntry(entry, textBlock) {
+                            if (entry.attachment === 'smallscope_attachment') return textBlock; // Skip smallscope_attachment
+                            const section = entry.attachment + " = \\{";
+                            const regex = new RegExp(section);
+                            const position = textBlock.search(regex);
+                            if (position !== -1) {
+                                const closingBraceIndex = textBlock.indexOf('}', position);
+                                if (closingBraceIndex !== -1) {
+                                    const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
+                                    textBlock = textBlock.slice(0, closingBraceIndex) + formattedEntry + textBlock.slice(closingBraceIndex);
+                                }
+                            }
+                            return textBlock;
+                        }
+
+                        const formattedLuaEntries = selectedNames.flatMap(name => {
+                            if (!nameMappings[name]) return [];
+                            return nameMappings[name].map(entry => {
+                                const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
+                                    .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
+
+                                return `{
+name = "${entry.name.toUpperCase()}",
+label = TranslateCap("${entry.name.toLowerCase()}"),
+ammo = { label = TranslateCap("ammo_rounds"), hash = "${entry.ammotype || 'AMMO_PISTOL'}" },
+tints = Config.DefaultWeaponTints,
+components = {${components}},
+},`;
+                            });
+                        }).join('\n\n');
+
+                        if (formattedLuaEntries) {
+                            let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
+                            let closingBraceIndex = text.indexOf('}', position);
+                            if (closingBraceIndex !== -1) {
+                                text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
+                            }
+                        }
+
+                        selectedNames.forEach(name => {
+                            if (attachmentMappings[name]) {
+                                attachmentMappings[name].forEach(entry => {
+                                    if (entry.attachment !== 'smallscope_attachment') {
+                                        text = processAttachmentEntry(entry, text);
+                                    }
+                                });
+                            }
+                        });
+
+                        text = `
+Config.Weapons = {\n${formattedLuaEntries}
+}`;
+
+                        // Beautify text before saving
+                        const beautifiedText = luaBeautify(text);
+
+                        const blob = new Blob([beautifiedText], { type: 'text/plain' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
                         document.body.removeChild(link);
                     }
                 }
@@ -521,114 +1556,1309 @@ Config.Weapons = {\n${formattedLuaEntries}
 
             else if (selectedValue === "ox") {
                 if (fileName === 'ox_inventory/data/weapons.lua') {
-                    let text = ""
-
                     const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                        .map(checkbox => checkbox.value);
+                        .map(cb => cb.value);
 
+                    const ammoReplacements = {
+                        AMMO_RIFLE: 'ammo-rifle',
+                        AMMO_PISTOL: 'ammo-9',
+                        AMMO_SNIPER: 'ammo-sniper',
+                        AMMO_SHOTGUN: 'ammo-shotgun',
+                        AMMO_SMG: 'ammo-9',
+                    };
 
-                    function saveText(updatedText) {
-                        console.log(updatedText); // Replace this with actual saving logic
-                    }
+                    const weaponEntries = selectedNames.flatMap(name => {
+                        if (!nameMappings[name]) return [];
+                        return nameMappings[name].map(entry => {
+                            const label = entry.name.replace(/^weapon_/, '').toUpperCase().replace(/_/g, ' ');
+                            const ammotype = ammoReplacements[entry.ammotype] || entry.ammotype || 'ammo-9';
 
-                    // Function to update and save text for each attachment entry
-                    function processAttachmentEntry(entry, text) {
-                        const section = "";
-                        const position = text.search(section);
-                        if (position !== -1) {
-                            const closingBraceIndex = text.indexOf('', position);
-                            //if (closingBraceIndex !== -1) {
-                            const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                            text = text.slice(0, closingBraceIndex) + formattedEntry + text.slice(closingBraceIndex);
-                            saveText(text); // Save after each component is added
-                            //}
-                        }
-                        return text;
-                    }
-
-                    // Create formatted Lua entries for selected weapons with components
-                    const formattedLuaEntries = selectedNames.flatMap(name => {
-                        if (nameMappings[name]) {
-                            return nameMappings[name].map(entry => {
-                                const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
-                                    .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
-
-                                return `\n['${entry.name.toUpperCase()}'] = {\n\tlabel = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\tweight = 1600,\n\tdurability = 0.03, \n\tammoname = '${entry.ammotype}',\n\t \n},`;
-
-                            });
-                        } else {
-                            return [];
-                        }
+                            return [
+                                `['${entry.name.toUpperCase()}'] = {`,
+                                `\tlabel = '${label}',`,
+                                `\tweight = 1600,`,
+                                `\tdurability = 0.03,`,
+                                `\tammoname = '${ammotype}',`,
+                                `},`
+                            ].join('\n');
+                        });
                     }).join('\n');
 
-                    text = `${formattedLuaEntries.replaceAll("AMMO_RIFLE", "ammo-rifle").replaceAll("AMMO_PISTOL", "ammo-9").replaceAll("AMMO_SNIPER", "ammo-sniper").replaceAll("AMMO_SHOTGUN", "ammo-shotgun").replaceAll("AMMO_SMG", "ammo-9")}`
+                    const prefixOverrides = {
+                        'x17 modular': 'x17m',
+                        'police m4': 'pm4',
+                        'shotgun 590': '590',
+                        'tactical sniper': 'tacticalsniper',
+                        'revolver': 'revolver'
+                        // Add more overrides as needed
+                    };
+
+                    const attachmentEntriesMap = new Map();
+                    const sharedAttachmentMap = new Map();
 
                     selectedNames.forEach(name => {
-                        let componentCounters = {}; // Key: weaponPrefix|componentType
+                        if (!attachmentMappings[name]) return;
 
-                        if (attachmentMappings[name]) {
-                            attachmentMappings[name].forEach(entry => {
-                                if (entry.attachment !== 'smallscope_attachment') {
-                                    const weaponPrefix = entry.name.replace("weapon_", ""); // e.g. x17m or x17ms
+                        //const weaponPrefix = name.replace(/^weapon_/, '').toLowerCase();
+                        let weaponPrefix = name.replace(/^weapon_/, '').toLowerCase();
+                        weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
 
-                                    const componentType = entry.attachment
-                                        .replace("_attachment", "")
-                                        .replaceAll("_", "")
-                                        .replace(/\d+/g, ""); // e.g. clip, barrel
+                        attachmentMappings[name].forEach(att => {
+                            const component = att.component;
+                            if (!component) return;
 
-                                    const counterKey = `${weaponPrefix}|${componentType}`;
+                            // Detect if shared by checking the component name
+                            if (component.toLowerCase().includes('shared')) {
+                                // (Shared attachment logic as before - unchanged)
+                                let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
+                                let labelPart = sharedKey.replace(/^SHARED_/, '');
+                                labelPart = labelPart.replace(/_(\d+)$/, ' #' + '$1');
+                                labelPart = labelPart.split('_').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
 
-                                    // Initialize or increment the counter for this specific weapon+type
-                                    if (!componentCounters[counterKey]) {
-                                        componentCounters[counterKey] = 1;
-                                    } else {
-                                        componentCounters[counterKey]++;
-                                    }
-
-                                    const labelNumber = componentCounters[counterKey];
-
-                                    const formattedLabel = weaponPrefix.toUpperCase() + " " +
-                                        componentType.charAt(0).toUpperCase() + componentType.slice(1) + ` ${labelNumber}`;
-
-                                    const formattedEntryName = `${weaponPrefix}_${entry.attachment.replace("_attachment", "")}`;
-
-                                    text += `\n['${formattedEntryName}'] = {\n\tlabel = '${formattedLabel}',\n\tweight = 200,\n\ttype = '${componentType}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
+                                if (!sharedAttachmentMap.has(sharedKey)) {
+                                    sharedAttachmentMap.set(sharedKey, {
+                                        component,
+                                        labelBase: labelPart,
+                                        weapons: new Set([weaponPrefix])
+                                    });
+                                } else {
+                                    sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
                                 }
-                            });
-                        }
+
+                                return;
+                            }
+
+                            let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                            compKey = compKey.replace(/markomods_?/gi, '');
+
+                            // Extract real weapon prefix from component itself (first word before underscore)
+                            const realPrefix = compKey.split('_')[0];
+                            const remainder = compKey.split('_').slice(1).join('_');
+                            const itemKey = `${realPrefix}_${remainder}`;
+
+
+                            if (attachmentEntriesMap.has(itemKey)) return;
+
+                            // Format label:
+                            // weaponPrefix, split by _, capitalize each word
+                            //const weaponLabel = weaponPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                            const weaponLabel = realPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+
+
+                            // component key: e.g. mutant_mag_01 -> 'Magazine #1'
+                            // extract base name and number
+                            let compLabel = compKey.replace(/_/g, ' '); // 'mutant mag 01'
+                            // Remove weapon name prefix from compLabel if present (optional)
+                            compLabel = compLabel.replace(new RegExp(`^${weaponPrefix} `), '');
+                            // Replace trailing number with #number
+                            compLabel = compLabel.replace(/(\d+)$/, '#$1');
+
+                            // Capitalize words in compLabel except #number
+                            compLabel = compLabel.split(' ').map(word => {
+                                if (word.startsWith('#')) return word;
+                                return word.charAt(0).toUpperCase() + word.slice(1);
+                            }).join(' ');
+
+                            // Compose full label
+                            const labelBase = `${weaponLabel} ${compLabel}`;
+
+                            attachmentEntriesMap.set(itemKey, [
+                                `['${itemKey.toLowerCase()}'] = {`,
+                                `\tlabel = '${labelBase}',`,
+                                `\tweight = 200,`,
+                                `\ttype = 'clip',`,
+                                `\tclient = {`,
+                                `\t\tcomponent = {'${component}'},`,
+                                `\t\tusetime = 2500`,
+                                `\t},`,
+                                `},`
+                            ].join('\n'));
+                        });
                     });
 
 
+                    // After all attachments processed, generate shared attachment entries:
+                    sharedAttachmentMap.forEach((data, key) => {
+                        const weaponList = Array.from(data.weapons)
+                            .map(w => w.toUpperCase().replace(/_/g, ' '))
+                            .map(w => w.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
+
+                        const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
+
+                        attachmentEntriesMap.set(key, [
+                            `['${key.toLowerCase()}'] = {`,
+                            `\tlabel = 'Shared ${data.labelBase.replace("Supp", "Suppressor").replace("Flash", "Flashlight")}${fitsLabel}',`,
+                            `\tweight = 200,`,
+                            `\ttype = 'clip',`,
+                            `\tclient = {`,
+                            `\t\tcomponent = {'${data.component}'},`,
+                            `\t\tusetime = 2500`,
+                            `\t},`,
+                            `},`
+                        ].join('\n'));
+                    });
 
 
-                    // Create a Blob from the text
-                    const blob = new Blob([text], { type: 'text/plain' });
+                    // Handle shared attachments (create entries with formatted label + weapons list)
+                    sharedAttachmentMap.forEach((data, key) => {
+                        const weaponList = Array.from(data.weapons)
+                            .map(w => w.toUpperCase().replace(/_/g, ' '))
+                            .map(w => w.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
 
-                    // Create a temporary anchor element for the download
+                        const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
+
+                        attachmentEntriesMap.set(key, [
+                            `['${key.toLowerCase()}'] = {`,
+                            `\tlabel = 'Shared ${data.labelBase.replace("Supp", "Suppressor").replace("Flash", "Flashlight")}${fitsLabel}',`,
+                            `\tweight = 200,`,
+                            `\ttype = 'clip',`,
+                            `\tclient = {`,
+                            `\t\tcomponent = {'${data.component}'},`,
+                            `\t\tusetime = 2500`,
+                            `\t},`,
+                            `},`
+                        ].join('\n'));
+                    });
+
+                    const attachmentEntries = Array.from(attachmentEntriesMap.values()).join('\n');
+                    const finalText = weaponEntries + '\n' + attachmentEntries;
+
+
+                    const blob = new Blob([finalText], { type: 'text/plain' });
                     const link = document.createElement('a');
                     link.href = URL.createObjectURL(blob);
                     link.download = fileName;
-
-                    // Append the anchor element to the body
                     document.body.appendChild(link);
-
-                    // Programmatically click the link to trigger the download
                     link.click();
-
-                    // Remove the anchor element from the body
                     document.body.removeChild(link);
                 }
             }
-            // QS INVENTORY GEN
-            else if (selectedValue === "qs") {
+            else if (selectedValue === "ox-shops") {
+                if (fileName === 'qb-shops/config.lua') {
+                    if (selectedValueConfig === "entire-config") {
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(cb => cb.value);
+
+                        const weaponPrice = 4000;
+                        const attachmentPrice = 500;
+
+                        const allProducts = [];
+                        const existingNames = new Set();
+
+                        const prefixOverrides = {
+                            'x17 modular': 'x17m',
+                            'police m4': 'pm4',
+                            'shotgun 590': '590',
+                            'tactical sniper': 'tacticalsniper',
+                            'revolver': 'revolver'
+                        };
+
+                        const sharedAttachmentMap = new Map();
+                        const attachmentEntriesMap = new Map();
+
+                        // First: Add weapon entries
+                        selectedNames.forEach(weaponKey => {
+                            const weaponsArray = nameMappings[weaponKey];
+                            if (!weaponsArray) {
+                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            weaponsArray.forEach(weapon => {
+                                const weaponName = weapon.name.toLowerCase();
+                                if (!existingNames.has(weaponName)) {
+                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                    existingNames.add(weaponName);
+                                }
+                            });
+                        });
+
+                        // Second: Process attachments
+                        selectedNames.forEach(weaponKey => {
+                            if (!attachmentMappings[weaponKey]) {
+                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            let weaponPrefix = weaponKey.replace(/^weapon_/, '').toLowerCase();
+                            weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
+
+                            attachmentMappings[weaponKey].forEach(att => {
+                                const component = att.component;
+                                if (!component) return;
+
+                                // Shared attachments
+                                if (component.toLowerCase().includes('shared')) {
+                                    let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                    sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
+
+                                    if (!sharedAttachmentMap.has(sharedKey)) {
+                                        sharedAttachmentMap.set(sharedKey, {
+                                            component,
+                                            weapons: new Set([weaponPrefix])
+                                        });
+                                    } else {
+                                        sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
+                                    }
+                                    return;
+                                }
+
+                                let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                compKey = compKey.replace(/markomods_?/gi, '');
+
+                                const realPrefix = compKey.split('_')[0];
+                                const remainder = compKey.split('_').slice(1).join('_');
+                                const itemKey = `${realPrefix}_${remainder}`;
+
+                                if (attachmentEntriesMap.has(itemKey)) return;
+
+                                attachmentEntriesMap.set(itemKey, `{ name = '${itemKey.toLowerCase()}', price = ${attachmentPrice}, amount = 5, requiredLicense = 'weapon' },`);
+                            });
+                        });
+
+                        // Shared attachment entry generation
+                        sharedAttachmentMap.forEach((data, key) => {
+                            attachmentEntriesMap.set(key.toLowerCase(), `{ name = '${key.toLowerCase()}', price = ${attachmentPrice}, amount = 5, requiredLicense = 'weapon' },`);
+                        });
+
+                        // Finalize: Add all attachment entries
+                        attachmentEntriesMap.forEach((entryString, key) => {
+                            if (!existingNames.has(key)) {
+                                existingNames.add(key);
+                                allProducts.push(entryString);
+                            }
+                        });
+
+                        // Format the final string
+                        const weaponsEntriesString = allProducts.map(p => {
+                            if (typeof p === 'string') {
+                                return p.trim();
+                            } else {
+                                return `{ name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
+                            }
+                        }).join('\n        ');
+
+
+
+                        const qbShopsConfigBase = `-- full qb-shops config.lua text goes here as a string
+Config = {}
+Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
+
+-- Deliveries
+Config.ShopsInvJsonFile = './json/shops-inventory.json'
+Config.TruckDeposit = 125
+Config.MaxDeliveries = 20
+Config.DeliveryPrice = 500
+Config.RewardItem = 'cryptostick'
+Config.Fuel = 'LegacyFuel'
+
+Config.DeliveryLocations = {
+    ['main'] = { label = 'GO Postal', coords = vector4(69.0862, 127.6753, 79.2123, 156.7736) },
+    ['vehicleWithdraw'] = vector4(71.9318, 120.8389, 79.0823, 160.5110),
+    ['vehicleDeposit'] = vector3(62.7282, 124.9846, 79.0926),
+    ['stores'] = {} -- auto generated
+}
+
+Config.Vehicles = {
+    ['boxville2'] = { ['label'] = 'Boxville StepVan', ['cargodoors'] = { [0] = 2, [1] = 3 }, ['trunkpos'] = 1.5 },
+}
+
+Config.Products = {
+    ['normal'] = {
+        { name = 'tosti',         price = 2,   amount = 50 },
+        { name = 'water_bottle',  price = 2,   amount = 50 },
+        { name = 'kurkakola',     price = 2,   amount = 50 },
+        { name = 'twerks_candy',  price = 2,   amount = 50 },
+        { name = 'snikkel_candy', price = 2,   amount = 50 },
+        { name = 'sandwich',      price = 2,   amount = 50 },
+        { name = 'beer',          price = 7,   amount = 50 },
+        { name = 'whiskey',       price = 10,  amount = 50 },
+        { name = 'vodka',         price = 12,  amount = 50 },
+        { name = 'bandage',       price = 100, amount = 50 },
+        { name = 'lighter',       price = 2,   amount = 50 },
+        { name = 'rolling_paper', price = 2,   amount = 5000 },
+    },
+    ['liquor'] = {
+        { name = 'beer',    price = 7,  amount = 50 },
+        { name = 'whiskey', price = 10, amount = 50 },
+        { name = 'vodka',   price = 12, amount = 50 },
+    },
+    ['hardware'] = {
+        { name = 'lockpick',          price = 200, amount = 50 },
+        { name = 'weapon_wrench',     price = 250, amount = 250 },
+        { name = 'weapon_hammer',     price = 250, amount = 250 },
+        { name = 'repairkit',         price = 250, amount = 50, requiredJob = { 'mechanic', 'police' } },
+        { name = 'screwdriverset',    price = 350, amount = 50 },
+        { name = 'phone',             price = 850, amount = 50 },
+        { name = 'radio',             price = 250, amount = 50 },
+        { name = 'binoculars',        price = 50,  amount = 50 },
+        { name = 'firework1',         price = 50,  amount = 50 },
+        { name = 'firework2',         price = 50,  amount = 50 },
+        { name = 'firework3',         price = 50,  amount = 50 },
+        { name = 'firework4',         price = 50,  amount = 50 },
+        { name = 'fitbit',            price = 400, amount = 150 },
+        { name = 'cleaningkit',       price = 150, amount = 150 },
+        { name = 'advancedrepairkit', price = 500, amount = 50, requiredJob = 'mechanic' },
+    },
+    ['weedshop'] = {
+        { name = 'joint',          price = 10,  amount = 50 },
+        { name = 'weapon_poolcue', price = 100, amount = 50 },
+        { name = 'weed_nutrition', price = 20,  amount = 50 },
+        { name = 'empty_weed_bag', price = 2,   amount = 1000 },
+        { name = 'rolling_paper',  price = 2,   amount = 1000 },
+    },
+    ['gearshop'] = {
+        { name = 'diving_gear', price = 2500, amount = 10 },
+        { name = 'jerry_can',   price = 200,  amount = 50 },
+    },
+    ['leisureshop'] = {
+        { name = 'parachute',   price = 2500, amount = 10 },
+        { name = 'binoculars',  price = 50,   amount = 50 },
+        { name = 'diving_gear', price = 2500, amount = 10 },
+        { name = 'diving_fill', price = 500,  amount = 10 },
+    },
+    ['weapons'] = {
+        { name = 'weapon_knife',         price = 250,  amount = 250 },
+        { name = 'weapon_bat',           price = 250,  amount = 250 },
+        { name = 'weapon_hatchet',       price = 250,  amount = 250 },
+        { name = 'pistol_ammo',          price = 250,  amount = 250, requiredLicense = 'weapon' },
+        { name = 'weapon_pistol',        price = 2500, amount = 5,   requiredLicense = 'weapon' },
+        { name = 'weapon_snspistol',     price = 1500, amount = 5,   requiredLicense = 'weapon' },
+        { name = 'weapon_vintagepistol', price = 4000, amount = 5,   requiredLicense = 'weapon' },
+    },
+    ['blackmarket'] = {
+        { name = 'security_card_01',  price = 5000, amount = 50 },
+        { name = 'security_card_02',  price = 5000, amount = 50 },
+        { name = 'advanced_lockpick', price = 5000, amount = 50 },
+        { name = 'electronickit',     price = 5000, amount = 50 },
+        { name = 'gatecrack',         price = 5000, amount = 50 },
+        { name = 'thermite',          price = 5000, amount = 50 },
+        { name = 'trojan_usb',        price = 5000, amount = 50 },
+        { name = 'drill',             price = 5000, amount = 50 },
+        { name = 'radioscanner',      price = 5000, amount = 50 },
+        { name = 'cryptostick',       price = 5000, amount = 50 },
+        { name = 'joint',             price = 5000, amount = 50 },
+        { name = 'cokebaggy',         price = 5000, amount = 50 },
+        { name = 'crack_baggy',       price = 5000, amount = 50 },
+        { name = 'xtcbaggy',          price = 5000, amount = 50 },
+        { name = 'coke_brick',        price = 5000, amount = 50 },
+        { name = 'weed_brick',        price = 5000, amount = 50 },
+        { name = 'coke_small_brick',  price = 5000, amount = 50 },
+        { name = 'oxy',               price = 5000, amount = 50 },
+        { name = 'meth',              price = 5000, amount = 50 },
+        { name = 'weed_whitewidow',   price = 5000, amount = 50 },
+        { name = 'weed_skunk',        price = 5000, amount = 50 },
+        { name = 'weed_purplehaze',   price = 5000, amount = 50 },
+        { name = 'weed_ogkush',       price = 5000, amount = 50 },
+        { name = 'weed_amnesia',      price = 5000, amount = 50 },
+        { name = 'weed_ak47',         price = 5000, amount = 50 },
+        { name = 'markedbills',       price = 5000, amount = 50, info = { worth = 5000 } },
+    },
+    ['prison'] = {
+        { name = 'sandwich',     price = 4, amount = 50 },
+        { name = 'water_bottle', price = 4, amount = 50 },
+    },
+    ['police'] = {
+        { name = 'weapon_pistol',       price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_PI_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_stungun',      price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_pumpshotgun',  price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_smg',          price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_SCOPE_MACRO_02', label = '1x Scope' }, { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' } } } },
+        { name = 'weapon_carbinerifle', price = 0, amount = 50, info = { attachments = { { component = 'COMPONENT_AT_AR_FLSH', label = 'Flashlight' }, { component = 'COMPONENT_AT_SCOPE_MEDIUM', label = '3x Scope' } } } },
+        { name = 'weapon_nightstick',   price = 0, amount = 50 },
+        { name = 'weapon_flashlight',   price = 0, amount = 50 },
+        { name = 'pistol_ammo',         price = 0, amount = 50 },
+        { name = 'smg_ammo',            price = 0, amount = 50 },
+        { name = 'shotgun_ammo',        price = 0, amount = 50 },
+        { name = 'rifle_ammo',          price = 0, amount = 50 },
+        { name = 'handcuffs',           price = 0, amount = 50 },
+        { name = 'empty_evidence_bag',  price = 0, amount = 50 },
+        { name = 'police_stormram',     price = 0, amount = 50 },
+        { name = 'armor',               price = 0, amount = 50 },
+        { name = 'radio',               price = 0, amount = 50 },
+        { name = 'heavyarmor',          price = 0, amount = 50 },
+    },
+    ['ambulance'] = {
+        { name = 'radio',                   price = 0, amount = 50 },
+        { name = 'bandage',                 price = 0, amount = 50 },
+        { name = 'painkillers',             price = 0, amount = 50 },
+        { name = 'firstaid',                price = 0, amount = 50 },
+        { name = 'weapon_flashlight',       price = 0, amount = 50 },
+        { name = 'weapon_fireextinguisher', price = 0, amount = 50 },
+    },
+    ['mechanic'] = {
+        { name = 'veh_toolbox',       price = 5000, amount = 50 },
+        { name = 'veh_armor',         price = 5000, amount = 50 },
+        { name = 'veh_brakes',        price = 5000, amount = 50 },
+        { name = 'veh_engine',        price = 5000, amount = 50 },
+        { name = 'veh_suspension',    price = 5000, amount = 50 },
+        { name = 'veh_transmission',  price = 5000, amount = 50 },
+        { name = 'veh_turbo',         price = 5000, amount = 50 },
+        { name = 'veh_interior',      price = 5000, amount = 50 },
+        { name = 'veh_exterior',      price = 5000, amount = 50 },
+        { name = 'veh_wheels',        price = 5000, amount = 50 },
+        { name = 'veh_neons',         price = 5000, amount = 50 },
+        { name = 'veh_xenons',        price = 5000, amount = 50 },
+        { name = 'veh_tint',          price = 5000, amount = 50 },
+        { name = 'veh_plates',        price = 5000, amount = 50 },
+        { name = 'nitrous',           price = 5000, amount = 50 },
+        { name = 'tunerlaptop',       price = 5000, amount = 50 },
+        { name = 'repairkit',         price = 5000, amount = 50 },
+        { name = 'advancedrepairkit', price = 5000, amount = 50 },
+        { name = 'tirerepairkit',     price = 5000, amount = 50 },
+    }
+}
+
+Config.Locations = {
+    -- 24/7 Locations
+    ['247supermarket'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(24.47, -1346.62, 29.5, 271.66),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(26.45, -1315.51, 29.62, 0.07),
+        ['useStock'] = true
+    },
+
+    ['247supermarket2'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(-3039.54, 584.38, 7.91, 17.27),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-3047.95, 590.71, 7.62, 19.53)
+    },
+
+    ['247supermarket3'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(-3242.97, 1000.01, 12.83, 357.57),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-3245.76, 1005.25, 12.83, 269.45)
+    },
+
+    ['247supermarket4'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(1728.07, 6415.63, 35.04, 242.95),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1741.76, 6419.61, 35.04, 6.83)
+    },
+
+    ['247supermarket5'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(1959.82, 3740.48, 32.34, 301.57),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1963.81, 3750.09, 32.26, 302.46)
+    },
+
+    ['247supermarket6'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(549.13, 2670.85, 42.16, 99.39),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(541.54, 2663.53, 42.17, 120.51)
+    },
+
+    ['247supermarket7'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(2677.47, 3279.76, 55.24, 335.08),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2662.19, 3264.95, 55.24, 168.55)
+    },
+
+    ['247supermarket8'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(2556.66, 380.84, 108.62, 356.67),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2553.24, 399.73, 108.56, 344.86)
+    },
+
+    ['247supermarket9'] = {
+        ['label'] = '24/7 Supermarket',
+        ['coords'] = vector4(372.66, 326.98, 103.57, 253.73),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(379.97, 357.3, 102.56, 26.42)
+    },
+
+    -- LTD Gasoline Locations
+    ['ltdgasoline'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(-47.02, -1758.23, 29.42, 45.05),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-40.51, -1747.45, 29.29, 326.39)
+    },
+
+    ['ltdgasoline2'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(-706.06, -913.97, 19.22, 88.04),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-702.89, -917.44, 19.21, 181.96)
+    },
+
+    ['ltdgasoline3'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(-1820.02, 794.03, 138.09, 135.45),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1829.29, 801.49, 138.41, 41.39)
+    },
+
+    ['ltdgasoline4'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(1164.71, -322.94, 69.21, 101.72),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1160.62, -312.06, 69.28, 3.77)
+    },
+
+    ['ltdgasoline5'] = {
+        ['label'] = 'LTD Gasoline',
+        ['coords'] = vector4(1697.87, 4922.96, 42.06, 324.71),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['normal'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1702.68, 4917.28, 42.22, 139.27)
+    },
+
+    -- Rob's Liquor Locations
+    ['robsliquor'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(-1221.58, -908.15, 12.33, 35.49),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1226.92, -901.82, 12.28, 213.26)
+    },
+
+    ['robsliquor2'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(-1486.59, -377.68, 40.16, 139.51),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1468.29, -387.61, 38.79, 220.13)
+    },
+
+    ['robsliquor3'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(-2966.39, 391.42, 15.04, 87.48),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-2961.49, 376.25, 15.02, 111.41)
+    },
+
+    ['robsliquor4'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(1165.17, 2710.88, 38.16, 179.43),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1194.52, 2722.21, 38.62, 9.37)
+    },
+
+    ['robsliquor5'] = {
+        ['label'] = 'Rob\'s Liqour',
+        ['coords'] = vector4(1134.2, -982.91, 46.42, 277.24),
+        ['ped'] = 'mp_m_shopkeep_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-shopping-basket',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['liquor'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1129.73, -989.27, 45.97, 280.98)
+    },
+
+    -- Hardware Store Locations
+    ['hardware'] = {
+        ['label'] = 'Hardware Store',
+        ['coords'] = vector4(45.68, -1749.04, 29.61, 53.13),
+        ['ped'] = 'mp_m_waremech_01',
+        ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-wrench',
+        ['targetLabel'] = 'Open Hardware Store',
+        ['products'] = Config.Products['hardware'],
+        ['showblip'] = true,
+        ['blipsprite'] = 402,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(89.15, -1745.29, 30.09, 315.25)
+    },
+
+    ['hardware2'] = {
+        ['label'] = 'Hardware Store',
+        ['coords'] = vector4(2747.71, 3472.85, 55.67, 255.08),
+        ['ped'] = 'mp_m_waremech_01',
+        ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-wrench',
+        ['targetLabel'] = 'Open Hardware Store',
+        ['products'] = Config.Products['hardware'],
+        ['showblip'] = true,
+        ['blipsprite'] = 402,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2704.68, 3457.21, 55.54, 176.28)
+    },
+
+    ['hardware3'] = {
+        ['label'] = 'Hardware Store',
+        ['coords'] = vector4(-421.83, 6136.13, 31.88, 228.2),
+        ['ped'] = 'mp_m_waremech_01',
+        ['scenario'] = 'WORLD_HUMAN_CLIPBOARD',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-wrench',
+        ['targetLabel'] = 'Hardware Store',
+        ['products'] = Config.Products['hardware'],
+        ['showblip'] = true,
+        ['blipsprite'] = 402,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-438.25, 6146.9, 31.48, 136.99)
+    },
+
+    -- Ammunation Locations
+    ['ammunation'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-661.96, -933.53, 21.83, 177.05),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-660.61, -938.14, 21.83, 167.22)
+    },
+    ['ammunation2'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(809.68, -2159.13, 29.62, 1.43),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(820.97, -2146.7, 28.71, 359.98)
+    },
+    ['ammunation3'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(1692.67, 3761.38, 34.71, 227.65),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1687.17, 3755.47, 34.34, 163.69)
+    },
+    ['ammunation4'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-331.23, 6085.37, 31.45, 228.02),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-341.72, 6098.49, 31.32, 11.05)
+    },
+    ['ammunation5'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(253.63, -51.02, 69.94, 72.91),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(249.0, -50.64, 69.94, 60.71)
+    },
+    ['ammunation6'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(23.0, -1105.67, 29.8, 162.91),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-5.82, -1107.48, 29.0, 164.32)
+    },
+    ['ammunation7'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(2567.48, 292.59, 108.73, 349.68),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(2578.77, 285.53, 108.61, 277.2)
+    },
+    ['ammunation8'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-1118.59, 2700.05, 18.55, 221.89),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1127.67, 2708.18, 18.8, 41.76)
+    },
+    ['ammunation9'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(841.92, -1035.32, 28.19, 1.56),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(847.83, -1020.36, 27.88, 88.29)
+    },
+    ['ammunation10'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-1304.19, -395.12, 36.7, 75.03),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1302.44, -385.23, 36.62, 303.79)
+    },
+    ['ammunation11'] = {
+        ['label'] = 'Ammunation',
+        ['type'] = 'weapon',
+        ['coords'] = vector4(-3173.31, 1088.85, 20.84, 244.18),
+        ['ped'] = 's_m_y_ammucity_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Ammunation',
+        ['products'] = Config.Products['weapons'],
+        ['showblip'] = true,
+        ['blipsprite'] = 110,
+        ['blipscale'] = 0.6,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-3183.6, 1084.35, 20.84, 68.13)
+    },
+
+    -- Weedshop Locations
+    ['weedshop'] = {
+        ['label'] = 'Smoke On The Water',
+        ['coords'] = vector4(-1168.26, -1573.2, 4.66, 105.24),
+        ['ped'] = 'a_m_y_hippy_01',
+        ['scenario'] = 'WORLD_HUMAN_AA_SMOKE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-cannabis',
+        ['targetLabel'] = 'Open Weed Shop',
+        ['products'] = Config.Products['weedshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 140,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1162.13, -1568.57, 4.39, 328.52)
+    },
+
+    -- Sea Word Locations
+    ['seaword'] = {
+        ['label'] = 'Sea Word',
+        ['coords'] = vector4(-1687.03, -1072.18, 13.15, 52.93),
+        ['ped'] = 'a_m_y_beach_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_IMPATIENT',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-fish',
+        ['targetLabel'] = 'Sea Word',
+        ['products'] = Config.Products['gearshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1674.18, -1073.7, 13.15, 333.56)
+    },
+
+    -- Leisure Shop Locations
+    ['leisureshop'] = {
+        ['label'] = 'Leisure Shop',
+        ['coords'] = vector4(-1505.91, 1511.95, 115.29, 257.13),
+        ['ped'] = 'a_m_y_beach_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE_CLUBHOUSE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-leaf',
+        ['targetLabel'] = 'Open Leisure Shop',
+        ['products'] = Config.Products['leisureshop'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(-1507.64, 1505.52, 115.29, 262.2)
+    },
+
+    ['police'] = {
+        ['label'] = 'Police Shop',
+        ['coords'] = vector4(461.8498, -981.0677, 30.6896, 91.5892),
+        ['ped'] = 'mp_m_securoguard_01',
+        ['scenario'] = 'WORLD_HUMAN_COP_IDLES',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-gun',
+        ['targetLabel'] = 'Open Armory',
+        ['products'] = Config.Products['police'],
+        ['delivery'] = vector4(459.0441, -1008.0366, 28.2627, 271.4695),
+        ['requiredJob'] = 'police',
+    },
+
+    ['ambulance'] = {
+        ['label'] = 'Ambulance Shop',
+        ['coords'] = vector4(309.93, -602.94, 43.29, 71.0820),
+        ['ped'] = 's_m_m_doctor_01',
+        ['scenario'] = 'WORLD_HUMAN_STAND_MOBILE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-hand',
+        ['targetLabel'] = 'Open Armory',
+        ['products'] = Config.Products['ambulance'],
+        ['delivery'] = vector4(283.5821, -614.8570, 43.3792, 159.2903),
+        ['requiredJob'] = 'ambulance'
+    },
+
+    ['mechanic'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-343.66, -140.78, 39.02, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-354.3936, -128.2882, 39.4307, 251.4931),
+        ['requiredJob'] = 'mechanic',
+    },
+
+    ['mechanic2'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(1189.36, 2641.00, 38.44, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(1189.9852, 2651.1873, 37.8351, 317.7137),
+        ['requiredJob'] = 'mechanic2'
+    },
+
+    ['mechanic3'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-1156.56, -1999.85, 13.19, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-1131.9661, -1972.0144, 13.1603, 358.8637),
+        ['requiredJob'] = 'mechanic3'
+    },
+
+    ['bennys'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(-195.80, -1318.24, 31.08, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(-232.5028, -1311.7202, 31.2960, 180.3716),
+        ['requiredJob'] = 'bennys'
+    },
+
+    ['beeker'] = {
+        ['label'] = 'Mechanic Shop',
+        ['coords'] = vector4(100.92, 6616.00, 32.47, 0),
+        ['products'] = Config.Products['mechanic'],
+        ['delivery'] = vector4(119.3033, 6626.7358, 31.9558, 46.1566),
+        ['requiredJob'] = 'beeker'
+    },
+
+    ['prison'] = {
+        ['label'] = 'Canteen Shop',
+        ['coords'] = vector4(1777.59, 2560.52, 44.62, 187.83),
+        ['ped'] = false,
+        ['products'] = Config.Products['prison'],
+        ['showblip'] = true,
+        ['blipsprite'] = 52,
+        ['blipscale'] = 0.8,
+        ['blipcolor'] = 0,
+        ['delivery'] = vector4(1845.8175, 2585.9312, 45.6721, 96.7577)
+    },
+
+    ['blackmarket'] = {
+        ['label'] = 'Black Market',
+        ['coords'] = vector4(-594.7032, -1616.3647, 33.0105, 170.6846),
+        ['ped'] = 'a_m_y_smartcaspat_01',
+        ['scenario'] = 'WORLD_HUMAN_AA_SMOKE',
+        ['radius'] = 1.5,
+        ['targetIcon'] = 'fas fa-clipboard',
+        ['targetLabel'] = 'Open Shop',
+        ['products'] = Config.Products['blackmarket'],
+        ['delivery'] = vector4(-428.6385, -1728.1962, 19.7838, 75.6646)
+    },
+}`;
+
+                        // Inject weapons block after `Config.Products = {`
+                        // Inject into base config string
+                        const injectedConfig = qbShopsConfigBase.replace(
+                            /(\['weapons'\]\s*=\s*{\s*)([\s\S]*?)(\n\s*})/,
+                            (match, start, existingContent, end) => {
+                                const newEntries = `\n        ${weaponsEntriesString}`;
+                                return `${start}${existingContent.trim()},${newEntries}${end}`;
+                            }
+                        );
+
+                        // Create and download the updated config.lua file
+                        const blob = new Blob([injectedConfig], { type: 'text/plain' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = 'config.lua';
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                    else if (selectedValueConfig === "only-weapon") {
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(cb => cb.value);
+
+                        const weaponPrice = 4000;
+                        const attachmentPrice = 500;
+
+                        const allProducts = [];
+                        const existingNames = new Set();
+
+                        const prefixOverrides = {
+                            'x17 modular': 'x17m',
+                            'police m4': 'pm4',
+                            'shotgun 590': '590',
+                            'tactical sniper': 'tacticalsniper',
+                            'revolver': 'revolver'
+                            // Add more overrides as needed
+                        };
+
+                        const sharedAttachmentMap = new Map();
+                        const attachmentEntriesMap = new Map();
+
+                        // First: add weapon entries as before
+                        selectedNames.forEach(weaponKey => {
+                            const weaponsArray = nameMappings[weaponKey];
+                            if (!weaponsArray) {
+                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            weaponsArray.forEach(weapon => {
+                                const weaponName = weapon.name.toLowerCase();
+                                if (!existingNames.has(weaponName)) {
+                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                    existingNames.add(weaponName);
+                                }
+                            });
+                        });
+
+                        // Second: process attachments with your new detailed generator logic
+                        selectedNames.forEach(weaponKey => {
+                            if (!attachmentMappings[weaponKey]) {
+                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                return;
+                            }
+
+                            let weaponPrefix = weaponKey.replace(/^weapon_/, '').toLowerCase();
+                            weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
+
+                            attachmentMappings[weaponKey].forEach(att => {
+                                const component = att.component;
+                                if (!component) return;
+
+                                // Shared attachments detection
+                                if (component.toLowerCase().includes('shared')) {
+                                    let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                    sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
+                                    let labelPart = sharedKey.replace(/^SHARED_/, '');
+                                    labelPart = labelPart.replace(/_(\d+)$/, ' #' + '$1');
+                                    labelPart = labelPart.split('_').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+
+                                    if (!sharedAttachmentMap.has(sharedKey)) {
+                                        sharedAttachmentMap.set(sharedKey, {
+                                            component,
+                                            labelBase: labelPart,
+                                            weapons: new Set([weaponPrefix])
+                                        });
+                                    } else {
+                                        sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
+                                    }
+                                    return;
+                                }
+
+                                let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                compKey = compKey.replace(/markomods_?/gi, '');
+
+                                const realPrefix = compKey.split('_')[0];
+                                const remainder = compKey.split('_').slice(1).join('_');
+                                const itemKey = `${realPrefix}_${remainder}`;
+
+                                if (attachmentEntriesMap.has(itemKey)) return;
+
+                                let compLabel = compKey.replace(/_/g, ' ');
+                                compLabel = compLabel.replace(new RegExp(`^${weaponPrefix} `), '');
+                                compLabel = compLabel.replace(/(\d+)$/, '#$1');
+
+                                compLabel = compLabel.split(' ').map(word => {
+                                    if (word.startsWith('#')) return word;
+                                    return word.charAt(0).toUpperCase() + word.slice(1);
+                                }).join(' ');
+
+                                const weaponLabel = realPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                                const labelBase = `${weaponLabel} ${compLabel}`;
+
+                                attachmentEntriesMap.set(itemKey, [
+                                    `{ name = '${itemKey.toLowerCase()}', price = ${attachmentPrice}, amount = 5, requiredLicense = 'weapon' },`
+                                ].join('\n'));
+                            });
+                        });
+
+                        // Generate shared attachment entries similarly:
+                        sharedAttachmentMap.forEach((data, key) => {
+                            const weaponList = Array.from(data.weapons)
+                                .map(w => w.toUpperCase().replace(/_/g, ' '))
+                                .map(w => w.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
+
+                            const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
+
+                            attachmentEntriesMap.set(key.toLowerCase(), [
+                                `{ name = '${key.toLowerCase()}', price = ${attachmentPrice}, amount = 5, requiredLicense = 'weapon' },`
+                            ].join('\n'));
+                        });
+
+                        // Now append all attachments to allProducts (avoid duplicates)
+                        attachmentEntriesMap.forEach((entryString, key) => {
+                            if (!existingNames.has(key)) {
+                                // Parse name from string — here the string already has the `{ name = 'xxx', ... }` format
+                                // So just append it as raw string later
+                                existingNames.add(key);
+                                allProducts.push(entryString);
+                            }
+                        });
+
+                        // Prepare the final formatted Lua table string
+                        const weaponsEntriesString = allProducts.map(p => {
+                            // If p is string (attachment entry), return as-is; else build string for weapons
+                            if (typeof p === 'string') {
+                                return p.trim();
+                            } else {
+                                return `{ name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
+                            }
+                        }).join('\n        ');
+
+                        const formatted = `Config.Products = {
+    ['weapons'] = {
+        ${weaponsEntriesString}
+    },
+}`;
+
+                        const blob = new Blob([formatted], { type: 'text/plain' });
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+
+                    }
+                }
+            } else if (selectedValue === "qs") {
                 // qb-core/shared/items.lua
                 if (fileName === 'qb-core/shared/items.lua') {
                     let text = ""
-                    /*
-                        ['weapon_g45'] 			 		= {['name'] = 'weapon_g45', 		 	  	     ['label'] = 'Glock 45', 			    ['weight'] = 1000, 		['type'] = 'weapon', 	['ammotype'] = 'AMMO_PISTOL',					['image'] = 'weapon_g45.png', 		        		['unique'] = true, 		['useable'] = false, 	['description'] = 'A small firearm designed for close combat'},
-
-                        ['markomods-glock45-mag1'] 	     	 = {['name'] = 'markomods-glock45-mag1', 		['label'] = 'g45_clip1', 			['weight'] = 1000, 		['type'] = 'item', 		['image'] = 'pistol_extendedclip.png', 					['unique'] = false, 		['useable'] = true, 	['shouldClose'] = true,	   ['combinable'] = nil,   ['description'] = 'Pistol Clip'},
-                    */
                     const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
                         .map(checkbox => checkbox.value);
 
@@ -717,8 +2947,6 @@ Config.Weapons = {\n${formattedLuaEntries}
                         }
                     });
 
-
-
                     const blob = new Blob([text], { type: 'text/plain' });
 
                     const link = document.createElement('a');
@@ -727,29 +2955,8 @@ Config.Weapons = {\n${formattedLuaEntries}
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-
-
-
-
-
-
-
-
-
-                    // qb-core/shared/weapons.lua
                 } else if (fileName === 'qb-core/shared/weapons.lua') {
                     let text = ""
-                    /*
-                        [`weapon_ak47`] = {
-                            ['name'] = 'weapon_ak47',
-                            ['label'] = 'AK47',
-                            ['ammotype'] = 'AMMO_RIFLE',
-                            ['damagereason'] = 'Ended / Rifled / Shot down / Floored'
-                        },
-
-                        [`weapon_g45`] 		     		 = {['name'] = 'weapon_g45', 	    ['label'] = 'Glock_45', 		['ammotype'] = 'AMMO_PISTOL',	['damagereason'] = 'Ended / Rifled / Shot down / Floored'},
-
-                    */
 
                     const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
                         .map(checkbox => checkbox.value);
@@ -769,53 +2976,6 @@ Config.Weapons = {\n${formattedLuaEntries}
 
                     text = `${formattedLuaEntries}`
 
-                    /*
-                    // This generates the attachments
-                    selectedNames.forEach(name => {
-                        let componentCounters = {}; // Reset counters for each selected name
-                        let previousEntryName = ""; // Track the previous entry name
-
-                        if (attachmentMappings[name]) {
-                            attachmentMappings[name].forEach(entry => {
-                                if (entry.attachment !== 'smallscope_attachment') { // Filter out smallscope_attachment
-
-                                    // Reset counters if the entry name changes
-                                    if (entry.name !== previousEntryName) {
-                                        componentCounters = {};
-                                        previousEntryName = entry.name;
-                                    }
-
-                                    const componentType = entry.attachment
-                                        .replace("_attachment", "")
-                                        .replace("_", "")
-                                        .replace(/\d+/g, ""); // Remove all numbers
-
-                                    // Initialize or increment the counter for the component type
-                                    if (!componentCounters[componentType]) {
-                                        componentCounters[componentType] = 1;
-                                    } else {
-                                        componentCounters[componentType]++;
-                                    }
-
-                                    const labelNumber = componentCounters[componentType];
-
-                                    // Format the label by removing numbers, adding the entry name, and the counter
-                                    const formattedLabel = entry.name.replace("weapon_", "").replaceAll("_", " ").replace(/^./, str => str.toUpperCase()) + " " +
-                                        entry.attachment
-                                        .replace("_attachment", "")
-                                        .replaceAll("_", "")
-                                        .replace(/\d+/g, "") // Remove all numbers
-                                        .replace(/^./, str => str.toUpperCase()) 
-                                        + ` ${labelNumber}`; // Append the label number
-
-                                    text += `\n['${entry.name.replace("weapon_", "")}_${entry.attachment.replace("_attachment", "")}'] = {\n\tlabel = '${formattedLabel}',\n\tweight = 200,\n\ttype = '${componentType}',\n\tclient = {\n\t\tcomponent = {'${entry.component}'},\n\t\tusetime = 2500\n\t}\n},`;
-                                }
-                            });
-                        }
-                    });
-                    */
-                    // \n${formattedLuaEntries}
-
                     const blob = new Blob([text], { type: 'text/plain' });
 
                     const link = document.createElement('a');
@@ -824,29 +2984,23 @@ Config.Weapons = {\n${formattedLuaEntries}
                     document.body.appendChild(link);
                     link.click();
                     document.body.removeChild(link);
-                } else if (fileName === 'qs-inventory\config\weapons.lua') {
+                } else if (fileName === 'qs-inventory/config/weapons.lua') {
                     let text = "";
 
                     const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
                         .map(checkbox => checkbox.value);
 
-                    // Initialize the text for Config.DurabilityMultiplier and Config.WeaponAttachments
                     text = "Config.DurabilityMultiplier = {\n";
-
-                    // Loop through each selected name to add the durability multiplier
                     selectedNames.forEach(name => {
                         if (nameMappings[name]) {
-                            // Map through each entry to access entry.name
                             nameMappings[name].forEach(entry => {
-                                // Add the durability multiplier for each weapon
                                 text += `    ['${entry.name.toLowerCase().replace(/ /g, "_")}'] = 0.10,\n`;
                             });
                         }
                     });
 
-                    text += "}\n\n"; // Close the DurabilityMultiplier section and add a line break
+                    text += "}\n\n";
 
-                    // Add the WeaponAttachments section
                     text += "Config.WeaponAttachments = {\n";
 
                     const capitalizeWords = (str) => {
@@ -955,20 +3109,19 @@ Config.Weapons = {\n${formattedLuaEntries}
                     document.body.removeChild(link);
                 }
             }
-        }
-
-
-
-
-        function downloadAll() {
-            // Logic for downloading all files
-            downloadFile('weapons.lua');
-            downloadFile('items.lua');
-            downloadFile('config.lua');
+            function downloadAll() {
+                // Logic for downloading all files
+                downloadFile('weapons.lua');
+                downloadFile('items.lua');
+                downloadFile('config.lua');
+            }
         }
 
     </script>
-
+    <script src="mappings.js"></script>
+    <script src="swm.js"></script>
+    <script src="qbcore.js"></script>
+    <script src="esx.js"></script>
 </body>
 
 </html>
