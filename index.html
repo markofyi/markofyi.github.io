@@ -1596,10 +1596,27 @@ Config.Weapons = {\n${formattedLuaEntries}
                     const attachmentEntriesMap = new Map();
                     const sharedAttachmentMap = new Map();
 
+                    // Helper to determine attachment type from component string
+                    function getAttachmentType(component) {
+                        const comp = component.toLowerCase();
+
+                        if (comp.includes('clip') || comp.includes('mag') || comp.includes('magazine')) return 'magazine';
+                        if (comp.includes('scope') || comp.includes('zoomscope')) return 'scope';
+                        if (comp.includes('flashlight') || comp.includes('light') || comp.includes('flash')) return 'flashlight';
+                        if (comp.includes('suppressor') || comp.includes('silencer') || comp.includes('supp')) return 'muzzle';
+                        if (comp.includes('grip')) return 'grip';
+                        if (comp.includes('stock')) return 'stock';
+                        if (comp.includes('frame')) return 'frame';
+                        if (comp.includes('laser')) return 'laser';
+                        if (comp.includes('misc')) return 'misc';
+                        // Add other detection rules as needed
+
+                        return 'clip'; // fallback default
+                    }
+
                     selectedNames.forEach(name => {
                         if (!attachmentMappings[name]) return;
 
-                        //const weaponPrefix = name.replace(/^weapon_/, '').toLowerCase();
                         let weaponPrefix = name.replace(/^weapon_/, '').toLowerCase();
                         weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
 
@@ -1607,9 +1624,8 @@ Config.Weapons = {\n${formattedLuaEntries}
                             const component = att.component;
                             if (!component) return;
 
-                            // Detect if shared by checking the component name
                             if (component.toLowerCase().includes('shared')) {
-                                // (Shared attachment logic as before - unchanged)
+                                // shared attachments handled below
                                 let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
                                 sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
                                 let labelPart = sharedKey.replace(/^SHARED_/, '');
@@ -1632,42 +1648,32 @@ Config.Weapons = {\n${formattedLuaEntries}
                             let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
                             compKey = compKey.replace(/markomods_?/gi, '');
 
-                            // Extract real weapon prefix from component itself (first word before underscore)
                             const realPrefix = compKey.split('_')[0];
                             const remainder = compKey.split('_').slice(1).join('_');
                             const itemKey = `${realPrefix}_${remainder}`;
 
-
                             if (attachmentEntriesMap.has(itemKey)) return;
 
-                            // Format label:
-                            // weaponPrefix, split by _, capitalize each word
-                            //const weaponLabel = weaponPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
                             const weaponLabel = realPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-
-                            // component key: e.g. mutant_mag_01 -> 'Magazine #1'
-                            // extract base name and number
-                            let compLabel = compKey.replace(/_/g, ' '); // 'mutant mag 01'
-                            // Remove weapon name prefix from compLabel if present (optional)
+                            let compLabel = compKey.replace(/_/g, ' ');
                             compLabel = compLabel.replace(new RegExp(`^${weaponPrefix} `), '');
-                            // Replace trailing number with #number
                             compLabel = compLabel.replace(/(\d+)$/, '#$1');
-
-                            // Capitalize words in compLabel except #number
                             compLabel = compLabel.split(' ').map(word => {
                                 if (word.startsWith('#')) return word;
                                 return word.charAt(0).toUpperCase() + word.slice(1);
                             }).join(' ');
 
-                            // Compose full label
                             const labelBase = `${weaponLabel} ${compLabel}`;
+
+                            // *** Use dynamic attachment type here ***
+                            const attachmentType = getAttachmentType(component);
 
                             attachmentEntriesMap.set(itemKey, [
                                 `['${itemKey.toLowerCase()}'] = {`,
                                 `\tlabel = '${labelBase}',`,
                                 `\tweight = 200,`,
-                                `\ttype = 'clip',`,
+                                `\ttype = '${attachmentType}',`,    // <-- dynamically set type here
                                 `\tclient = {`,
                                 `\t\tcomponent = {'${component}'},`,
                                 `\t\tusetime = 2500`,
@@ -1677,8 +1683,6 @@ Config.Weapons = {\n${formattedLuaEntries}
                         });
                     });
 
-
-                    // After all attachments processed, generate shared attachment entries:
                     sharedAttachmentMap.forEach((data, key) => {
                         const weaponList = Array.from(data.weapons)
                             .map(w => w.toUpperCase().replace(/_/g, ' '))
@@ -1686,33 +1690,13 @@ Config.Weapons = {\n${formattedLuaEntries}
 
                         const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
 
-                        attachmentEntriesMap.set(key, [
-                            `['${key.toLowerCase()}'] = {`,
-                            `\tlabel = 'Shared ${data.labelBase.replace("Supp", "Suppressor").replace("Flash", "Flashlight")}${fitsLabel}',`,
-                            `\tweight = 200,`,
-                            `\ttype = 'clip',`,
-                            `\tclient = {`,
-                            `\t\tcomponent = {'${data.component}'},`,
-                            `\t\tusetime = 2500`,
-                            `\t},`,
-                            `},`
-                        ].join('\n'));
-                    });
-
-
-                    // Handle shared attachments (create entries with formatted label + weapons list)
-                    sharedAttachmentMap.forEach((data, key) => {
-                        const weaponList = Array.from(data.weapons)
-                            .map(w => w.toUpperCase().replace(/_/g, ' '))
-                            .map(w => w.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
-
-                        const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
+                        const attachmentType = getAttachmentType(data.component);
 
                         attachmentEntriesMap.set(key, [
                             `['${key.toLowerCase()}'] = {`,
                             `\tlabel = 'Shared ${data.labelBase.replace("Supp", "Suppressor").replace("Flash", "Flashlight")}${fitsLabel}',`,
                             `\tweight = 200,`,
-                            `\ttype = 'clip',`,
+                            `\ttype = '${attachmentType}',`,
                             `\tclient = {`,
                             `\t\tcomponent = {'${data.component}'},`,
                             `\t\tusetime = 2500`,
