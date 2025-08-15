@@ -1,4 +1,8 @@
 const nameMappings = {
+    "Dragon": [
+        { name: 'weapon_dragon', label: 'Dragon', caliber: '7.62', image: 'weapon_assaultrifle.png', weapontype: 'Pistol', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile rifle' },
+        { name: 'weapon_dragon_gold', label: 'Dragon Gold', caliber: '7.62', image: 'weapon_assaultrifle.png', weapontype: 'Pistol', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile rifle' },
+    ],
     "X17 Modular": [
         { name: 'weapon_x17m', label: 'X17 Semi', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
         { name: 'weapon_x17ms', label: 'X17 Auto', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
@@ -90,6 +94,36 @@ const nameMappings = {
 
 const attachmentMappings = {
     "ZK Knife": [],
+    "Dragon": [
+        { name: 'weapon_dragon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_01' },
+        { name: 'weapon_dragon_gold', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_01' },
+        { name: 'weapon_dragon', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_02' },
+        { name: 'weapon_dragon_gold', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_02' },
+        { name: 'weapon_dragon', attachment: 'clip_attachment_2', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_03' },
+        { name: 'weapon_dragon_gold', attachment: 'clip_attachment_2', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_03' },
+        { name: 'weapon_dragon', attachment: 'clip_attachment_3', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_04' },
+        { name: 'weapon_dragon_gold', attachment: 'clip_attachment_3', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_04' },
+        { name: 'weapon_dragon', attachment: 'clip_attachment_4', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_05' },
+        { name: 'weapon_dragon_gold', attachment: 'clip_attachment_4', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_05' },
+        { name: 'weapon_dragon', attachment: 'clip_attachment_5', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_06' },
+        { name: 'weapon_dragon_gold', attachment: 'clip_attachment_5', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_06' },
+        { name: 'weapon_dragon', attachment: 'stock_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_STOCK_01' },
+        { name: 'weapon_dragon_gold', attachment: 'stock_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_STOCK_01' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_0', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_01' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_0', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_01' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_1', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_02' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_1', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_02' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_2', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_03' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_2', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_03' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_3', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_04' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_3', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_04' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_4', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_05' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_4', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_05' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_5', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_06' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_5', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_06' },
+        { name: 'weapon_dragon', attachment: 'scope_attachment_6', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_07' },
+        { name: 'weapon_dragon_gold', attachment: 'scope_attachment_6', component: 'COMPONENT_MARKOMODS_DRAGON_SCOPE_07' },
+    ],
     "X17 Modular": [
         { name: 'weapon_x17m', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_X17M_MAGAZINE_01' },
         { name: 'weapon_x17ms', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_X17M_MAGAZINE_01' },
