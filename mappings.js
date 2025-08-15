@@ -1,7 +1,7 @@
 const nameMappings = {
     "Dragon": [
-        { name: 'weapon_dragon', label: 'Dragon', caliber: '7.62', image: 'weapon_assaultrifle.png', weapontype: 'Pistol', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile rifle' },
-        { name: 'weapon_dragon_gold', label: 'Dragon Gold', caliber: '7.62', image: 'weapon_assaultrifle.png', weapontype: 'Pistol', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile rifle' },
+        { name: 'weapon_dragon', label: 'Dragon', caliber: '7.62', image: 'weapon_assaultrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile rifle' },
+        { name: 'weapon_dragon_gold', label: 'Dragon Gold', caliber: '7.62', image: 'weapon_assaultrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile rifle' },
     ],
     "X17 Modular": [
         { name: 'weapon_x17m', label: 'X17 Semi', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
@@ -93,7 +93,6 @@ const nameMappings = {
 // THE ORDER: 
 
 const attachmentMappings = {
-    "ZK Knife": [],
     "Dragon": [
         { name: 'weapon_dragon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_01' },
         { name: 'weapon_dragon_gold', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_01' },
@@ -232,6 +231,7 @@ const attachmentMappings = {
         { name: 'weapon_x17m', attachment: 'suppressor_attachment_5', component: 'COMPONENT_MARKOMODS_X17M_SUPPRESSOR_04' },
         { name: 'weapon_x17ms', attachment: 'suppressor_attachment_5', component: 'COMPONENT_MARKOMODS_X17M_SUPPRESSOR_04' },
     ],
+    "ZK Knife": [],
     "Virtus": [
         { name: 'weapon_virtus_1', attachment: 'frame_attachment', component: 'COMPONENT_MARKOMODS_VIRTUS_BODY1_2' },
         { name: 'weapon_virtus_1', attachment: 'frame_attachment_1', component: 'COMPONENT_MARKOMODS_VIRTUS_BODY2_2' },
