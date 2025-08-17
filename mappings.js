@@ -97,7 +97,7 @@ const nameMappings = {
 // THE ORDER: 
 
 const attachmentMappings = {
-    "Dragon": [
+    "BK12": [
         { name: 'weapon_bk12', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_BK12_MAG_01' },
         { name: 'weapon_bk12_shorty', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_BK12_MAG_01' },
         { name: 'weapon_bk12', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_BK12_MAG_02' },
@@ -145,7 +145,7 @@ const attachmentMappings = {
         { name: 'weapon_bk12', attachment: 'flashlight_attachment_1', component: 'COMPONENT_MARKOMODS_SHARED_FLASH_07' },
         { name: 'weapon_bk12_shorty', attachment: 'flashlight_attachment_1', component: 'COMPONENT_MARKOMODS_SHARED_FLASH_07' },
     ],
-    "BK12": [
+    "Dragon": [
         { name: 'weapon_dragon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_01' },
         { name: 'weapon_dragon_gold', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_01' },
         { name: 'weapon_dragon', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_DRAGON_MAG_02' },
