@@ -1,4 +1,7 @@
 const nameMappings = {
+    "PMR Sniper": [
+        { name: 'weapon_pmr', label: 'Precision Marksman Rifle', weapontype: 'Sniper Rifle', caliber: '.308 Win', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' },
+    ],
     "BK12": [
         { name: 'weapon_bk12', label: 'BK12', caliber: '12 Gauge', weapontype: 'Shotgun', image: 'weapon_combatshotgun.png', ammotype: 'AMMO_SHOTGUN', damagereason: 'Blasted / Plugged / Put a hole in ya', description: 'A gun for firing a small shot at short range' },
         { name: 'weapon_bk12_shorty', label: 'BK12 Shorty', caliber: '12 Gauge', weapontype: 'Shotgun', image: 'weapon_combatshotgun.png', ammotype: 'AMMO_SHOTGUN', damagereason: 'Blasted / Plugged / Put a hole in ya', description: 'A gun for firing a small shot at short range' },
@@ -97,6 +100,27 @@ const nameMappings = {
 // THE ORDER: 
 
 const attachmentMappings = {
+    "PMR Sniper": [
+        { name: 'weapon_pmr', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_PMR_MAG_01' },
+        { name: 'weapon_pmr', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_PMR_MAG_02' },
+        { name: 'weapon_pmr', attachment: 'clip_attachment_2', component: 'COMPONENT_MARKOMODS_PMR_MAG_03' },
+        { name: 'weapon_pmr', attachment: 'clip_attachment_3', component: 'COMPONENT_MARKOMODS_PMR_MAG_04' },
+        { name: 'weapon_pmr', attachment: 'clip_attachment_4', component: 'COMPONENT_MARKOMODS_PMR_MAG_05' },
+        { name: 'weapon_pmr', attachment: 'scope_attachment_0', component: 'COMPONENT_MARKOMODS_PMR_SCOPE_01' },
+        { name: 'weapon_pmr', attachment: 'scope_attachment_1', component: 'COMPONENT_MARKOMODS_PMR_SCOPE_02' },
+        { name: 'weapon_pmr', attachment: 'scope_attachment_2', component: 'COMPONENT_MARKOMODS_PMR_SCOPE_03' },
+        { name: 'weapon_pmr', attachment: 'scope_attachment_3', component: 'COMPONENT_MARKOMODS_PMR_SCOPE_04' },
+        { name: 'weapon_pmr', attachment: 'scope_attachment_4', component: 'COMPONENT_MARKOMODS_PMR_SCOPE_05' },
+        { name: 'weapon_pmr', attachment: 'scope_attachment_5', component: 'COMPONENT_MARKOMODS_PMR_SCOPE_06' },
+        { name: 'weapon_pmr', attachment: 'frame_attachment', component: 'COMPONENT_MARKOMODS_PMR_FRAME_01' },
+        { name: 'weapon_pmr', attachment: 'frame_attachment_1', component: 'COMPONENT_MARKOMODS_PMR_FRAME_02' },
+        { name: 'weapon_pmr', attachment: 'frame_attachment_2', component: 'COMPONENT_MARKOMODS_PMR_FRAME_03' },
+        { name: 'weapon_pmr', attachment: 'frame_attachment_3', component: 'COMPONENT_MARKOMODS_PMR_FRAME_04' },
+        { name: 'weapon_pmr', attachment: 'frame_attachment_4', component: 'COMPONENT_MARKOMODS_PMR_FRAME_05' },
+        { name: 'weapon_pmr', attachment: 'frame_attachment_5', component: 'COMPONENT_MARKOMODS_PMR_FRAME_06' },
+        { name: 'weapon_pmr', attachment: 'grip_attachment', component: 'COMPONENT_MARKOMODS_PMR_BIPOD_01' },
+        { name: 'weapon_pmr', attachment: 'grip_attachment_1', component: 'COMPONENT_MARKOMODS_PMR_BIPOD_02' },
+    ],
     "BK12": [
         { name: 'weapon_bk12', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_BK12_MAG_01' },
         { name: 'weapon_bk12_shorty', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_BK12_MAG_01' },
