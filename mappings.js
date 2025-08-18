@@ -1,6 +1,6 @@
 const nameMappings = {
-    "PMR": [
-        { name: 'weapon_pmr', label: 'PMR', weapontype: 'Sniper Rifle', caliber: '.308 Win', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' },
+    "Precision Marksman Rifle": [
+        { name: 'weapon_pmr', label: 'Precision Marksman Rifle', weapontype: 'Sniper Rifle', caliber: '.308 Win', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' },
     ],
     "BK12": [
         { name: 'weapon_bk12', label: 'BK12', caliber: '12 Gauge', weapontype: 'Shotgun', image: 'weapon_combatshotgun.png', ammotype: 'AMMO_SHOTGUN', damagereason: 'Blasted / Plugged / Put a hole in ya', description: 'A gun for firing a small shot at short range' },
@@ -99,7 +99,7 @@ const nameMappings = {
 
 // THE ORDER: 
 const attachmentMappings = {
-    "PMR": [
+    "Precision Marksman Rifle": [
         { name: 'weapon_pmr', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_PMR_MAG_01' },
         { name: 'weapon_pmr', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_PMR_MAG_02' },
         { name: 'weapon_pmr', attachment: 'clip_attachment_2', component: 'COMPONENT_MARKOMODS_PMR_MAG_03' },
