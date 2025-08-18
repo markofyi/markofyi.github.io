@@ -98,7 +98,6 @@ const nameMappings = {
 
 
 // THE ORDER: 
-
 const attachmentMappings = {
     "PMR": [
         { name: 'weapon_pmr', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_PMR_MAG_01' },
