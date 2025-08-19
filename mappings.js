@@ -1,4 +1,7 @@
 const nameMappings = {
+    "FMAS": [
+        { name: 'weapon_fmas', label: 'FMAS Rifle', caliber: '5.56', image: 'weapon_bullpuprifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle' },
+    ],
     "PMR": [
         { name: 'weapon_pmr', label: 'Precision Marksman Rifle', weapontype: 'Sniper Rifle', caliber: '.308 Win', image: 'weapon_sniperrifle.png', ammotype: 'AMMO_SNIPER', damagereason: 'Picked Off / Plugged / Ended', description: 'A high-precision, long-range rifle' },
     ],
@@ -99,6 +102,36 @@ const nameMappings = {
 
 // THE ORDER: 
 const attachmentMappings = {
+    "FMAS": [
+        { name: 'weapon_fmas', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_FMAS_MAG_01' },
+        { name: 'weapon_fmas', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_FMAS_MAG_02' },
+        { name: 'weapon_fmas', attachment: 'clip_attachment_2', component: 'COMPONENT_MARKOMODS_FMAS_MAG_03' },
+        { name: 'weapon_fmas', attachment: 'clip_attachment_3', component: 'COMPONENT_MARKOMODS_FMAS_MAG_04' },
+        { name: 'weapon_fmas', attachment: 'clip_attachment_4', component: 'COMPONENT_MARKOMODS_FMAS_MAG_05' },
+        { name: 'weapon_fmas', attachment: 'clip_attachment_5', component: 'COMPONENT_MARKOMODS_FMAS_MAG_06' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_0', component: 'COMPONENT_MARKOMODS_FMAS_SCOPE_01' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_1', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_01_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_2', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_02_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_3', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_03_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_4', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_04_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_5', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_05_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_6', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_06_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'scope_attachment_7', component: 'COMPONENT_MARKOMODS_SHARED_SCOPE_08_LIGHT' },
+        { name: 'weapon_fmas', attachment: 'grip_attachment', component: 'COMPONENT_MARKOMODS_SHARED_GRIP_01' },
+        { name: 'weapon_fmas', attachment: 'grip_attachment_1', component: 'COMPONENT_MARKOMODS_SHARED_GRIP_03' },
+        { name: 'weapon_fmas', attachment: 'grip_attachment_2', component: 'COMPONENT_MARKOMODS_SHARED_GRIP_08' },
+        { name: 'weapon_fmas', attachment: 'grip_attachment_3', component: 'COMPONENT_MARKOMODS_SHARED_GRIP_09' },
+        { name: 'weapon_fmas', attachment: 'grip_attachment_4', component: 'COMPONENT_MARKOMODS_SHARED_GRIP_16' },
+        { name: 'weapon_fmas', attachment: 'frame_attachment', component: 'COMPONENT_MARKOMODS_FMAS_RAIL_SCOPE' },
+        { name: 'weapon_fmas', attachment: 'frame_attachment_1', component: 'COMPONENT_MARKOMODS_FMAS_RAIL_GRIP' },
+        { name: 'weapon_fmas', attachment: 'frame_attachment_2', component: 'COMPONENT_MARKOMODS_FMAS_RAIL_ALL' },
+        { name: 'weapon_fmas', attachment: 'suppressor_attachment', component: 'COMPONENT_MARKOMODS_FMAS_SUPPRESSOR_01' },
+        { name: 'weapon_fmas', attachment: 'suppressor_attachment_1', component: 'COMPONENT_MARKOMODS_SHARED_SUPP_14' },
+        { name: 'weapon_fmas', attachment: 'suppressor_attachment_2', component: 'COMPONENT_MARKOMODS_SHARED_SUPP_18' },
+        { name: 'weapon_fmas', attachment: 'suppressor_attachment_3', component: 'COMPONENT_MARKOMODS_SHARED_SUPP_19' },
+        { name: 'weapon_fmas', attachment: 'suppressor_attachment_4', component: 'COMPONENT_MARKOMODS_SHARED_SUPP_21' },
+        { name: 'weapon_fmas', attachment: 'suppressor_attachment_5', component: 'COMPONENT_MARKOMODS_SHARED_SUPP_16' },
+    ],
     "PMR": [
         { name: 'weapon_pmr', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_PMR_MAG_01' },
         { name: 'weapon_pmr', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_PMR_MAG_02' },
