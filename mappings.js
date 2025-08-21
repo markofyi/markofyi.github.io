@@ -1,4 +1,10 @@
 const nameMappings = {
+    "Combat Pistol Addon": [
+        { name: 'weapon_combatpistol_addon', label: 'Combat Pistol Addon (Black)', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
+        { name: 'weapon_combatpistol_tan_addon', label: 'Combat Pistol Addon (Tan)', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
+        { name: 'weapon_combatpistol_blacktan_addon', label: 'Combat Pistol Addon (Black/Tan)', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
+        { name: 'weapon_combatpistol_tanblack_addon', label: 'Combat Pistol Addon (Tan/Black)', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
+    ],
     "FMAS": [
         { name: 'weapon_fmas', label: 'FMAS Rifle', caliber: '5.56', image: 'weapon_bullpuprifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle' },
     ],
@@ -102,6 +108,20 @@ const nameMappings = {
 
 // THE ORDER: 
 const attachmentMappings = {
+    "Combat Pistol Addon": [
+        { name: 'weapon_combatpistol_addon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_01' },
+        { name: 'weapon_combatpistol_addon', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_02' },
+        { name: 'weapon_combatpistol_addon', attachment: 'flashlight_attachment', component: 'COMPONENT_AT_PI_FLSH' },
+        { name: 'weapon_combatpistol_tan_addon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_01' },
+        { name: 'weapon_combatpistol_tan_addon', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_02' },
+        { name: 'weapon_combatpistol_tan_addon', attachment: 'flashlight_attachment', component: 'COMPONENT_AT_PI_FLSH' },
+        { name: 'weapon_combatpistol_tanblack_addon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_01' },
+        { name: 'weapon_combatpistol_tanblack_addon', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_02' },
+        { name: 'weapon_combatpistol_tanblack_addon', attachment: 'flashlight_attachment', component: 'COMPONENT_AT_PI_FLSH' },
+        { name: 'weapon_combatpistol_blacktan_addon', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_01' },
+        { name: 'weapon_combatpistol_blacktan_addon', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_COMBATPISTOL_MAG_02' },
+        { name: 'weapon_combatpistol_blacktan_addon', attachment: 'flashlight_attachment', component: 'COMPONENT_AT_PI_FLSH' },
+    ],
     "FMAS": [
         { name: 'weapon_fmas', attachment: 'clip_attachment', component: 'COMPONENT_MARKOMODS_FMAS_MAG_01' },
         { name: 'weapon_fmas', attachment: 'clip_attachment_1', component: 'COMPONENT_MARKOMODS_FMAS_MAG_02' },
