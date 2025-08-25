@@ -1,8 +1,8 @@
 const nameMappings = {
     "UBR": [
-        { name: 'weapon_ubr_og', label: 'OG UBR', caliber: '5.56', image: 'weapon_advancedrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle' },
-        { name: 'weapon_ubr_modern', label: 'Modern UBR', caliber: '5.56', image: 'weapon_advancedrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle' },
-        { name: 'weapon_ubr_cqb', label: 'CQB UBR', caliber: '5.56', image: 'weapon_advancedrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle' },
+        { name: 'weapon_ubr_og', label: 'OG UBR', caliber: '5.56', image: 'weapon_advancedrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle for any combat situation' },
+        { name: 'weapon_ubr_modern', label: 'Modern UBR', caliber: '5.56', image: 'weapon_advancedrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle for any combat situation' },
+        { name: 'weapon_ubr_cqb', label: 'CQB UBR', caliber: '5.56', image: 'weapon_advancedrifle.png', weapontype: 'Assault Rifle', ammotype: 'AMMO_RIFLE', damagereason: 'Ended / Rifled / Shot down / Floored', description: 'An extremely versatile assault rifle for any combat situation' },
     ],
     "Combat Pistol Addon": [
         { name: 'weapon_combatpistol_addon', label: 'Combat Pistol Addon (Black)', caliber: '9 MM', image: 'weapon_pistol.png', weapontype: 'Pistol', ammotype: 'AMMO_PISTOL', damagereason: 'Pistoled / Blasted / Plugged / Bust a cap in', description: 'A small firearm designed to be held in one hand' },
