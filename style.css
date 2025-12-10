@@ -2,11 +2,18 @@ body {
     font-family: Arial, sans-serif;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
+    min-height: 100vh;       
     margin: 0;
     background-color: #f0f0f0;
+}
+
+.page-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center; 
+    flex: 1;                 
 }
 
 .logo {
@@ -25,10 +32,105 @@ body {
     margin-bottom: 20px;
 }
 
-.disclaimer {
-    position: fixed;
-    bottom: 10%;
+.hash-table-wrapper {
+    width: 100%;
+    overflow-x: auto;
+}
 
+
+
+.status-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    background-color: #E9E9ED;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    overflow: hidden; 
+}
+
+.status-table td {
+    padding: 12px;
+    font-size: 14px;
+    color: #333;
+    border-bottom: 1px solid #d1d1d1;
+    background-color: #E9E9ED;
+}
+
+.status-table tr:last-child td {
+    border-bottom: none;
+}
+
+.status-table tr:first-child td {
+    font-weight: bold;
+    background-color: #dcdce0; 
+}
+
+
+.hash-table-container {
+    margin-top: 20px;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    overflow-x: auto; 
+}
+.status-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 15px; /* Space above the Generate button */
+}
+
+.status-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    background-color: #f7f7f7;
+    font-size: 14px;
+    color: #333;
+}
+.hash-table-container h3 {
+    text-align: center;
+    color: #333;
+    margin-top: 0;
+    margin-bottom: 15px;
+}
+
+.hash-data-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.hash-data-table th, .hash-data-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.hash-data-table th {
+    background-color: #e0e0e0;
+    font-weight: bold;
+}
+
+.hash-data-table tr:nth-child(odd) {
+    background-color: #f2f2f2;
+}
+
+.hash-data-table td input[type="text"] {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 6px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.disclaimer {
+    margin: 20px 0;
+    max-width: 1000px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #555;
 }
 
 .dropdown {
@@ -106,14 +208,15 @@ body {
 
 .download-box {
     padding: 30px;
-    text-align: center;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    width: 300px;
+    width: max-content;     /* grows to fit table */
+    max-width: 90vw;        /* but never exceeds screen */
     margin-top: 30px;
     display: none;
 }
+
 
 .download-button {
     padding: 10px 20px;

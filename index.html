@@ -11,358 +11,646 @@
 </head>
 
 <body>
-    <img src="https://dunb17ur4ymx4.cloudfront.net/webstore/logos/155f177e7d0b21bb523faa40dfbb54fb4c81c18c.png"
-        alt="Logo" class="logo">
-    <div class="container">
-        <h1>Config Generator</h1>
-        <div class="dropdown-container">
-            <label for="framework">Select Framework</label>
-            <select id="framework" class="dropdown">
-                <option value="qb-core" selected>QB Core</option>
-                <option value="qb-shops">QB Shops Config</option>
-                <option value="esx">ESX</option>
-                <option value="ox">OX Inventory</option>
-                <option value="ox-shops">OX Shops Config</option>
-                <option value="qs">Quasar Inventory (3.0+, QB)</option>
-            </select>
+
+    <body>
+        <div class="page-content">
+            <img src="https://dunb17ur4ymx4.cloudfront.net/webstore/logos/155f177e7d0b21bb523faa40dfbb54fb4c81c18c.png"
+                alt="Logo" class="logo">
+            <div class="container">
+                <h1>Config Generator</h1>
+                <div class="dropdown-container">
+                    <label for="framework">Select Framework</label>
+                    <select id="framework" class="dropdown">
+                        <option value="qb-core" selected>QB Core</option>
+                        <option value="qb-shops">QB Shops Config</option>
+                        <option value="esx">ESX</option>
+                        <option value="ox">OX Inventory</option>
+                        <option value="ox-shops">OX Shops Config</option>
+                        <option value="qs">Quasar Inventory (3.0+, QB)</option>
+                    </select>
+                </div>
+
+                <div class="dropdown-container">
+                    <label for="names">Select Weapons</label>
+                    <div id="names" class="dropdown checkbox-dropdown">Weapons</div>
+                    <div id="checkboxDropdownContent" class="checkbox-dropdown-content"></div>
+                </div>
+
+                <div class="dropdown-container">
+                    <label for="generate">Options</label>
+                    <select id="generate" class="dropdown">
+                        <option value="entire-config" selected>Generate Entire Config</option>
+                        <option value="only-weapon">Generate Only Weapon Code</option>
+                        <option value="weapon-hash">Generate Weapon Hash</option>
+                        <option value="all-hash">Generate Weapon & Attachment Hash</option>
+                    </select>
+                </div>
+
+                <button class="submit-button" id="generateBtn">Generate</button>
+            </div>
+
+            <div id="downloadBox" class="download-box">
+                <h2>Download Files</h2>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('config.lua')">
+                        Download qb-weapons/config.lua
+                    </button>
+                </div>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('weapons.lua')">
+                        Download qb-core/shared/weapons.lua
+                    </button>
+                </div>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('items.lua')">
+                        Download qb-core/shared/items.lua
+                    </button>
+                </div>
+                <div class="download-item">
+                    <button class="download-all-button" onclick="downloadAll()">
+                        Download All Files
+                    </button>
+                </div>
+            </div>
+
+            <div id="downloadBoxQBShop" class="download-box">
+                <h2>Download Files</h2>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('qb-shops/config.lua')">
+                        Download qb-shops/config.lua
+                    </button>
+                </div>
+            </div>
+
+            <div id="downloadBoxOXShop" class="download-box">
+                <h2>Download Files</h2>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('ox_inventory/data/shops.lua')">
+                        Download ox_inventory/data/shops.lua
+                    </button>
+                </div>
+            </div>
+
+            <div id="downloadBoxESX" class="download-box">
+                <h2>Download Files</h2>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('config.weapons.lua')">
+                        Download es_extended/config.weapons.lua
+                    </button>
+                </div>
+            </div>
+
+            <div id="downloadBoxOX" class="download-box">
+                <h2>Download Files</h2>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('ox_inventory/data/weapons.lua')">
+                        Download ox_inventory/data/weapons.lua
+                    </button>
+                </div>
+            </div>
+
+            <div id="downloadBoxQS" class="download-box">
+                <h2>Download Files</h2>
+                <div class="download-item">
+                    <button class="download-button" onclick="downloadFile('qb-core/shared/items.lua')">
+                        Download qb-core/shared/items.lua
+                    </button>
+                    <button class="download-button" onclick="downloadFile('qb-core/shared/weapons.lua')">
+                        Download qb-core/shared/weapons.lua
+                    </button>
+                    <button class="download-button" onclick="downloadFile('qs-inventory/config/weapons.lua')">
+                        Download qs-inventory/config/weapons.lua
+                    </button>
+                </div>
+            </div>
+
+            <div id="hashBox" class="download-box">
+                <h2>Weapon Hash</h2>
+                <div id="hashContent"></div>
+            </div>
         </div>
 
-        <div class="dropdown-container">
-            <label for="names">Select Weapons</label>
-            <div id="names" class="dropdown checkbox-dropdown">Weapons</div>
-            <div id="checkboxDropdownContent" class="checkbox-dropdown-content"></div>
-        </div>
+        <label class="disclaimer">
+            Before adding any of these files into your server make sure to make backups of the files you will be editing
+            or
+            replacing.
+        </label>
 
-        <div class="dropdown-container">
-            <label for="generate">Options</label>
-            <select id="generate" class="dropdown">
-                <option value="entire-config" selected>Generate Entire Config</option>
-                <option value="only-weapon">Generate Only Weapon Code</option>
-            </select>
-        </div>
 
-        <button class="submit-button" id="generateBtn">Generate</button>
-    </div>
+        <script>
+            const weapons = [
+                "UBR", "Combat Pistol Addon", "FMAS", "PMR", "BK12", "Dragon", "X17 Modular", "MK18", "Mutant", "Virtus", "M320", "Tactical Sniper", "AGC", "Shotgun 590",
+                "Police M4", "X19", "Revolver", "MB47", "R9", "L80", "KVR", "X17", "X45", "A45",
+                "ZKKnife", "MI9", "KTB", "C36", "2S", "2011", "P5"
+            ];
 
-    <div id="downloadBox" class="download-box">
-        <h2>Download Files</h2>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('config.lua')">Download qb-weapons/config.lua</button>
-        </div>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('weapons.lua')">Download
-                qb-core/shared/weapons.lua</button>
-        </div>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('items.lua')">Download
-                qb-core/shared/items.lua</button>
-        </div>
-        <div class="download-item">
-            <button class="download-all-button" onclick="downloadAll()">Download All Files</button>
-        </div>
-    </div>
+            let selectedValue = "qb-core";
+            let selectedValueConfig = "entire-config";
 
-    <div id="downloadBoxQBShop" class="download-box">
-        <h2>Download Files</h2>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('qb-shops/config.lua')">Download
-                qb-shops/config.lua</button>
-        </div>
-    </div>
-    <div id="downloadBoxOXShop" class="download-box">
-        <h2>Download Files</h2>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('ox_inventory/data/shops.lua')">Download
-                ox_inventory/data/shops.lua</button>
-        </div>
-    </div>
+            function renderWeaponCheckboxes() {
+                const container = document.getElementById('checkboxDropdownContent');
+                container.innerHTML = '';
 
-    <div id="downloadBoxESX" class="download-box">
-        <h2>Download Files</h2>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('config.weapons.lua')">Download
-                es_extended/config.weapons.lua</button>
-        </div>
-    </div>
-
-    <div id="downloadBoxOX" class="download-box">
-        <h2>Download Files</h2>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('ox_inventory/data/weapons.lua')">Download
-                ox_inventory/data/weapons.lua</button>
-        </div>
-    </div>
-
-    <div id="downloadBoxQS" class="download-box">
-        <h2>Download Files</h2>
-        <div class="download-item">
-            <button class="download-button" onclick="downloadFile('qb-core/shared/items.lua')">Download
-                qb-core/shared/items.lua</button>
-            <button class="download-button" onclick="downloadFile('qb-core/shared/weapons.lua')">Download
-                qb-core/shared/weapons.lua</button>
-            <button class="download-button" onclick="downloadFile('qs-inventory/config/weapons.lua')">Download
-                qs-inventory/config/weapons.lua</button>
-        </div>
-    </div>
-
-    <label class="disclaimer">
-        Before adding any of these files into your server make sure to make backups of the files you will be editing or
-        replacing.
-    </label>
-
-    <script>
-        const weapons = [
-            "UBR", "Combat Pistol Addon", "FMAS", "PMR", "BK12", "Dragon", "X17 Modular", "MK18", "Mutant", "Virtus", "M320", "Tactical Sniper", "AGC", "Shotgun 590",
-            "Police M4", "X19", "Revolver", "MB47", "R9", "L80", "KVR", "X17", "X45", "A45",
-            "ZKKnife", "MI9", "KTB", "C36", "2S", "2011", "P5"
-        ];
-
-        let selectedValue = "qb-core";
-        let selectedValueConfig = "entire-config";
-
-        function renderWeaponCheckboxes() {
-            const container = document.getElementById('checkboxDropdownContent');
-            weapons.forEach(weapon => {
-                const label = document.createElement('label');
-                const input = document.createElement('input');
-                input.type = 'checkbox';
-                input.value = weapon;
-                input.onchange = updateCheckedLabels;
-                label.appendChild(input);
-                label.appendChild(document.createTextNode(` ${weapon}`));
-                container.appendChild(label);
-            });
-        }
-
-        function updateCheckedLabels() {
-            const checkboxes = document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]');
-            checkboxes.forEach((checkbox) => {
-                const label = checkbox.parentElement;
-                label.classList.toggle('checked', checkbox.checked);
-            });
-        }
-
-        function toggleCheckboxDropdown() {
-            document.getElementById("checkboxDropdownContent").classList.toggle("show");
-        }
-
-        function updateSelected() {
-            selectedValue = document.getElementById('framework').value;
-            console.log('Selected framework:', selectedValue);
-        }
-
-        function updateSelectedConfig() {
-            selectedValueConfig = document.getElementById('generate').value;
-            console.log('Selected config:', selectedValueConfig);
-        }
-
-        function submitForm() {
-            document.querySelectorAll('.download-box').forEach(box => box.style.display = 'none');
-
-            const boxMap = {
-                "qb-core": "downloadBox",
-                "qb-shops": "downloadBoxQBShop",
-                "esx": "downloadBoxESX",
-                "ox": "downloadBoxOX",
-                "ox-shops": "downloadBoxOXShop",
-                "qs": "downloadBoxQS"
-            };
-
-            const selectedBoxId = boxMap[selectedValue];
-            if (selectedBoxId) {
-                document.getElementById(selectedBoxId).style.display = 'block';
+                weapons.forEach(weapon => {
+                    const label = document.createElement('label');
+                    const input = document.createElement('input');
+                    input.type = 'checkbox';
+                    input.value = weapon;
+                    input.onchange = updateCheckedLabels;
+                    label.appendChild(input);
+                    label.appendChild(document.createTextNode(` ${weapon}`));
+                    container.appendChild(label);
+                });
             }
-        }
 
-        function initListeners() {
-            document.getElementById('framework').addEventListener('change', updateSelected);
-            document.getElementById('generate').addEventListener('change', updateSelectedConfig);
-            document.getElementById('names').addEventListener('click', toggleCheckboxDropdown);
-            document.getElementById('generateBtn').addEventListener('click', submitForm);
+            function renderWeaponHashTable() {
+                const container = document.getElementById('hashContent');
+                container.innerHTML = '';
 
-            window.addEventListener('click', function (event) {
-                const dropdown = document.getElementById("checkboxDropdownContent");
-                const toggleButton = document.getElementById("names");
-                if (!toggleButton.contains(event.target) && !dropdown.contains(event.target)) {
-                    dropdown.classList.remove("show");
-                }
-            });
-        }
+                const table = document.createElement('table');
+                table.className = 'status-table';
 
-        document.addEventListener('DOMContentLoaded', () => {
-            updateSelected();
-            updateSelectedConfig();
-            renderWeaponCheckboxes();
-            initListeners();
-        });
+                const tbody = document.createElement('tbody');
 
-        function downloadFile(fileName) {
-            if (selectedValue === "qb-core") {
-                const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked')).map(cb => cb.value);
-                let text = "";
+                const headerRow = document.createElement('tr');
+                ['Weapon', 'Hex', 'Unsigned Int', 'Signed Int'].forEach(text => {
+                    const td = document.createElement('td');
+                    td.textContent = text;
+                    headerRow.appendChild(td);
+                });
+                tbody.appendChild(headerRow);
 
-                const formatWeaponEntry = entry => `	['${entry.name}'] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`;
-                const formatItemEntry = entry => `	${entry.name} = { name = '${entry.name}', label = '${entry.label}', weight = 1000, type = 'weapon', ammotype = '${entry.ammotype}', image = '${entry.image}', unique = true, useable = false, description =  '${entry.description}'},`;
-                const formatDurabilityEntry = entry => `	${entry.name} = 0.15,`;
-                const formatAttachmentEntry = entry => `    ${entry.name} = '${entry.component}',\n`;
+                const selectedNames = getSelectedWeapons(); // same function you already use
 
-                const insertBeforeClosingBrace = (source, marker, insertText) => {
-                    const start = source.indexOf(marker) + marker.length;
-                    const end = source.indexOf('}', start);
-                    return end !== -1 ? source.slice(0, end) + insertText + source.slice(end) : source;
-                };
+                selectedNames.forEach(name => {
+                    const entries = nameMappings[name];
+                    if (!entries) return;
 
-                const processAttachments = (textBlock, name) => {
-                    const entries = attachmentMappings[name] || [];
                     entries.forEach(entry => {
-                        if (entry.attachment !== 'smallscope_attachment') {
-                            const regex = new RegExp(entry.attachment + " = \\{");
-                            const position = textBlock.search(regex);
-                            if (position !== -1) {
-                                const end = textBlock.indexOf('}', position);
-                                if (end !== -1) {
-                                    const formatted = formatAttachmentEntry(entry);
-                                    textBlock = textBlock.slice(0, end) + formatted + textBlock.slice(end);
-                                }
-                            }
+                        const spawnCode = entry.name.toUpperCase();
+                        const { hex, uint32, int32 } = joaat(spawnCode);
+
+                        const tr = document.createElement('tr');
+
+                        const weaponTd = document.createElement('td');
+                        weaponTd.textContent = spawnCode;
+                        tr.appendChild(weaponTd);
+
+                        const hexTd = document.createElement('td');
+                        hexTd.textContent = hex;
+                        tr.appendChild(hexTd);
+
+                        const uintTd = document.createElement('td');
+                        uintTd.textContent = uint32;
+                        tr.appendChild(uintTd);
+
+                        const intTd = document.createElement('td');
+                        intTd.textContent = int32;
+                        tr.appendChild(intTd);
+
+                        tbody.appendChild(tr);
+                    });
+                });
+
+                table.appendChild(tbody);
+                container.appendChild(table);
+            }
+
+            function renderAllHashTables() {
+                const container = document.getElementById('hashContent');
+                container.innerHTML = '';
+
+                const selectedNames = getSelectedWeapons();
+
+                selectedNames.forEach(name => {
+                    const entries = nameMappings[name];
+                    if (!entries) return;
+
+                    entries.forEach(entry => {
+                        const spawnCode = entry.name.toUpperCase();
+
+                        // Attempt to find attachments using different keys
+                        const attachments =
+                            attachmentMappings[spawnCode] ||
+                            attachmentMappings[entry.name] ||
+                            attachmentMappings[name];
+
+                        // Create table for this weapon
+                        const table = document.createElement('table');
+                        table.className = 'status-table';
+
+                        const tbody = document.createElement('tbody');
+
+                        // Header
+                        const headerRow = document.createElement('tr');
+                        ['Weapon / Component', 'Hex', 'Unsigned Int', 'Signed Int'].forEach(text => {
+                            const td = document.createElement('td');
+                            td.textContent = text;
+                            headerRow.appendChild(td);
+                        });
+                        tbody.appendChild(headerRow);
+
+                        // ───────────────────────────────────────────
+                        // Weapon row
+                        // ───────────────────────────────────────────
+                        const weaponHashes = joaat(spawnCode);
+                        const weaponRow = document.createElement('tr');
+
+                        const weaponTd = document.createElement('td');
+                        weaponTd.textContent = spawnCode;
+                        weaponRow.appendChild(weaponTd);
+
+                        const weaponHexTd = document.createElement('td');
+                        weaponHexTd.textContent = weaponHashes.hex;
+                        weaponRow.appendChild(weaponHexTd);
+
+                        const weaponUintTd = document.createElement('td');
+                        weaponUintTd.textContent = weaponHashes.uint32;
+                        weaponRow.appendChild(weaponUintTd);
+
+                        const weaponIntTd = document.createElement('td');
+                        weaponIntTd.textContent = weaponHashes.int32;
+                        weaponRow.appendChild(weaponIntTd);
+
+                        tbody.appendChild(weaponRow);
+
+                        // ───────────────────────────────────────────
+                        // Attachment rows
+                        // ───────────────────────────────────────────
+                        if (attachments && attachments.length) {
+                            attachments.forEach(att => {
+                                if (!att.component) return;
+                                const compCode = att.component.toUpperCase();
+
+                                const { hex, uint32, int32 } = joaat(compCode);
+
+                                const row = document.createElement('tr');
+
+                                const compTd = document.createElement('td');
+                                compTd.textContent = compCode;
+                                row.appendChild(compTd);
+
+                                const hexTd = document.createElement('td');
+                                hexTd.textContent = hex;
+                                row.appendChild(hexTd);
+
+                                const uintTd = document.createElement('td');
+                                uintTd.textContent = uint32;
+                                row.appendChild(uintTd);
+
+                                const intTd = document.createElement('td');
+                                intTd.textContent = int32;
+                                row.appendChild(intTd);
+
+                                tbody.appendChild(row);
+                            });
+                        } else {
+                            // No attachments found
+                            const row = document.createElement('tr');
+                            const td = document.createElement('td');
+                            td.colSpan = 4;
+                            td.textContent = 'No attachments found for this weapon.';
+                            row.appendChild(td);
+                            tbody.appendChild(row);
                         }
+
+                        table.appendChild(tbody);
+                        container.appendChild(table);
                     });
-                    return textBlock;
-                };
+                });
+            }
 
-                // New function: Group attachments and append single (Fits ...) label listing all fitting weapons
-                function addGroupedFitsLabels(itemsluaText, selectedWeaponNames) {
-                    // Map attachment key → Set of weapons that fit it
-                    const attachmentToWeapons = {};
 
-                    selectedWeaponNames.forEach(weaponName => {
-                        const attachments = attachmentMappings[weaponName] || [];
-                        attachments.forEach(att => {
-                            if (!attachmentToWeapons[att.attachment]) {
-                                attachmentToWeapons[att.attachment] = new Set();
-                            }
-                            attachmentToWeapons[att.attachment].add(weaponName);
-                        });
-                    });
+            function joaat(input) {
+                if (typeof input !== 'string') input = String(input);
 
-                    Object.entries(attachmentToWeapons).forEach(([attachmentKey, weaponsSet]) => {
-                        // Format weapons list nicely: capitalize words, replace underscores with spaces
-                        const weaponsList = Array.from(weaponsSet)
-                            .map(w => w.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))
-                            .join(', ');
+                // Rockstar commonly lowercases the string before hashing.
+                const s = input.toLowerCase();
 
-                        const regex = new RegExp(`(${attachmentKey}\\s*=\\s*\\{[^}]*label\\s*=\\s*')([^']*)(')`, 'g');
-
-                        itemsluaText = itemsluaText.replace(regex, (match, p1, label, p3) => {
-                            // Remove existing (Fits ...) suffix to avoid duplicates
-                            label = label.replace(/\s*\(Fits [^)]+\)/gi, '');
-                            return `${p1}${label} (Fits ${weaponsList})${p3}`;
-                        });
-                    });
-
-                    return itemsluaText;
+                let hash = 0 >>> 0; // ensure unsigned 32-bit
+                for (let i = 0; i < s.length; i++) {
+                    hash = (hash + s.charCodeAt(i)) >>> 0;
+                    hash = (hash + ((hash << 10) >>> 0)) >>> 0;
+                    hash = (hash ^ (hash >>> 6)) >>> 0;
                 }
 
-                const generateLuaBlock = (template, formatter) => {
-                    const block = selectedNames.flatMap(name =>
-                        nameMappings[name]?.map(formatter) || []
-                    ).join('\n');
-                    return template + `\n${block}\n}\n`;
-                };
+                hash = (hash + ((hash << 3) >>> 0)) >>> 0;
+                hash = (hash ^ (hash >>> 11)) >>> 0;
+                hash = (hash + ((hash << 15) >>> 0)) >>> 0;
 
-                switch (fileName) {
-                    case 'weapons.lua':
-                        text = selectedValueConfig === "entire-config"
-                            ? generateLuaBlock(weaponslua, formatWeaponEntry)
-                            : generateLuaBlock("QBShared = QBShared or {}\nQBShared.Weapons = {", formatWeaponEntry);
-                        break;
+                const uint32 = hash >>> 0;
+                const hex = '0x' + uint32.toString(16).toUpperCase().padStart(8, '0');
+                const int32 = (uint32 | 0); // signed 32-bit
 
-                    case 'items.lua':
-                        let itemsLuaText = selectedValueConfig === "entire-config"
-                            ? itemslua
-                            : itemslua_attachments;
+                return { uint32, hex, int32 };
+            }
 
-                        // Add grouped (Fits WEAPON1, WEAPON2) labels for attachments
-                        itemsLuaText = addGroupedFitsLabels(itemsLuaText, selectedNames);
+            function updateCheckedLabels() {
+                const checkboxes = document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]');
+                checkboxes.forEach((checkbox) => {
+                    const label = checkbox.parentElement;
+                    label.classList.toggle('checked', checkbox.checked);
+                });
+            }
 
-                        text = generateLuaBlock(itemsLuaText, formatItemEntry);
-                        break;
+            function getSelectedWeapons() {
+                const checkboxes = document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]');
+                const selected = [];
 
-                    case 'config.lua':
-                        text = selectedValueConfig === "entire-config" ? configlua : configlua_attachments;
+                checkboxes.forEach(cb => {
+                    if (cb.checked) {
+                        selected.push(cb.value);
+                    }
+                });
 
-                        selectedNames.forEach(name => {
-                            const durabilityBlock = nameMappings[name]?.map(formatDurabilityEntry).join('\n') || "";
-                            text = insertBeforeClosingBrace(text, 'Config.DurabilityMultiplier = {', durabilityBlock + '\n');
+                return selected;
+            }
 
-                            if (attachmentMappings[name]) {
-                                text = processAttachments(text, name);
-                            }
-                        });
-                        break;
+            function renderWeaponRows() {
+                const tbody = document.getElementById('hashTableBody');
 
-                    default:
-                        text = "Example text content for download.";
+                // Keep the header row, remove all others
+                while (tbody.rows.length > 1) {
+                    tbody.deleteRow(1);
                 }
 
-                const blob = new Blob([text], { type: 'text/plain' });
-                const link = document.createElement('a');
-                link.href = URL.createObjectURL(blob);
-                link.download = fileName;
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
+                // These are the display names the user checked
+                const selectedNames = getSelectedWeapons();
+
+                selectedNames.forEach(name => {
+                    const entries = nameMappings[name];
+                    if (!entries) return; // skip if no mapping
+
+                    entries.forEach(entry => {
+                        // Weapon spawn code: entry.name.toUpperCase()
+                        const spawnCode = entry.name.toUpperCase();
+
+                        // Compute hashes
+                        const { hex, uint32, int32 } = joaat(spawnCode);
+
+                        const tr = document.createElement('tr');
+
+                        // 1st cell: weapon spawn code
+                        const weaponTd = document.createElement('td');
+                        weaponTd.textContent = spawnCode;
+                        tr.appendChild(weaponTd);
+
+                        // 2nd cell: Hex
+                        const hexTd = document.createElement('td');
+                        hexTd.textContent = hex;
+                        tr.appendChild(hexTd);
+
+                        // 3rd cell: Unsigned Int
+                        const uintTd = document.createElement('td');
+                        uintTd.textContent = uint32;
+                        tr.appendChild(uintTd);
+
+                        // 4th cell: Signed Int
+                        const intTd = document.createElement('td');
+                        intTd.textContent = int32;
+                        tr.appendChild(intTd);
+
+                        tbody.appendChild(tr);
+                    });
+                });
+            }
 
 
-            } else if (selectedValue === "qb-shops") {
-                if (fileName === 'qb-shops/config.lua') {
-                    if (selectedValueConfig === "entire-config") {
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(cb => cb.value);
 
-                        const weaponPrice = 4000;
-                        const attachmentPrice = 500;
+            function toggleCheckboxDropdown() {
+                document.getElementById("checkboxDropdownContent").classList.toggle("show");
+            }
 
-                        const allProducts = [];
-                        const existingNames = new Set();
+            function updateSelected() {
+                selectedValue = document.getElementById('framework').value;
+                console.log('Selected framework:', selectedValue);
+            }
 
-                        selectedNames.forEach(weaponKey => {
-                            // Add weapons from nameMappings
-                            const weaponsArray = nameMappings[weaponKey];
-                            if (!weaponsArray) {
-                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
-                                return;
-                            }
+            function updateSelectedConfig() {
+                selectedValueConfig = document.getElementById('generate').value;
+                console.log('Selected config:', selectedValueConfig);
+            }
 
-                            weaponsArray.forEach(weapon => {
-                                const weaponName = weapon.name.toLowerCase();
-                                if (!existingNames.has(weaponName)) {
-                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
-                                    existingNames.add(weaponName);
+            function submitForm() {
+                document.querySelectorAll('.download-box').forEach(box => box.style.display = 'none');
+
+                const boxMap = {
+                    "qb-core": "downloadBox",
+                    "qb-shops": "downloadBoxQBShop",
+                    "esx": "downloadBoxESX",
+                    "ox": "downloadBoxOX",
+                    "ox-shops": "downloadBoxOXShop",
+                    "qs": "downloadBoxQS",
+                    "hash": "hashBox"
+
+                };
+
+                if (selectedValueConfig === "weapon-hash") {
+                    document.getElementById(boxMap["hash"]).style.display = "block";
+                    renderWeaponHashTable();
+                } else if (selectedValueConfig === "all-hash") {
+                    document.getElementById(boxMap["hash"]).style.display = "block";
+                    renderAllHashTables();
+                } else {
+                    const selectedBoxId = boxMap[selectedValue];
+                    if (selectedBoxId) {
+                        document.getElementById(selectedBoxId).style.display = 'block';
+                    }
+                }
+
+            }
+
+            function initListeners() {
+                document.getElementById('framework').addEventListener('change', updateSelected);
+                document.getElementById('generate').addEventListener('change', updateSelectedConfig);
+                document.getElementById('names').addEventListener('click', toggleCheckboxDropdown);
+                document.getElementById('generateBtn').addEventListener('click', submitForm);
+
+                window.addEventListener('click', function (event) {
+                    const dropdown = document.getElementById("checkboxDropdownContent");
+                    const toggleButton = document.getElementById("names");
+                    if (!toggleButton.contains(event.target) && !dropdown.contains(event.target)) {
+                        dropdown.classList.remove("show");
+                    }
+
+                });
+            }
+
+            document.addEventListener('DOMContentLoaded', () => {
+                updateSelected();
+                updateSelectedConfig();
+                renderWeaponCheckboxes();
+                initListeners();
+
+            });
+
+            function downloadFile(fileName) {
+                if (selectedValue === "qb-core") {
+                    const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked')).map(cb => cb.value);
+                    let text = "";
+
+                    const formatWeaponEntry = entry => `	['${entry.name}'] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`;
+                    const formatItemEntry = entry => `	${entry.name} = { name = '${entry.name}', label = '${entry.label}', weight = 1000, type = 'weapon', ammotype = '${entry.ammotype}', image = '${entry.image}', unique = true, useable = false, description =  '${entry.description}'},`;
+                    const formatDurabilityEntry = entry => `	${entry.name} = 0.15,`;
+                    const formatAttachmentEntry = entry => `    ${entry.name} = '${entry.component}',\n`;
+
+                    const insertBeforeClosingBrace = (source, marker, insertText) => {
+                        const start = source.indexOf(marker) + marker.length;
+                        const end = source.indexOf('}', start);
+                        return end !== -1 ? source.slice(0, end) + insertText + source.slice(end) : source;
+                    };
+
+                    const processAttachments = (textBlock, name) => {
+                        const entries = attachmentMappings[name] || [];
+                        entries.forEach(entry => {
+                            if (entry.attachment !== 'smallscope_attachment') {
+                                const regex = new RegExp(entry.attachment + " = \\{");
+                                const position = textBlock.search(regex);
+                                if (position !== -1) {
+                                    const end = textBlock.indexOf('}', position);
+                                    if (end !== -1) {
+                                        const formatted = formatAttachmentEntry(entry);
+                                        textBlock = textBlock.slice(0, end) + formatted + textBlock.slice(end);
+                                    }
                                 }
-                            });
-
-                            // Add attachments from attachmentMappings
-                            const attachmentsArray = attachmentMappings[weaponKey];
-                            if (!attachmentsArray) {
-                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
-                                return;
                             }
+                        });
+                        return textBlock;
+                    };
 
-                            attachmentsArray.forEach(attObj => {
-                                const attName = attObj.attachment.toLowerCase();
-                                if (!existingNames.has(attName)) {
-                                    allProducts.push({ name: attName, price: attachmentPrice, amount: 5, requiredLicense: 'weapon' });
-                                    existingNames.add(attName);
+                    // New function: Group attachments and append single (Fits ...) label listing all fitting weapons
+                    function addGroupedFitsLabels(itemsluaText, selectedWeaponNames) {
+                        // Map attachment key → Set of weapons that fit it
+                        const attachmentToWeapons = {};
+
+                        selectedWeaponNames.forEach(weaponName => {
+                            const attachments = attachmentMappings[weaponName] || [];
+                            attachments.forEach(att => {
+                                if (!attachmentToWeapons[att.attachment]) {
+                                    attachmentToWeapons[att.attachment] = new Set();
                                 }
+                                attachmentToWeapons[att.attachment].add(weaponName);
                             });
                         });
 
-                        // Format the product entries (without wrapping ['weapons'] = { } )
-                        const productEntries = allProducts.map(p => {
-                            return `        { name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
-                        }).join(',\n');
-                        const qbShopsConfigBase = `-- full qb-shops config.lua text goes here as a string
+                        Object.entries(attachmentToWeapons).forEach(([attachmentKey, weaponsSet]) => {
+                            // Format weapons list nicely: capitalize words, replace underscores with spaces
+                            const weaponsList = Array.from(weaponsSet)
+                                .map(w => w.replace(/_/g, ' ').replace(/\b\w/g, c => c.toUpperCase()))
+                                .join(', ');
+
+                            const regex = new RegExp(`(${attachmentKey}\\s*=\\s*\\{[^}]*label\\s*=\\s*')([^']*)(')`, 'g');
+
+                            itemsluaText = itemsluaText.replace(regex, (match, p1, label, p3) => {
+                                // Remove existing (Fits ...) suffix to avoid duplicates
+                                label = label.replace(/\s*\(Fits [^)]+\)/gi, '');
+                                return `${p1}${label} (Fits ${weaponsList})${p3}`;
+                            });
+                        });
+
+                        return itemsluaText;
+                    }
+
+                    const generateLuaBlock = (template, formatter) => {
+                        const block = selectedNames.flatMap(name =>
+                            nameMappings[name]?.map(formatter) || []
+                        ).join('\n');
+                        return template + `\n${block}\n}\n`;
+                    };
+
+                    switch (fileName) {
+                        case 'weapons.lua':
+                            text = selectedValueConfig === "entire-config"
+                                ? generateLuaBlock(weaponslua, formatWeaponEntry)
+                                : generateLuaBlock("QBShared = QBShared or {}\nQBShared.Weapons = {", formatWeaponEntry);
+                            break;
+
+                        case 'items.lua':
+                            let itemsLuaText = selectedValueConfig === "entire-config"
+                                ? itemslua
+                                : itemslua_attachments;
+
+                            // Add grouped (Fits WEAPON1, WEAPON2) labels for attachments
+                            itemsLuaText = addGroupedFitsLabels(itemsLuaText, selectedNames);
+
+                            text = generateLuaBlock(itemsLuaText, formatItemEntry);
+                            break;
+
+                        case 'config.lua':
+                            text = selectedValueConfig === "entire-config" ? configlua : configlua_attachments;
+
+                            selectedNames.forEach(name => {
+                                const durabilityBlock = nameMappings[name]?.map(formatDurabilityEntry).join('\n') || "";
+                                text = insertBeforeClosingBrace(text, 'Config.DurabilityMultiplier = {', durabilityBlock + '\n');
+
+                                if (attachmentMappings[name]) {
+                                    text = processAttachments(text, name);
+                                }
+                            });
+                            break;
+
+                        default:
+                            text = "Example text content for download.";
+                    }
+
+                    const blob = new Blob([text], { type: 'text/plain' });
+                    const link = document.createElement('a');
+                    link.href = URL.createObjectURL(blob);
+                    link.download = fileName;
+                    document.body.appendChild(link);
+                    link.click();
+                    document.body.removeChild(link);
+
+
+                } else if (selectedValue === "qb-shops") {
+                    if (fileName === 'qb-shops/config.lua') {
+                        if (selectedValueConfig === "entire-config") {
+                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                                .map(cb => cb.value);
+
+                            const weaponPrice = 4000;
+                            const attachmentPrice = 500;
+
+                            const allProducts = [];
+                            const existingNames = new Set();
+
+                            selectedNames.forEach(weaponKey => {
+                                // Add weapons from nameMappings
+                                const weaponsArray = nameMappings[weaponKey];
+                                if (!weaponsArray) {
+                                    console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                    return;
+                                }
+
+                                weaponsArray.forEach(weapon => {
+                                    const weaponName = weapon.name.toLowerCase();
+                                    if (!existingNames.has(weaponName)) {
+                                        allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                        existingNames.add(weaponName);
+                                    }
+                                });
+
+                                // Add attachments from attachmentMappings
+                                const attachmentsArray = attachmentMappings[weaponKey];
+                                if (!attachmentsArray) {
+                                    console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                    return;
+                                }
+
+                                attachmentsArray.forEach(attObj => {
+                                    const attName = attObj.attachment.toLowerCase();
+                                    if (!existingNames.has(attName)) {
+                                        allProducts.push({ name: attName, price: attachmentPrice, amount: 5, requiredLicense: 'weapon' });
+                                        existingNames.add(attName);
+                                    }
+                                });
+                            });
+
+                            // Format the product entries (without wrapping ['weapons'] = { } )
+                            const productEntries = allProducts.map(p => {
+                                return `        { name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
+                            }).join(',\n');
+                            const qbShopsConfigBase = `-- full qb-shops config.lua text goes here as a string
 Config = {}
 Config.UseTarget = GetConvar('UseTarget', 'false') == 'true'
 
@@ -1208,1036 +1496,1036 @@ Config.Locations = {
     },
 }`;
 
-                        // Inject weapons block after `Config.Products = {`
-                        const injectedConfig = qbShopsConfigBase.replace(
-                            /(\['weapons'\]\s*=\s*{\s*)/,
-                            `$1\n${productEntries}\n`
-                        );
+                            // Inject weapons block after `Config.Products = {`
+                            const injectedConfig = qbShopsConfigBase.replace(
+                                /(\['weapons'\]\s*=\s*{\s*)/,
+                                `$1\n${productEntries}\n`
+                            );
 
-                        // Create and download the updated config.lua file
-                        const blob = new Blob([injectedConfig], { type: 'text/plain' });
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = 'config.lua';
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                    }
-                    else if (selectedValueConfig === "only-weapon") {
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(cb => cb.value);
+                            // Create and download the updated config.lua file
+                            const blob = new Blob([injectedConfig], { type: 'text/plain' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = 'config.lua';
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
+                        else if (selectedValueConfig === "only-weapon") {
+                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                                .map(cb => cb.value);
 
-                        const weaponPrice = 4000;
-                        const attachmentPrice = 500;
+                            const weaponPrice = 4000;
+                            const attachmentPrice = 500;
 
-                        const allProducts = [];
-                        const existingNames = new Set();
+                            const allProducts = [];
+                            const existingNames = new Set();
 
-                        selectedNames.forEach(weaponKey => {
-                            // Add weapons from nameMappings
-                            const weaponsArray = nameMappings[weaponKey];
-                            if (!weaponsArray) {
-                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
-                                return;
-                            }
-
-                            weaponsArray.forEach(weapon => {
-                                const weaponName = weapon.name.toLowerCase();
-                                if (!existingNames.has(weaponName)) {
-                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
-                                    existingNames.add(weaponName);
+                            selectedNames.forEach(weaponKey => {
+                                // Add weapons from nameMappings
+                                const weaponsArray = nameMappings[weaponKey];
+                                if (!weaponsArray) {
+                                    console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                    return;
                                 }
+
+                                weaponsArray.forEach(weapon => {
+                                    const weaponName = weapon.name.toLowerCase();
+                                    if (!existingNames.has(weaponName)) {
+                                        allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                        existingNames.add(weaponName);
+                                    }
+                                });
+
+                                // Add attachments from attachmentMappings
+                                const attachmentsArray = attachmentMappings[weaponKey];
+                                if (!attachmentsArray) {
+                                    console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                    return;
+                                }
+
+                                attachmentsArray.forEach(attObj => {
+                                    const attName = attObj.attachment.toLowerCase();
+                                    if (!existingNames.has(attName)) {
+                                        allProducts.push({ name: attName, price: attachmentPrice, amount: 5, requiredLicense: 'weapon' });
+                                        existingNames.add(attName);
+                                    }
+                                });
                             });
 
-                            // Add attachments from attachmentMappings
-                            const attachmentsArray = attachmentMappings[weaponKey];
-                            if (!attachmentsArray) {
-                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
-                                return;
-                            }
-
-                            attachmentsArray.forEach(attObj => {
-                                const attName = attObj.attachment.toLowerCase();
-                                if (!existingNames.has(attName)) {
-                                    allProducts.push({ name: attName, price: attachmentPrice, amount: 5, requiredLicense: 'weapon' });
-                                    existingNames.add(attName);
-                                }
-                            });
-                        });
-
-                        const formatted = `Config.Products = {
+                            const formatted = `Config.Products = {
     ['weapons'] = {
         ${allProducts.map(p => {
-                            return `{ name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
-                        }).join(',\n        ')}
+                                return `{ name = '${p.name}', price = ${p.price}, amount = ${p.amount}, requiredLicense = '${p.requiredLicense}' }`;
+                            }).join(',\n        ')}
     },
 }`;
 
-                        const blob = new Blob([formatted], { type: 'text/plain' });
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = fileName;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
+                            const blob = new Blob([formatted], { type: 'text/plain' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = fileName;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
                     }
-                }
-            } else if (selectedValue === "esx") {
-                if (fileName === 'config.weapons.lua') {
+                } else if (selectedValue === "esx") {
+                    if (fileName === 'config.weapons.lua') {
 
-                    const luaBeautify = (code) => {
-                        const indentString = '  ';
-                        let indentLevel = 0;
-                        let inString = false;
-                        let stringChar = null;
-                        let inComment = false;
-                        let output = '';
-                        let buffer = '';
-                        let i = 0;
+                        const luaBeautify = (code) => {
+                            const indentString = '  ';
+                            let indentLevel = 0;
+                            let inString = false;
+                            let stringChar = null;
+                            let inComment = false;
+                            let output = '';
+                            let buffer = '';
+                            let i = 0;
 
-                        const flushBuffer = () => {
-                            const trimmed = buffer.trim();
-                            if (trimmed.length > 0) {
-                                output += indentString.repeat(indentLevel) + trimmed + '\n';
-                            }
-                            buffer = '';
-                        };
-
-                        while (i < code.length) {
-                            const char = code[i];
-                            const nextTwo = code.substr(i, 2);
-
-                            // Handle comments
-                            if (!inString && nextTwo === '--') {
-                                flushBuffer();
-                                inComment = true;
-                                output += indentString.repeat(indentLevel) + '--';
-                                i += 2;
-                                continue;
-                            }
-
-                            if (inComment) {
-                                output += char;
-                                if (char === '\n') {
-                                    inComment = false;
+                            const flushBuffer = () => {
+                                const trimmed = buffer.trim();
+                                if (trimmed.length > 0) {
+                                    output += indentString.repeat(indentLevel) + trimmed + '\n';
                                 }
-                                i++;
-                                continue;
-                            }
+                                buffer = '';
+                            };
 
-                            // Handle strings
-                            if (!inString && (char === '"' || char === "'")) {
-                                inString = true;
-                                stringChar = char;
-                                buffer += char;
-                                i++;
-                                continue;
-                            } else if (inString) {
-                                buffer += char;
-                                if (char === stringChar) {
-                                    inString = false;
-                                    stringChar = null;
+                            while (i < code.length) {
+                                const char = code[i];
+                                const nextTwo = code.substr(i, 2);
+
+                                // Handle comments
+                                if (!inString && nextTwo === '--') {
+                                    flushBuffer();
+                                    inComment = true;
+                                    output += indentString.repeat(indentLevel) + '--';
+                                    i += 2;
+                                    continue;
                                 }
-                                i++;
-                                continue;
-                            }
 
-                            // Handle opening brace
-                            if (char === '{') {
-                                flushBuffer();
-                                output += indentString.repeat(indentLevel) + '{\n';
-                                indentLevel++;
-                                i++;
-                                continue;
-                            }
-
-                            // Handle closing brace possibly followed by comma
-                            if (char === '}') {
-                                flushBuffer();
-                                indentLevel = Math.max(indentLevel - 1, 0);
-
-                                // Peek next chars to check if a comma follows immediately
-                                let j = i + 1;
-                                while (code[j] === ' ' || code[j] === '\t' || code[j] === '\n' || code[j] === '\r') {
-                                    j++;
-                                }
-                                const commaFollows = code[j] === ',';
-
-                                if (commaFollows) {
-                                    // Output closing brace and comma on the same line
-                                    output += indentString.repeat(indentLevel) + '},\n';
-                                    i = j + 1; // Skip past comma
-                                } else {
-                                    output += indentString.repeat(indentLevel) + '}\n';
+                                if (inComment) {
+                                    output += char;
+                                    if (char === '\n') {
+                                        inComment = false;
+                                    }
                                     i++;
+                                    continue;
                                 }
-                                continue;
-                            }
 
-                            // Handle commas that are not after closing braces
-                            if (char === ',') {
-                                buffer += ',';
-                                flushBuffer();
-                                i++;
-                                continue;
-                            }
-
-                            // Handle newlines
-                            if (char === '\n') {
-                                flushBuffer();
-                                i++;
-                                continue;
-                            }
-
-                            // Regular characters
-                            buffer += char;
-                            i++;
-                        }
-
-                        flushBuffer();
-                        return output.trim();
-                    };
-
-
-
-
-
-                    if (selectedValueConfig === "entire-config") {
-                        let text = ""; // original config text (assumed assigned elsewhere)
-
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(checkbox => checkbox.value);
-
-                        const processAttachmentEntry = (entry, textBlock) => {
-                            if (entry.attachment === 'smallscope_attachment') return textBlock; // skip
-
-                            const regex = new RegExp(entry.attachment + " = \\{");
-                            const position = textBlock.search(regex);
-                            if (position !== -1) {
-                                const end = textBlock.indexOf('}', position);
-                                if (end !== -1) {
-                                    const formatted = formatAttachmentEntry(entry);
-                                    textBlock = textBlock.slice(0, end) + formatted + textBlock.slice(end);
+                                // Handle strings
+                                if (!inString && (char === '"' || char === "'")) {
+                                    inString = true;
+                                    stringChar = char;
+                                    buffer += char;
+                                    i++;
+                                    continue;
+                                } else if (inString) {
+                                    buffer += char;
+                                    if (char === stringChar) {
+                                        inString = false;
+                                        stringChar = null;
+                                    }
+                                    i++;
+                                    continue;
                                 }
+
+                                // Handle opening brace
+                                if (char === '{') {
+                                    flushBuffer();
+                                    output += indentString.repeat(indentLevel) + '{\n';
+                                    indentLevel++;
+                                    i++;
+                                    continue;
+                                }
+
+                                // Handle closing brace possibly followed by comma
+                                if (char === '}') {
+                                    flushBuffer();
+                                    indentLevel = Math.max(indentLevel - 1, 0);
+
+                                    // Peek next chars to check if a comma follows immediately
+                                    let j = i + 1;
+                                    while (code[j] === ' ' || code[j] === '\t' || code[j] === '\n' || code[j] === '\r') {
+                                        j++;
+                                    }
+                                    const commaFollows = code[j] === ',';
+
+                                    if (commaFollows) {
+                                        // Output closing brace and comma on the same line
+                                        output += indentString.repeat(indentLevel) + '},\n';
+                                        i = j + 1; // Skip past comma
+                                    } else {
+                                        output += indentString.repeat(indentLevel) + '}\n';
+                                        i++;
+                                    }
+                                    continue;
+                                }
+
+                                // Handle commas that are not after closing braces
+                                if (char === ',') {
+                                    buffer += ',';
+                                    flushBuffer();
+                                    i++;
+                                    continue;
+                                }
+
+                                // Handle newlines
+                                if (char === '\n') {
+                                    flushBuffer();
+                                    i++;
+                                    continue;
+                                }
+
+                                // Regular characters
+                                buffer += char;
+                                i++;
                             }
-                            return textBlock;
+
+                            flushBuffer();
+                            return output.trim();
                         };
 
-                        // Create formatted Lua entries for selected weapons with components
-                        const formattedLuaEntriesRaw = selectedNames.flatMap(name => {
-                            if (!nameMappings[name]) return [];
 
-                            return nameMappings[name].map(entry => {
-                                const uniqueAttachments = new Map();
-                                (attachmentMappings[name] || []).forEach(att => {
-                                    if (att.attachment !== 'smallscope_attachment') {
-                                        uniqueAttachments.set(att.attachment + att.component, att);
+
+
+
+                        if (selectedValueConfig === "entire-config") {
+                            let text = ""; // original config text (assumed assigned elsewhere)
+
+                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                                .map(checkbox => checkbox.value);
+
+                            const processAttachmentEntry = (entry, textBlock) => {
+                                if (entry.attachment === 'smallscope_attachment') return textBlock; // skip
+
+                                const regex = new RegExp(entry.attachment + " = \\{");
+                                const position = textBlock.search(regex);
+                                if (position !== -1) {
+                                    const end = textBlock.indexOf('}', position);
+                                    if (end !== -1) {
+                                        const formatted = formatAttachmentEntry(entry);
+                                        textBlock = textBlock.slice(0, end) + formatted + textBlock.slice(end);
                                     }
-                                });
+                                }
+                                return textBlock;
+                            };
 
-                                const components = Array.from(uniqueAttachments.values())
-                                    .map(att => `{ name = "${att.attachment}", label = TranslateCap("component_${att.attachment}"), hash = "${att.component}" }`)
-                                    .join(',');
+                            // Create formatted Lua entries for selected weapons with components
+                            const formattedLuaEntriesRaw = selectedNames.flatMap(name => {
+                                if (!nameMappings[name]) return [];
 
-                                return `{
+                                return nameMappings[name].map(entry => {
+                                    const uniqueAttachments = new Map();
+                                    (attachmentMappings[name] || []).forEach(att => {
+                                        if (att.attachment !== 'smallscope_attachment') {
+                                            uniqueAttachments.set(att.attachment + att.component, att);
+                                        }
+                                    });
+
+                                    const components = Array.from(uniqueAttachments.values())
+                                        .map(att => `{ name = "${att.attachment}", label = TranslateCap("component_${att.attachment}"), hash = "${att.component}" }`)
+                                        .join(',');
+
+                                    return `{
 name = "${entry.name.toUpperCase()}",
 label = TranslateCap("${entry.name.toLowerCase()}"),
 ammo = { label = TranslateCap("ammo_rounds"), hash = "${entry.ammotype || 'AMMO_PISTOL'}" },
 tints = Config.DefaultWeaponTints,
 components = {${components}},
 },`;
-                            });
-                        }).join('\n\n');
-
-                        // Beautify only the generated Lua entries (weapon code)
-                        const beautifiedLuaEntries = luaBeautify(`{\n${formattedLuaEntriesRaw}\n}`);
-
-                        // Insert durability entries in the original config text
-                        if (formattedLuaEntriesRaw) {
-                            let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
-                            let closingBraceIndex = text.indexOf('}', position);
-                            if (closingBraceIndex !== -1) {
-                                text = text.slice(0, closingBraceIndex) + beautifiedLuaEntries + '\n' + text.slice(closingBraceIndex);
-                            }
-                        }
-
-                        // Process attachments on the entire config text (unchanged)
-                        selectedNames.forEach(name => {
-                            if (attachmentMappings[name]) {
-                                attachmentMappings[name].forEach(entry => {
-                                    if (entry.attachment !== 'smallscope_attachment') {
-                                        text = processAttachmentEntry(entry, text);
-                                    }
                                 });
-                            }
-                        });
+                            }).join('\n\n');
 
-                        text = configweaponslua + `\n${beautifiedLuaEntries}\n}`;
+                            // Beautify only the generated Lua entries (weapon code)
+                            const beautifiedLuaEntries = luaBeautify(`{\n${formattedLuaEntriesRaw}\n}`);
 
-                        const blob = new Blob([text], { type: 'text/plain' });
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = fileName;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
-                    } else if (selectedValueConfig === "only-weapon") {
-                        let text = "";
-
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(checkbox => checkbox.value);
-
-                        function processAttachmentEntry(entry, textBlock) {
-                            if (entry.attachment === 'smallscope_attachment') return textBlock; // Skip smallscope_attachment
-                            const section = entry.attachment + " = \\{";
-                            const regex = new RegExp(section);
-                            const position = textBlock.search(regex);
-                            if (position !== -1) {
-                                const closingBraceIndex = textBlock.indexOf('}', position);
+                            // Insert durability entries in the original config text
+                            if (formattedLuaEntriesRaw) {
+                                let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
+                                let closingBraceIndex = text.indexOf('}', position);
                                 if (closingBraceIndex !== -1) {
-                                    const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
-                                    textBlock = textBlock.slice(0, closingBraceIndex) + formattedEntry + textBlock.slice(closingBraceIndex);
+                                    text = text.slice(0, closingBraceIndex) + beautifiedLuaEntries + '\n' + text.slice(closingBraceIndex);
                                 }
                             }
-                            return textBlock;
-                        }
 
-                        const formattedLuaEntries = selectedNames.flatMap(name => {
-                            if (!nameMappings[name]) return [];
-                            return nameMappings[name].map(entry => {
-                                const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
-                                    .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
+                            // Process attachments on the entire config text (unchanged)
+                            selectedNames.forEach(name => {
+                                if (attachmentMappings[name]) {
+                                    attachmentMappings[name].forEach(entry => {
+                                        if (entry.attachment !== 'smallscope_attachment') {
+                                            text = processAttachmentEntry(entry, text);
+                                        }
+                                    });
+                                }
+                            });
 
-                                return `{
+                            text = configweaponslua + `\n${beautifiedLuaEntries}\n}`;
+
+                            const blob = new Blob([text], { type: 'text/plain' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = fileName;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        } else if (selectedValueConfig === "only-weapon") {
+                            let text = "";
+
+                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                                .map(checkbox => checkbox.value);
+
+                            function processAttachmentEntry(entry, textBlock) {
+                                if (entry.attachment === 'smallscope_attachment') return textBlock; // Skip smallscope_attachment
+                                const section = entry.attachment + " = \\{";
+                                const regex = new RegExp(section);
+                                const position = textBlock.search(regex);
+                                if (position !== -1) {
+                                    const closingBraceIndex = textBlock.indexOf('}', position);
+                                    if (closingBraceIndex !== -1) {
+                                        const formattedEntry = `\t${entry.name} = '${entry.component}',\n`;
+                                        textBlock = textBlock.slice(0, closingBraceIndex) + formattedEntry + textBlock.slice(closingBraceIndex);
+                                    }
+                                }
+                                return textBlock;
+                            }
+
+                            const formattedLuaEntries = selectedNames.flatMap(name => {
+                                if (!nameMappings[name]) return [];
+                                return nameMappings[name].map(entry => {
+                                    const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment')
+                                        .map(att => `{ name = '${att.attachment}', label = TranslateCap('component_${att.attachment}'), hash = '${att.component}' }`).join(', ');
+
+                                    return `{
 name = "${entry.name.toUpperCase()}",
 label = TranslateCap("${entry.name.toLowerCase()}"),
 ammo = { label = TranslateCap("ammo_rounds"), hash = "${entry.ammotype || 'AMMO_PISTOL'}" },
 tints = Config.DefaultWeaponTints,
 components = {${components}},
 },`;
-                            });
-                        }).join('\n\n');
-
-                        if (formattedLuaEntries) {
-                            let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
-                            let closingBraceIndex = text.indexOf('}', position);
-                            if (closingBraceIndex !== -1) {
-                                text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
-                            }
-                        }
-
-                        selectedNames.forEach(name => {
-                            if (attachmentMappings[name]) {
-                                attachmentMappings[name].forEach(entry => {
-                                    if (entry.attachment !== 'smallscope_attachment') {
-                                        text = processAttachmentEntry(entry, text);
-                                    }
                                 });
-                            }
-                        });
+                            }).join('\n\n');
 
-                        text = `
+                            if (formattedLuaEntries) {
+                                let position = text.indexOf('Config.DurabilityMultiplier = {') + 'Config.DurabilityMultiplier = {'.length;
+                                let closingBraceIndex = text.indexOf('}', position);
+                                if (closingBraceIndex !== -1) {
+                                    text = text.slice(0, closingBraceIndex) + `${formattedLuaEntries}\n` + text.slice(closingBraceIndex);
+                                }
+                            }
+
+                            selectedNames.forEach(name => {
+                                if (attachmentMappings[name]) {
+                                    attachmentMappings[name].forEach(entry => {
+                                        if (entry.attachment !== 'smallscope_attachment') {
+                                            text = processAttachmentEntry(entry, text);
+                                        }
+                                    });
+                                }
+                            });
+
+                            text = `
 Config.Weapons = {\n${formattedLuaEntries}
 }`;
 
-                        // Beautify text before saving
-                        const beautifiedText = luaBeautify(text);
+                            // Beautify text before saving
+                            const beautifiedText = luaBeautify(text);
 
-                        const blob = new Blob([beautifiedText], { type: 'text/plain' });
-                        const link = document.createElement('a');
-                        link.href = URL.createObjectURL(blob);
-                        link.download = fileName;
-                        document.body.appendChild(link);
-                        link.click();
-                        document.body.removeChild(link);
+                            const blob = new Blob([beautifiedText], { type: 'text/plain' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = fileName;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+                        }
                     }
                 }
-            }
 
-            else if (selectedValue === "ox") {
-                if (fileName === 'ox_inventory/data/weapons.lua') {
-                    const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                        .map(cb => cb.value);
+                else if (selectedValue === "ox") {
+                    if (fileName === 'ox_inventory/data/weapons.lua') {
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(cb => cb.value);
 
-                    const ammoReplacements = {
-                        AMMO_RIFLE: 'ammo-rifle',
-                        AMMO_PISTOL: 'ammo-9',
-                        AMMO_SNIPER: 'ammo-sniper',
-                        AMMO_SHOTGUN: 'ammo-shotgun',
-                        AMMO_SMG: 'ammo-9',
-                    };
+                        const ammoReplacements = {
+                            AMMO_RIFLE: 'ammo-rifle',
+                            AMMO_PISTOL: 'ammo-9',
+                            AMMO_SNIPER: 'ammo-sniper',
+                            AMMO_SHOTGUN: 'ammo-shotgun',
+                            AMMO_SMG: 'ammo-9',
+                        };
 
-                    const weaponEntries = selectedNames.flatMap(name => {
-                        if (!nameMappings[name]) return [];
-                        return nameMappings[name].map(entry => {
-                            const label = entry.name.replace(/^weapon_/, '').toUpperCase().replace(/_/g, ' ');
-                            const ammotype = ammoReplacements[entry.ammotype] || entry.ammotype || 'ammo-9';
+                        const weaponEntries = selectedNames.flatMap(name => {
+                            if (!nameMappings[name]) return [];
+                            return nameMappings[name].map(entry => {
+                                const label = entry.name.replace(/^weapon_/, '').toUpperCase().replace(/_/g, ' ');
+                                const ammotype = ammoReplacements[entry.ammotype] || entry.ammotype || 'ammo-9';
 
-                            return [
-                                `['${entry.name.toUpperCase()}'] = {`,
-                                `\tlabel = '${label}',`,
-                                `\tweight = 1600,`,
-                                `\tdurability = 0.03,`,
-                                `\tammoname = '${ammotype}',`,
-                                `},`
-                            ].join('\n');
-                        });
-                    }).join('\n');
+                                return [
+                                    `['${entry.name.toUpperCase()}'] = {`,
+                                    `\tlabel = '${label}',`,
+                                    `\tweight = 1600,`,
+                                    `\tdurability = 0.03,`,
+                                    `\tammoname = '${ammotype}',`,
+                                    `},`
+                                ].join('\n');
+                            });
+                        }).join('\n');
 
-                    const prefixOverrides = {
-                        'x17 modular': 'x17m',
-                        'police m4': 'pm4',
-                        'shotgun 590': '590',
-                        'tactical sniper': 'tacticalsniper',
-                        'revolver': 'revolver'
-                        // Add more overrides as needed
-                    };
+                        const prefixOverrides = {
+                            'x17 modular': 'x17m',
+                            'police m4': 'pm4',
+                            'shotgun 590': '590',
+                            'tactical sniper': 'tacticalsniper',
+                            'revolver': 'revolver'
+                            // Add more overrides as needed
+                        };
 
-                    const attachmentEntriesMap = new Map();
-                    const sharedAttachmentMap = new Map();
+                        const attachmentEntriesMap = new Map();
+                        const sharedAttachmentMap = new Map();
 
-                    // Helper to determine attachment type from component string
-                    function getAttachmentType(component) {
-                        const comp = component.toLowerCase();
+                        // Helper to determine attachment type from component string
+                        function getAttachmentType(component) {
+                            const comp = component.toLowerCase();
 
-                        if (comp.includes('clip') || comp.includes('mag') || comp.includes('magazine')) return 'magazine';
-                        if (comp.includes('scope') || comp.includes('zoomscope')) return 'scope';
-                        if (comp.includes('flashlight') || comp.includes('light') || comp.includes('flash')) return 'flashlight';
-                        if (comp.includes('suppressor') || comp.includes('silencer') || comp.includes('supp')) return 'muzzle';
-                        if (comp.includes('grip')) return 'grip';
-                        if (comp.includes('stock')) return 'stock';
-                        if (comp.includes('frame')) return 'frame';
-                        if (comp.includes('laser')) return 'laser';
-                        if (comp.includes('misc')) return 'misc';
-                        // Add other detection rules as needed
+                            if (comp.includes('clip') || comp.includes('mag') || comp.includes('magazine')) return 'magazine';
+                            if (comp.includes('scope') || comp.includes('zoomscope')) return 'scope';
+                            if (comp.includes('flashlight') || comp.includes('light') || comp.includes('flash')) return 'flashlight';
+                            if (comp.includes('suppressor') || comp.includes('silencer') || comp.includes('supp')) return 'muzzle';
+                            if (comp.includes('grip')) return 'grip';
+                            if (comp.includes('stock')) return 'stock';
+                            if (comp.includes('frame')) return 'frame';
+                            if (comp.includes('laser')) return 'laser';
+                            if (comp.includes('misc')) return 'misc';
+                            // Add other detection rules as needed
 
-                        return 'clip'; // fallback default
-                    }
+                            return 'clip'; // fallback default
+                        }
 
-                    selectedNames.forEach(name => {
-                        if (!attachmentMappings[name]) return;
+                        selectedNames.forEach(name => {
+                            if (!attachmentMappings[name]) return;
 
-                        let weaponPrefix = name.replace(/^weapon_/, '').toLowerCase();
-                        weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
+                            let weaponPrefix = name.replace(/^weapon_/, '').toLowerCase();
+                            weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
 
-                        attachmentMappings[name].forEach(att => {
-                            const component = att.component;
-                            if (!component) return;
+                            attachmentMappings[name].forEach(att => {
+                                const component = att.component;
+                                if (!component) return;
 
-                            if (component.toLowerCase().includes('shared')) {
-                                // shared attachments handled below
-                                let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
-                                sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
-                                let labelPart = sharedKey.replace(/^SHARED_/, '');
-                                labelPart = labelPart.replace(/_(\d+)$/, ' #' + '$1');
-                                labelPart = labelPart.split('_').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
+                                if (component.toLowerCase().includes('shared')) {
+                                    // shared attachments handled below
+                                    let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                    sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
+                                    let labelPart = sharedKey.replace(/^SHARED_/, '');
+                                    labelPart = labelPart.replace(/_(\d+)$/, ' #' + '$1');
+                                    labelPart = labelPart.split('_').map(w => w.charAt(0) + w.slice(1).toLowerCase()).join(' ');
 
-                                if (!sharedAttachmentMap.has(sharedKey)) {
-                                    sharedAttachmentMap.set(sharedKey, {
-                                        component,
-                                        labelBase: labelPart,
-                                        weapons: new Set([weaponPrefix])
-                                    });
-                                } else {
-                                    sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
+                                    if (!sharedAttachmentMap.has(sharedKey)) {
+                                        sharedAttachmentMap.set(sharedKey, {
+                                            component,
+                                            labelBase: labelPart,
+                                            weapons: new Set([weaponPrefix])
+                                        });
+                                    } else {
+                                        sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
+                                    }
+
+                                    return;
                                 }
 
-                                return;
-                            }
+                                let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                compKey = compKey.replace(/markomods_?/gi, '');
 
-                            let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
-                            compKey = compKey.replace(/markomods_?/gi, '');
+                                const realPrefix = compKey.split('_')[0];
+                                const remainder = compKey.split('_').slice(1).join('_');
+                                const itemKey = `${realPrefix}_${remainder}`;
 
-                            const realPrefix = compKey.split('_')[0];
-                            const remainder = compKey.split('_').slice(1).join('_');
-                            const itemKey = `${realPrefix}_${remainder}`;
+                                if (attachmentEntriesMap.has(itemKey)) return;
 
-                            if (attachmentEntriesMap.has(itemKey)) return;
+                                const weaponLabel = realPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
 
-                            const weaponLabel = realPrefix.split('_').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ');
+                                let compLabel = compKey.replace(/_/g, ' ');
+                                compLabel = compLabel.replace(new RegExp(`^${weaponPrefix} `), '');
+                                compLabel = compLabel.replace(/(\d+)$/, '#$1');
+                                compLabel = compLabel.split(' ').map(word => {
+                                    if (word.startsWith('#')) return word;
+                                    return word.charAt(0).toUpperCase() + word.slice(1);
+                                }).join(' ');
 
-                            let compLabel = compKey.replace(/_/g, ' ');
-                            compLabel = compLabel.replace(new RegExp(`^${weaponPrefix} `), '');
-                            compLabel = compLabel.replace(/(\d+)$/, '#$1');
-                            compLabel = compLabel.split(' ').map(word => {
-                                if (word.startsWith('#')) return word;
-                                return word.charAt(0).toUpperCase() + word.slice(1);
-                            }).join(' ');
+                                const labelBase = `${weaponLabel} ${compLabel}`;
 
-                            const labelBase = `${weaponLabel} ${compLabel}`;
+                                // *** Use dynamic attachment type here ***
+                                const attachmentType = getAttachmentType(component);
 
-                            // *** Use dynamic attachment type here ***
-                            const attachmentType = getAttachmentType(component);
+                                attachmentEntriesMap.set(itemKey, [
+                                    `['${itemKey.toLowerCase()}'] = {`,
+                                    `\tlabel = '${labelBase}',`,
+                                    `\tweight = 200,`,
+                                    `\ttype = '${attachmentType}',`,    // <-- dynamically set type here
+                                    `\tclient = {`,
+                                    `\t\tcomponent = {'${component}'},`,
+                                    `\t\tusetime = 2500`,
+                                    `\t},`,
+                                    `},`
+                                ].join('\n'));
+                            });
+                        });
 
-                            attachmentEntriesMap.set(itemKey, [
-                                `['${itemKey.toLowerCase()}'] = {`,
-                                `\tlabel = '${labelBase}',`,
+                        sharedAttachmentMap.forEach((data, key) => {
+                            const weaponList = Array.from(data.weapons)
+                                .map(w => w.toUpperCase().replace(/_/g, ' '))
+                                .map(w => w.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
+
+                            const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
+
+                            const attachmentType = getAttachmentType(data.component);
+
+                            attachmentEntriesMap.set(key, [
+                                `['${key.toLowerCase()}'] = {`,
+                                `\tlabel = 'Shared ${data.labelBase.replace("Supp", "Suppressor").replace("Flash", "Flashlight")}${fitsLabel}',`,
                                 `\tweight = 200,`,
-                                `\ttype = '${attachmentType}',`,    // <-- dynamically set type here
+                                `\ttype = '${attachmentType}',`,
                                 `\tclient = {`,
-                                `\t\tcomponent = {'${component}'},`,
+                                `\t\tcomponent = {'${data.component}'},`,
                                 `\t\tusetime = 2500`,
                                 `\t},`,
                                 `},`
                             ].join('\n'));
                         });
-                    });
 
-                    sharedAttachmentMap.forEach((data, key) => {
-                        const weaponList = Array.from(data.weapons)
-                            .map(w => w.toUpperCase().replace(/_/g, ' '))
-                            .map(w => w.split(' ').map(word => word.charAt(0).toUpperCase() + word.slice(1)).join(' '));
-
-                        const fitsLabel = weaponList.length ? ` (Fits ${weaponList.join(', ')})` : '';
-
-                        const attachmentType = getAttachmentType(data.component);
-
-                        attachmentEntriesMap.set(key, [
-                            `['${key.toLowerCase()}'] = {`,
-                            `\tlabel = 'Shared ${data.labelBase.replace("Supp", "Suppressor").replace("Flash", "Flashlight")}${fitsLabel}',`,
-                            `\tweight = 200,`,
-                            `\ttype = '${attachmentType}',`,
-                            `\tclient = {`,
-                            `\t\tcomponent = {'${data.component}'},`,
-                            `\t\tusetime = 2500`,
-                            `\t},`,
-                            `},`
-                        ].join('\n'));
-                    });
-
-                    const attachmentEntries = Array.from(attachmentEntriesMap.values()).join('\n');
-                    const finalText = weaponEntries + '\n' + attachmentEntries;
+                        const attachmentEntries = Array.from(attachmentEntriesMap.values()).join('\n');
+                        const finalText = weaponEntries + '\n' + attachmentEntries;
 
 
-                    const blob = new Blob([finalText], { type: 'text/plain' });
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = fileName;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                }
-            }
-            else if (selectedValue === "ox-shops") {
-                if (fileName === 'ox_inventory/data/shops.lua') {
-                    if (selectedValueConfig === "entire-config") {
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(cb => cb.value);
-
-                        const weaponPrice = 4000;
-                        const attachmentPrice = 500;
-
-                        const allProducts = [];
-                        const existingNames = new Set();
-
-                        const prefixOverrides = {
-                            'x17 modular': 'x17m',
-                            'police m4': 'pm4',
-                            'shotgun 590': '590',
-                            'tactical sniper': 'tacticalsniper',
-                            'revolver': 'revolver'
-                        };
-
-                        const sharedAttachmentMap = new Map();
-                        const attachmentEntriesMap = new Map();
-
-                        // First: Add weapon entries
-                        selectedNames.forEach(weaponKey => {
-                            const weaponsArray = nameMappings[weaponKey];
-                            if (!weaponsArray) {
-                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
-                                return;
-                            }
-
-                            weaponsArray.forEach(weapon => {
-                                const weaponName = weapon.name.toLowerCase();
-                                if (!existingNames.has(weaponName)) {
-                                    allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
-                                    existingNames.add(weaponName);
-                                }
-                            });
-                        });
-
-                        // Second: Process attachments
-                        selectedNames.forEach(weaponKey => {
-                            if (!attachmentMappings[weaponKey]) {
-                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
-                                return;
-                            }
-
-                            let weaponPrefix = weaponKey.replace(/^weapon_/, '').toLowerCase();
-                            weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
-
-                            attachmentMappings[weaponKey].forEach(att => {
-                                const component = att.component;
-                                if (!component) return;
-
-                                // Shared attachments
-                                if (component.toLowerCase().includes('shared')) {
-                                    let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
-                                    sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
-
-                                    if (!sharedAttachmentMap.has(sharedKey)) {
-                                        sharedAttachmentMap.set(sharedKey, {
-                                            component,
-                                            weapons: new Set([weaponPrefix])
-                                        });
-                                    } else {
-                                        sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
-                                    }
-                                    return;
-                                }
-
-                                let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
-                                compKey = compKey.replace(/markomods_?/gi, '');
-
-                                const realPrefix = compKey.split('_')[0];
-                                const remainder = compKey.split('_').slice(1).join('_');
-                                const itemKey = `${realPrefix}_${remainder}`;
-
-                                if (attachmentEntriesMap.has(itemKey)) return;
-
-                                attachmentEntriesMap.set(itemKey, `{ name = '${itemKey.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
-                            });
-                        });
-
-                        sharedAttachmentMap.forEach((data, key) => {
-                            attachmentEntriesMap.set(key.toLowerCase(), `{ name = '${key.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
-                        });
-
-                        attachmentEntriesMap.forEach((entryString, key) => {
-                            if (!existingNames.has(key)) {
-                                existingNames.add(key);
-                                allProducts.push(entryString);
-                            }
-                        });
-
-                        const weaponsEntriesString = allProducts.map(p => {
-                            if (typeof p === 'string') {
-                                return p.trim().replace(/,\s*$/, '') + ','; // ensure trailing comma
-                            } else {
-                                if (p.name.startsWith('weapon_')) {
-                                    return `{ name = '${p.name.toUpperCase()}', price = 4000, metadata = { registered = true }, license = 'weapon' },`;
-                                } else {
-                                    return `{ name = '${p.name}', price = ${attachmentPrice}, license = 'weapon', }`;
-                                }
-                            }
-                        }).join('\n        ');
-
-
-
-                        fetch('shops.lua')
-                            .then(response => response.text())
-                            .then(data => {
-                                let qbShopsConfigBase = data;
-
-                                // Match the Ammunation inventory block safely
-                                const injectedConfig = qbShopsConfigBase.replace(
-                                    /(Ammunation\s*=\s*{\s*[\s\S]*?inventory\s*=\s*{)([\s\S]*?)(^\s*}\s*,)/m,
-                                    (match, start, existingContent, closingBrace) => {
-                                        const newEntries = `${existingContent.trim()},\n            ${weaponsEntriesString}`;
-                                        return `${start}${newEntries}\n${closingBrace}`;
-                                    }
-                                );
-
-                                // Create and download updated shops.lua
-                                const blob = new Blob([injectedConfig], { type: 'text/plain' });
-                                const link = document.createElement('a');
-                                link.href = URL.createObjectURL(blob);
-                                link.download = fileName;
-                                document.body.appendChild(link);
-                                link.click();
-                                document.body.removeChild(link);
-                            })
-                            .catch(err => console.error("Failed to load Lua file:", err));
-
-
-
-
-                    }
-                    else if (selectedValueConfig === "only-weapon") {
-                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                            .map(cb => cb.value);
-
-                        const weaponPrice = 4000;
-                        const attachmentPrice = 500;
-
-                        const allProducts = [];
-                        const existingNames = new Set();
-
-                        const prefixOverrides = {
-                            'x17 modular': 'x17m',
-                            'police m4': 'pm4',
-                            'shotgun 590': '590',
-                            'tactical sniper': 'tacticalsniper',
-                            'revolver': 'revolver'
-                        };
-
-                        const sharedAttachmentMap = new Map();
-                        const attachmentEntriesMap = new Map();
-
-                        // First: Add weapon entries
-                        selectedNames.forEach(weaponKey => {
-                            const weaponsArray = nameMappings[weaponKey];
-                            if (!weaponsArray) {
-                                console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
-                                return;
-                            }
-
-                            weaponsArray.forEach(weapon => {
-                                const weaponName = weapon.name.toLowerCase();
-                                if (!existingNames.has(weaponName)) {
-                                    allProducts.push({ name: weaponName, price: weaponPrice });
-                                    existingNames.add(weaponName);
-                                }
-                            });
-                        });
-
-                        // Second: Process attachments
-                        selectedNames.forEach(weaponKey => {
-                            if (!attachmentMappings[weaponKey]) {
-                                console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
-                                return;
-                            }
-
-                            let weaponPrefix = weaponKey.replace(/^weapon_/, '').toLowerCase();
-                            weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
-
-                            attachmentMappings[weaponKey].forEach(att => {
-                                const component = att.component;
-                                if (!component) return;
-
-                                // Shared attachments
-                                if (component.toLowerCase().includes('shared')) {
-                                    let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
-                                    sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
-
-                                    if (!sharedAttachmentMap.has(sharedKey)) {
-                                        sharedAttachmentMap.set(sharedKey, {
-                                            component,
-                                            weapons: new Set([weaponPrefix])
-                                        });
-                                    } else {
-                                        sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
-                                    }
-                                    return;
-                                }
-
-                                let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
-                                compKey = compKey.replace(/markomods_?/gi, '');
-
-                                const realPrefix = compKey.split('_')[0];
-                                const remainder = compKey.split('_').slice(1).join('_');
-                                const itemKey = `${realPrefix}_${remainder}`;
-
-                                if (attachmentEntriesMap.has(itemKey)) return;
-
-                                attachmentEntriesMap.set(itemKey, `{ name = '${itemKey.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
-                            });
-                        });
-
-                        sharedAttachmentMap.forEach((data, key) => {
-                            attachmentEntriesMap.set(key.toLowerCase(), `{ name = '${key.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
-                        });
-
-                        attachmentEntriesMap.forEach((entryString, key) => {
-                            if (!existingNames.has(key)) {
-                                existingNames.add(key);
-                                allProducts.push(entryString);
-                            }
-                        });
-
-                        // Format the Lua string
-                        const weaponsEntriesString = allProducts.map(p => {
-                            if (typeof p === 'string') {
-                                return p.trim().replace(/,\s*$/, '') + ','; // Ensure trailing comma
-                            } else {
-                                if (p.name.startsWith('weapon_')) {
-                                    return `{ name = '${p.name.toUpperCase()}', price = ${weaponPrice}, metadata = { registered = true }, license = 'weapon' },`;
-                                } else {
-                                    return `{ name = '${p.name}', price = ${attachmentPrice}, license = 'weapon' },`;
-                                }
-                            }
-                        }).join('\n');
-
-                        // Save the output as a file
-                        const blob = new Blob([weaponsEntriesString], { type: 'text/plain' });
+                        const blob = new Blob([finalText], { type: 'text/plain' });
                         const link = document.createElement('a');
                         link.href = URL.createObjectURL(blob);
                         link.download = fileName;
                         document.body.appendChild(link);
                         link.click();
                         document.body.removeChild(link);
-
                     }
                 }
-            } else if (selectedValue === "qs") {
-                // qb-core/shared/items.lua
-                if (fileName === 'qb-core/shared/items.lua') {
-                    let text = ""
-                    const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                        .map(checkbox => checkbox.value);
+                else if (selectedValue === "ox-shops") {
+                    if (fileName === 'ox_inventory/data/shops.lua') {
+                        if (selectedValueConfig === "entire-config") {
+                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                                .map(cb => cb.value);
 
-                    const formattedLuaEntries = selectedNames.flatMap(name => {
-                        if (nameMappings[name]) {
-                            return nameMappings[name].map(entry => {
-                                const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment').join(', ');
+                            const weaponPrice = 4000;
+                            const attachmentPrice = 500;
 
-                                return `\n['${entry.name}'] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['weight'] = 1000,\n\t['type'] = 'weapon',\n\t['ammotype'] = '${entry.ammotype}',\n\t['image'] = '${entry.name}.png',\n\t['unique'] = true,\n\t['useable'] = false,\n\t['description'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}'\n},`;
+                            const allProducts = [];
+                            const existingNames = new Set();
 
-                            });
-                        } else {
-                            return [];
-                        }
-                    }).join('\n');
+                            const prefixOverrides = {
+                                'x17 modular': 'x17m',
+                                'police m4': 'pm4',
+                                'shotgun 590': '590',
+                                'tactical sniper': 'tacticalsniper',
+                                'revolver': 'revolver'
+                            };
 
-                    text = `${formattedLuaEntries}`
+                            const sharedAttachmentMap = new Map();
+                            const attachmentEntriesMap = new Map();
 
-                    const capitalizeWords = (str) => {
-                        return str
-                            .split(' ')
-                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ');
-                    };
+                            // First: Add weapon entries
+                            selectedNames.forEach(weaponKey => {
+                                const weaponsArray = nameMappings[weaponKey];
+                                if (!weaponsArray) {
+                                    console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                    return;
+                                }
 
-                    text += "\n"
-
-                    // Loop through each selected name for WeaponAttachments
-                    selectedNames.forEach(name => {
-                        if (nameMappings[name]) {
-                            nameMappings[name].forEach(entry => {
-                                // Get the attachment mappings for the specific entry
-                                const weaponAttachments = attachmentMappings[name] || [];
-                                let componentCounters = {}; // Reset counters for each selected weapon
-                                let previousEntryName = ""; // Track the previous entry name
-
-                                weaponAttachments.forEach(att => {
-                                    if (att.attachment !== 'smallscope_attachment' && att.name === entry.name) { // Filter out smallscope_attachment and match entry name
-
-                                        // Reset counters if the entry name changes
-                                        if (att.name.toUpperCase() !== previousEntryName) {
-                                            componentCounters = {};
-                                            previousEntryName = att.name.toUpperCase();
-                                        }
-
-                                        const componentType = att.attachment
-                                            .replace("_attachment", "")
-                                            .replace("_", "")
-                                            .replace(/\d+/g, ""); // Remove all numbers
-
-                                        // Initialize or increment the counter for the component type
-                                        if (!componentCounters[componentType]) {
-                                            componentCounters[componentType] = 1;
-                                        } else {
-                                            componentCounters[componentType]++;
-                                        }
-
-                                        const labelNumber = componentCounters[componentType];
-
-                                        // Format the label using att.attachment
-                                        const formattedLabel = capitalizeWords(
-                                            att.attachment
-                                                .replace(/_/g, " ")      // Replace underscores with spaces
-                                                .replace(/\d+/g, "")     // Remove all numbers
-                                                .trim()                  // Trim any whitespace
-                                        ) + ` ${labelNumber}`;           // Append the label number
-
-                                        const itemName = `${att.name.replace("weapon_", "").toLowerCase()}-${componentType}${labelNumber}`;
-
-                                        // Add the item in the required format
-                                        text += `['${itemName}'] = {\n`;
-                                        text += `    ['name'] = '${itemName}',\n`;
-                                        text += `    ['label'] = '${att.name.replace("weapon_", "").replace(/^\w+/, (match) => match.charAt(0).toUpperCase() + match.slice(1))} ${formattedLabel.replace("Attachment ", "")}',\n`;
-                                        text += `    ['weight'] = 1000,\n`;
-                                        text += `    ['type'] = 'item',\n`;
-                                        text += `    ['image'] = '${itemName}.png',\n`;
-                                        text += `    ['unique'] = false,\n`;
-                                        text += `    ['useable'] = true,\n`;
-                                        text += `    ['shouldClose'] = true,\n`;
-                                        text += `    ['combinable'] = nil,\n`;
-                                        text += `    ['description'] = '${formattedLabel.replace(/\d+/g, "").trimEnd()}',\n`;
-                                        text += `},\n`;
+                                weaponsArray.forEach(weapon => {
+                                    const weaponName = weapon.name.toLowerCase();
+                                    if (!existingNames.has(weaponName)) {
+                                        allProducts.push({ name: weaponName, price: weaponPrice, amount: 5, requiredLicense: 'weapon' });
+                                        existingNames.add(weaponName);
                                     }
                                 });
                             });
-                        }
-                    });
 
-                    const blob = new Blob([text], { type: 'text/plain' });
+                            // Second: Process attachments
+                            selectedNames.forEach(weaponKey => {
+                                if (!attachmentMappings[weaponKey]) {
+                                    console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                    return;
+                                }
 
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = fileName;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                } else if (fileName === 'qb-core/shared/weapons.lua') {
-                    let text = ""
+                                let weaponPrefix = weaponKey.replace(/^weapon_/, '').toLowerCase();
+                                weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
 
-                    const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                        .map(checkbox => checkbox.value);
+                                attachmentMappings[weaponKey].forEach(att => {
+                                    const component = att.component;
+                                    if (!component) return;
 
+                                    // Shared attachments
+                                    if (component.toLowerCase().includes('shared')) {
+                                        let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                        sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
 
-                    // This generates the weapon code
-                    const formattedLuaEntries = selectedNames.flatMap(name => {
-                        if (nameMappings[name]) {
-                            return nameMappings[name].map(entry => {
-                                return `\n[\`${entry.name}\`] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['ammotype'] = '${entry.ammotype}',\n\t['damagereason'] = 'Ended / Rifled / Shot down / Floored'\n},`;
-                            });
-                        } else {
-                            return [];
-                        }
-                    }).join('\n');
-
-
-                    text = `${formattedLuaEntries}`
-
-                    const blob = new Blob([text], { type: 'text/plain' });
-
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = fileName;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
-                } else if (fileName === 'qs-inventory/config/weapons.lua') {
-                    let text = "";
-
-                    const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
-                        .map(checkbox => checkbox.value);
-
-                    text = "Config.DurabilityMultiplier = {\n";
-                    selectedNames.forEach(name => {
-                        if (nameMappings[name]) {
-                            nameMappings[name].forEach(entry => {
-                                text += `    ['${entry.name.toLowerCase().replace(/ /g, "_")}'] = 0.10,\n`;
-                            });
-                        }
-                    });
-
-                    text += "}\n\n";
-
-                    text += "Config.WeaponAttachments = {\n";
-
-                    const capitalizeWords = (str) => {
-                        return str
-                            .split(' ')
-                            .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-                            .join(' ');
-                    };
-
-                    let weaponAttachmentItems = [];
-
-
-                    // Loop through each selected name for WeaponAttachments
-                    selectedNames.forEach(name => {
-                        if (nameMappings[name]) {
-                            nameMappings[name].forEach(entry => {
-                                // Start the weapon entry with the name in uppercase and underscores intact
-                                text += `    ['${entry.name.toUpperCase()}'] = {\n`;
-
-                                // Get the attachment mappings for the specific entry
-                                const weaponAttachments = attachmentMappings[name] || [];
-                                let componentCounters = {}; // Reset counters for each selected weapon
-                                let previousEntryName = ""; // Track the previous entry name
-
-                                weaponAttachments.forEach(att => {
-                                    if (att.attachment !== 'smallscope_attachment' && att.name === entry.name) { // Filter out smallscope_attachment and match entry name
-
-                                        // Reset counters if the entry name changes
-                                        if (att.name.toUpperCase() !== previousEntryName) {
-                                            componentCounters = {};
-                                            previousEntryName = att.name.toUpperCase();
-                                        }
-
-                                        const componentType = att.attachment
-                                            .replace("_attachment", "")
-                                            .replace("_", "")
-                                            .replace(/\d+/g, ""); // Remove all numbers
-
-                                        // Initialize or increment the counter for the component type
-                                        if (!componentCounters[componentType]) {
-                                            componentCounters[componentType] = 1;
+                                        if (!sharedAttachmentMap.has(sharedKey)) {
+                                            sharedAttachmentMap.set(sharedKey, {
+                                                component,
+                                                weapons: new Set([weaponPrefix])
+                                            });
                                         } else {
-                                            componentCounters[componentType]++;
+                                            sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
                                         }
+                                        return;
+                                    }
 
-                                        const labelNumber = componentCounters[componentType];
+                                    let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                    compKey = compKey.replace(/markomods_?/gi, '');
 
-                                        // Format the label using att.attachment
-                                        const formattedLabel = capitalizeWords(
-                                            att.attachment
-                                                .replace(/_/g, " ")      // Replace underscores with spaces
-                                                .replace(/\d+/g, "")     // Remove all numbers
-                                                .trim()                  // Trim any whitespace
-                                        ) + ` ${labelNumber}`;           // Append the label number
+                                    const realPrefix = compKey.split('_')[0];
+                                    const remainder = compKey.split('_').slice(1).join('_');
+                                    const itemKey = `${realPrefix}_${remainder}`;
 
-                                        const itemName = `${att.name.replace("weapon_", "").toLowerCase()}-${componentType}${labelNumber}`;
-                                        const attachmentName = `${componentType}${labelNumber}`;
+                                    if (attachmentEntriesMap.has(itemKey)) return;
 
-                                        // Add a comment for each component type section
-                                        if (labelNumber === 1) {
-                                            text += `        -- ${componentType.charAt(0).toUpperCase() + componentType.slice(1)}\n`;
+                                    attachmentEntriesMap.set(itemKey, `{ name = '${itemKey.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
+                                });
+                            });
+
+                            sharedAttachmentMap.forEach((data, key) => {
+                                attachmentEntriesMap.set(key.toLowerCase(), `{ name = '${key.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
+                            });
+
+                            attachmentEntriesMap.forEach((entryString, key) => {
+                                if (!existingNames.has(key)) {
+                                    existingNames.add(key);
+                                    allProducts.push(entryString);
+                                }
+                            });
+
+                            const weaponsEntriesString = allProducts.map(p => {
+                                if (typeof p === 'string') {
+                                    return p.trim().replace(/,\s*$/, '') + ','; // ensure trailing comma
+                                } else {
+                                    if (p.name.startsWith('weapon_')) {
+                                        return `{ name = '${p.name.toUpperCase()}', price = 4000, metadata = { registered = true }, license = 'weapon' },`;
+                                    } else {
+                                        return `{ name = '${p.name}', price = ${attachmentPrice}, license = 'weapon', }`;
+                                    }
+                                }
+                            }).join('\n        ');
+
+
+
+                            fetch('shops.lua')
+                                .then(response => response.text())
+                                .then(data => {
+                                    let qbShopsConfigBase = data;
+
+                                    // Match the Ammunation inventory block safely
+                                    const injectedConfig = qbShopsConfigBase.replace(
+                                        /(Ammunation\s*=\s*{\s*[\s\S]*?inventory\s*=\s*{)([\s\S]*?)(^\s*}\s*,)/m,
+                                        (match, start, existingContent, closingBrace) => {
+                                            const newEntries = `${existingContent.trim()},\n            ${weaponsEntriesString}`;
+                                            return `${start}${newEntries}\n${closingBrace}`;
                                         }
+                                    );
 
-                                        // Create the component entry in the specified format
-                                        text += `        ${componentType}${labelNumber} = {\n`;
-                                        text += `            component = '${att.component}',\n`;
-                                        text += `            item = '${itemName}',\n`;
-                                        if (componentType === "clip") {
-                                            text += `            type = 'clip',\n`;
-                                        }
-                                        text += `        },\n`;
-                                        weaponAttachmentItems.push({
-                                            item: itemName,
-                                            attachment: attachmentName,
-                                            type: componentType === "clip" ? "clip" : componentType
-                                        });
+                                    // Create and download updated shops.lua
+                                    const blob = new Blob([injectedConfig], { type: 'text/plain' });
+                                    const link = document.createElement('a');
+                                    link.href = URL.createObjectURL(blob);
+                                    link.download = fileName;
+                                    document.body.appendChild(link);
+                                    link.click();
+                                    document.body.removeChild(link);
+                                })
+                                .catch(err => console.error("Failed to load Lua file:", err));
+
+
+
+
+                        }
+                        else if (selectedValueConfig === "only-weapon") {
+                            const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                                .map(cb => cb.value);
+
+                            const weaponPrice = 4000;
+                            const attachmentPrice = 500;
+
+                            const allProducts = [];
+                            const existingNames = new Set();
+
+                            const prefixOverrides = {
+                                'x17 modular': 'x17m',
+                                'police m4': 'pm4',
+                                'shotgun 590': '590',
+                                'tactical sniper': 'tacticalsniper',
+                                'revolver': 'revolver'
+                            };
+
+                            const sharedAttachmentMap = new Map();
+                            const attachmentEntriesMap = new Map();
+
+                            // First: Add weapon entries
+                            selectedNames.forEach(weaponKey => {
+                                const weaponsArray = nameMappings[weaponKey];
+                                if (!weaponsArray) {
+                                    console.warn(`No weapon found in nameMappings for key: ${weaponKey}`);
+                                    return;
+                                }
+
+                                weaponsArray.forEach(weapon => {
+                                    const weaponName = weapon.name.toLowerCase();
+                                    if (!existingNames.has(weaponName)) {
+                                        allProducts.push({ name: weaponName, price: weaponPrice });
+                                        existingNames.add(weaponName);
                                     }
                                 });
-                                text += `    },\n`;
                             });
+
+                            // Second: Process attachments
+                            selectedNames.forEach(weaponKey => {
+                                if (!attachmentMappings[weaponKey]) {
+                                    console.warn(`No attachments found in attachmentMappings for key: ${weaponKey}`);
+                                    return;
+                                }
+
+                                let weaponPrefix = weaponKey.replace(/^weapon_/, '').toLowerCase();
+                                weaponPrefix = prefixOverrides[weaponPrefix] || weaponPrefix;
+
+                                attachmentMappings[weaponKey].forEach(att => {
+                                    const component = att.component;
+                                    if (!component) return;
+
+                                    // Shared attachments
+                                    if (component.toLowerCase().includes('shared')) {
+                                        let sharedKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                        sharedKey = sharedKey.replace(/^markomods_/, '').toUpperCase();
+
+                                        if (!sharedAttachmentMap.has(sharedKey)) {
+                                            sharedAttachmentMap.set(sharedKey, {
+                                                component,
+                                                weapons: new Set([weaponPrefix])
+                                            });
+                                        } else {
+                                            sharedAttachmentMap.get(sharedKey).weapons.add(weaponPrefix);
+                                        }
+                                        return;
+                                    }
+
+                                    let compKey = component.replace(/^COMPONENT_/i, '').toLowerCase();
+                                    compKey = compKey.replace(/markomods_?/gi, '');
+
+                                    const realPrefix = compKey.split('_')[0];
+                                    const remainder = compKey.split('_').slice(1).join('_');
+                                    const itemKey = `${realPrefix}_${remainder}`;
+
+                                    if (attachmentEntriesMap.has(itemKey)) return;
+
+                                    attachmentEntriesMap.set(itemKey, `{ name = '${itemKey.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
+                                });
+                            });
+
+                            sharedAttachmentMap.forEach((data, key) => {
+                                attachmentEntriesMap.set(key.toLowerCase(), `{ name = '${key.toLowerCase()}', price = ${attachmentPrice}, license = 'weapon' },`);
+                            });
+
+                            attachmentEntriesMap.forEach((entryString, key) => {
+                                if (!existingNames.has(key)) {
+                                    existingNames.add(key);
+                                    allProducts.push(entryString);
+                                }
+                            });
+
+                            // Format the Lua string
+                            const weaponsEntriesString = allProducts.map(p => {
+                                if (typeof p === 'string') {
+                                    return p.trim().replace(/,\s*$/, '') + ','; // Ensure trailing comma
+                                } else {
+                                    if (p.name.startsWith('weapon_')) {
+                                        return `{ name = '${p.name.toUpperCase()}', price = ${weaponPrice}, metadata = { registered = true }, license = 'weapon' },`;
+                                    } else {
+                                        return `{ name = '${p.name}', price = ${attachmentPrice}, license = 'weapon' },`;
+                                    }
+                                }
+                            }).join('\n');
+
+                            // Save the output as a file
+                            const blob = new Blob([weaponsEntriesString], { type: 'text/plain' });
+                            const link = document.createElement('a');
+                            link.href = URL.createObjectURL(blob);
+                            link.download = fileName;
+                            document.body.appendChild(link);
+                            link.click();
+                            document.body.removeChild(link);
+
                         }
-                    });
-                    text += "}\n\n";
+                    }
+                } else if (selectedValue === "qs") {
+                    // qb-core/shared/items.lua
+                    if (fileName === 'qb-core/shared/items.lua') {
+                        let text = ""
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(checkbox => checkbox.value);
 
-                    // Generate Config.WeaponAttachmentItems dynamically
-                    text += "Config.WeaponAttachmentItems = {\n";
-                    weaponAttachmentItems.forEach(att => {
-                        text += `    {\n`;
-                        text += `        item = '${att.item}',\n`;
-                        text += `        attachment = '${att.attachment}',\n`;
-                        text += `        type = '${att.type}'\n`;
-                        text += `    },\n`;
-                    });
-                    text += "}\n";
+                        const formattedLuaEntries = selectedNames.flatMap(name => {
+                            if (nameMappings[name]) {
+                                return nameMappings[name].map(entry => {
+                                    const components = (attachmentMappings[name] || []).filter(att => att.attachment !== 'smallscope_attachment').join(', ');
+
+                                    return `\n['${entry.name}'] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['weight'] = 1000,\n\t['type'] = 'weapon',\n\t['ammotype'] = '${entry.ammotype}',\n\t['image'] = '${entry.name}.png',\n\t['unique'] = true,\n\t['useable'] = false,\n\t['description'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}'\n},`;
+
+                                });
+                            } else {
+                                return [];
+                            }
+                        }).join('\n');
+
+                        text = `${formattedLuaEntries}`
+
+                        const capitalizeWords = (str) => {
+                            return str
+                                .split(' ')
+                                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                .join(' ');
+                        };
+
+                        text += "\n"
+
+                        // Loop through each selected name for WeaponAttachments
+                        selectedNames.forEach(name => {
+                            if (nameMappings[name]) {
+                                nameMappings[name].forEach(entry => {
+                                    // Get the attachment mappings for the specific entry
+                                    const weaponAttachments = attachmentMappings[name] || [];
+                                    let componentCounters = {}; // Reset counters for each selected weapon
+                                    let previousEntryName = ""; // Track the previous entry name
+
+                                    weaponAttachments.forEach(att => {
+                                        if (att.attachment !== 'smallscope_attachment' && att.name === entry.name) { // Filter out smallscope_attachment and match entry name
+
+                                            // Reset counters if the entry name changes
+                                            if (att.name.toUpperCase() !== previousEntryName) {
+                                                componentCounters = {};
+                                                previousEntryName = att.name.toUpperCase();
+                                            }
+
+                                            const componentType = att.attachment
+                                                .replace("_attachment", "")
+                                                .replace("_", "")
+                                                .replace(/\d+/g, ""); // Remove all numbers
+
+                                            // Initialize or increment the counter for the component type
+                                            if (!componentCounters[componentType]) {
+                                                componentCounters[componentType] = 1;
+                                            } else {
+                                                componentCounters[componentType]++;
+                                            }
+
+                                            const labelNumber = componentCounters[componentType];
+
+                                            // Format the label using att.attachment
+                                            const formattedLabel = capitalizeWords(
+                                                att.attachment
+                                                    .replace(/_/g, " ")      // Replace underscores with spaces
+                                                    .replace(/\d+/g, "")     // Remove all numbers
+                                                    .trim()                  // Trim any whitespace
+                                            ) + ` ${labelNumber}`;           // Append the label number
+
+                                            const itemName = `${att.name.replace("weapon_", "").toLowerCase()}-${componentType}${labelNumber}`;
+
+                                            // Add the item in the required format
+                                            text += `['${itemName}'] = {\n`;
+                                            text += `    ['name'] = '${itemName}',\n`;
+                                            text += `    ['label'] = '${att.name.replace("weapon_", "").replace(/^\w+/, (match) => match.charAt(0).toUpperCase() + match.slice(1))} ${formattedLabel.replace("Attachment ", "")}',\n`;
+                                            text += `    ['weight'] = 1000,\n`;
+                                            text += `    ['type'] = 'item',\n`;
+                                            text += `    ['image'] = '${itemName}.png',\n`;
+                                            text += `    ['unique'] = false,\n`;
+                                            text += `    ['useable'] = true,\n`;
+                                            text += `    ['shouldClose'] = true,\n`;
+                                            text += `    ['combinable'] = nil,\n`;
+                                            text += `    ['description'] = '${formattedLabel.replace(/\d+/g, "").trimEnd()}',\n`;
+                                            text += `},\n`;
+                                        }
+                                    });
+                                });
+                            }
+                        });
+
+                        const blob = new Blob([text], { type: 'text/plain' });
+
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else if (fileName === 'qb-core/shared/weapons.lua') {
+                        let text = ""
+
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(checkbox => checkbox.value);
 
 
-                    // \n${formattedLuaEntries}
+                        // This generates the weapon code
+                        const formattedLuaEntries = selectedNames.flatMap(name => {
+                            if (nameMappings[name]) {
+                                return nameMappings[name].map(entry => {
+                                    return `\n[\`${entry.name}\`] = {\n\t['name'] = '${entry.name}',\n\t['label'] = '${entry.name.replace("weapon_", "").toUpperCase().replace("_", " ")}',\n\t['ammotype'] = '${entry.ammotype}',\n\t['damagereason'] = 'Ended / Rifled / Shot down / Floored'\n},`;
+                                });
+                            } else {
+                                return [];
+                            }
+                        }).join('\n');
 
-                    const blob = new Blob([text], { type: 'text/plain' });
 
-                    const link = document.createElement('a');
-                    link.href = URL.createObjectURL(blob);
-                    link.download = fileName;
-                    document.body.appendChild(link);
-                    link.click();
-                    document.body.removeChild(link);
+                        text = `${formattedLuaEntries}`
+
+                        const blob = new Blob([text], { type: 'text/plain' });
+
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    } else if (fileName === 'qs-inventory/config/weapons.lua') {
+                        let text = "";
+
+                        const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked'))
+                            .map(checkbox => checkbox.value);
+
+                        text = "Config.DurabilityMultiplier = {\n";
+                        selectedNames.forEach(name => {
+                            if (nameMappings[name]) {
+                                nameMappings[name].forEach(entry => {
+                                    text += `    ['${entry.name.toLowerCase().replace(/ /g, "_")}'] = 0.10,\n`;
+                                });
+                            }
+                        });
+
+                        text += "}\n\n";
+
+                        text += "Config.WeaponAttachments = {\n";
+
+                        const capitalizeWords = (str) => {
+                            return str
+                                .split(' ')
+                                .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+                                .join(' ');
+                        };
+
+                        let weaponAttachmentItems = [];
+
+
+                        // Loop through each selected name for WeaponAttachments
+                        selectedNames.forEach(name => {
+                            if (nameMappings[name]) {
+                                nameMappings[name].forEach(entry => {
+                                    // Start the weapon entry with the name in uppercase and underscores intact
+                                    text += `    ['${entry.name.toUpperCase()}'] = {\n`;
+
+                                    // Get the attachment mappings for the specific entry
+                                    const weaponAttachments = attachmentMappings[name] || [];
+                                    let componentCounters = {}; // Reset counters for each selected weapon
+                                    let previousEntryName = ""; // Track the previous entry name
+
+                                    weaponAttachments.forEach(att => {
+                                        if (att.attachment !== 'smallscope_attachment' && att.name === entry.name) { // Filter out smallscope_attachment and match entry name
+
+                                            // Reset counters if the entry name changes
+                                            if (att.name.toUpperCase() !== previousEntryName) {
+                                                componentCounters = {};
+                                                previousEntryName = att.name.toUpperCase();
+                                            }
+
+                                            const componentType = att.attachment
+                                                .replace("_attachment", "")
+                                                .replace("_", "")
+                                                .replace(/\d+/g, ""); // Remove all numbers
+
+                                            // Initialize or increment the counter for the component type
+                                            if (!componentCounters[componentType]) {
+                                                componentCounters[componentType] = 1;
+                                            } else {
+                                                componentCounters[componentType]++;
+                                            }
+
+                                            const labelNumber = componentCounters[componentType];
+
+                                            // Format the label using att.attachment
+                                            const formattedLabel = capitalizeWords(
+                                                att.attachment
+                                                    .replace(/_/g, " ")      // Replace underscores with spaces
+                                                    .replace(/\d+/g, "")     // Remove all numbers
+                                                    .trim()                  // Trim any whitespace
+                                            ) + ` ${labelNumber}`;           // Append the label number
+
+                                            const itemName = `${att.name.replace("weapon_", "").toLowerCase()}-${componentType}${labelNumber}`;
+                                            const attachmentName = `${componentType}${labelNumber}`;
+
+                                            // Add a comment for each component type section
+                                            if (labelNumber === 1) {
+                                                text += `        -- ${componentType.charAt(0).toUpperCase() + componentType.slice(1)}\n`;
+                                            }
+
+                                            // Create the component entry in the specified format
+                                            text += `        ${componentType}${labelNumber} = {\n`;
+                                            text += `            component = '${att.component}',\n`;
+                                            text += `            item = '${itemName}',\n`;
+                                            if (componentType === "clip") {
+                                                text += `            type = 'clip',\n`;
+                                            }
+                                            text += `        },\n`;
+                                            weaponAttachmentItems.push({
+                                                item: itemName,
+                                                attachment: attachmentName,
+                                                type: componentType === "clip" ? "clip" : componentType
+                                            });
+                                        }
+                                    });
+                                    text += `    },\n`;
+                                });
+                            }
+                        });
+                        text += "}\n\n";
+
+                        // Generate Config.WeaponAttachmentItems dynamically
+                        text += "Config.WeaponAttachmentItems = {\n";
+                        weaponAttachmentItems.forEach(att => {
+                            text += `    {\n`;
+                            text += `        item = '${att.item}',\n`;
+                            text += `        attachment = '${att.attachment}',\n`;
+                            text += `        type = '${att.type}'\n`;
+                            text += `    },\n`;
+                        });
+                        text += "}\n";
+
+
+                        // \n${formattedLuaEntries}
+
+                        const blob = new Blob([text], { type: 'text/plain' });
+
+                        const link = document.createElement('a');
+                        link.href = URL.createObjectURL(blob);
+                        link.download = fileName;
+                        document.body.appendChild(link);
+                        link.click();
+                        document.body.removeChild(link);
+                    }
+                }
+                function downloadAll() {
+                    // Logic for downloading all files
+                    downloadFile('weapons.lua');
+                    downloadFile('items.lua');
+                    downloadFile('config.lua');
                 }
             }
-            function downloadAll() {
-                // Logic for downloading all files
-                downloadFile('weapons.lua');
-                downloadFile('items.lua');
-                downloadFile('config.lua');
-            }
-        }
 
-    </script>
-    <script src="mappings.js"></script>
-    <script src="swm.js"></script>
-    <script src="qbcore.js"></script>
-    <script src="esx.js"></script>
-</body>
+        </script>
+        <script src="mappings.js"></script>
+        <script src="swm.js"></script>
+        <script src="qbcore.js"></script>
+        <script src="esx.js"></script>
+    </body>
 
 </html>
