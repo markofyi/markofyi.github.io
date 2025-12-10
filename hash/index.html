@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>Hash Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+    <main class="app">
+        <header class="app-header">
+            <h1>Hash Generator</h1>
+            <p class="subtitle">Compute hashes from strings.</p>
+        </header>
+
+        <section class="controls">
+            <div class="control-group">
+                <label for="algorithmSelect" class="control-label">Algorithm</label>
+                <select id="algorithmSelect" class="control-select">
+                    <option value="default" selected>Default</option>
+                    <option value="awc">AWC</option>
+                    <option value="case-sensitive">Case Sensitive</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label for="outputFormatSelect" class="control-label">Format</label>
+                <select id="outputFormatSelect" class="control-select">
+                    <option value="all" selected>All</option>
+                    <option value="hex">Hex</option>
+                    <option value="uint">Unsigned Int</option>
+                    <option value="int">Signed Int</option>
+                </select>
+            </div>
+
+            <div class="control-group control-options">
+                <label class="checkbox-inline">
+                    <input type="checkbox" id="autoGenerate" checked />
+                    <span>Generate while typing</span>
+                </label>
+                <button id="generateBtn" class="btn-primary" type="button">
+                    Generate
+                </button>
+            </div>
+        </section>
+
+        <section class="panes">
+            <div class="pane">
+                <div class="pane-header">Input</div>
+                <textarea
+                    id="inputText"
+                    spellcheck="false"
+                    placeholder="Type one value per line…"
+                ></textarea>
+            </div>
+
+            <div class="pane">
+                <div class="pane-header">Output</div>
+                <textarea
+                    id="outputText"
+                    spellcheck="false"
+                    readonly
+                    placeholder="Hashes will appear here…"
+                ></textarea>
+            </div>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
