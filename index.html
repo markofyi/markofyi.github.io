@@ -126,6 +126,11 @@
 
             <div id="hashBox" class="download-box">
                 <h2>Weapon Hash</h2>
+                <p>Signed Int is usually the one you need for weapons, Hex for attachments.</p>
+                <button id="toggleUintBtn" class="uint-toggle-btn">
+                    Show Unsigned Int
+                </button>
+
                 <div id="hashContent"></div>
             </div>
         </div>
@@ -169,6 +174,7 @@
 
                 const table = document.createElement('table');
                 table.className = 'status-table';
+                table.classList.add("hide-uint");
 
                 const tbody = document.createElement('tbody');
 
@@ -238,6 +244,7 @@
                         // Create table for this weapon
                         const table = document.createElement('table');
                         table.className = 'status-table';
+                        table.classList.add("hide-uint");
 
                         const tbody = document.createElement('tbody');
 
@@ -319,6 +326,24 @@
                     });
                 });
             }
+
+            function toggleUnsignedInt() {
+                const btn = document.getElementById('toggleUintBtn');
+                const tables = document.querySelectorAll('#hashContent table');
+
+                const hiding = tables[0]?.classList.contains('hide-uint'); // check state
+
+                tables.forEach(table => {
+                    if (hiding) {
+                        table.classList.remove('hide-uint');
+                    } else {
+                        table.classList.add('hide-uint');
+                    }
+                });
+
+                btn.textContent = hiding ? "Hide Unsigned Int" : "Show Unsigned Int";
+            }
+
 
 
             function joaat(input) {
@@ -465,6 +490,8 @@
                 document.getElementById('generate').addEventListener('change', updateSelectedConfig);
                 document.getElementById('names').addEventListener('click', toggleCheckboxDropdown);
                 document.getElementById('generateBtn').addEventListener('click', submitForm);
+                document.getElementById('toggleUintBtn').addEventListener('click', toggleUnsignedInt);
+
 
                 window.addEventListener('click', function (event) {
                     const dropdown = document.getElementById("checkboxDropdownContent");

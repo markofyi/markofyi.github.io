@@ -37,7 +37,25 @@ body {
     overflow-x: auto;
 }
 
+.hide-uint td:nth-child(3),
+.hide-uint th:nth-child(3) {
+    display: none;
+}
+.uint-toggle-btn {
+    background-color: #E9E9ED;
+    border: 1px solid #ccc;
+    color: #333;
+    padding: 6px 12px;
+    font-size: 13px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-top: 8px;
+    margin-bottom: 10px;
+}
 
+.uint-toggle-btn:hover {
+    background-color: #dcdce0;
+}
 
 .status-table {
     width: 100%;
