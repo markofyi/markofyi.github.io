@@ -1917,16 +1917,16 @@ Config.Weapons = {\n${formattedLuaEntries}
 
                             if (comp.includes('clip') || comp.includes('mag') || comp.includes('magazine')) return 'magazine';
                             if (comp.includes('scope') || comp.includes('zoomscope')) return 'scope';
-                            if (comp.includes('flashlight') || comp.includes('light') || comp.includes('flash')) return 'flashlight';
+                            if (comp.includes('flashlight') || comp.includes('light') || comp.includes('accs') || comp.includes('flash')) return 'flashlight';
                             if (comp.includes('suppressor') || comp.includes('silencer') || comp.includes('supp')) return 'muzzle';
                             if (comp.includes('grip')) return 'grip';
                             if (comp.includes('stock')) return 'stock';
                             if (comp.includes('frame')) return 'frame';
                             if (comp.includes('laser')) return 'laser';
                             if (comp.includes('misc')) return 'misc';
-                            // Add other detection rules as needed
+                            if (comp.includes('base')) return 'base';
 
-                            return 'clip'; // fallback default
+                            return 'clip'; 
                         }
 
                         selectedNames.forEach(name => {
