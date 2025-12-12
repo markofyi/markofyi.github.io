@@ -516,7 +516,7 @@
                     const selectedNames = Array.from(document.querySelectorAll('#checkboxDropdownContent input[type="checkbox"]:checked')).map(cb => cb.value);
                     let text = "";
 
-                    const formatWeaponEntry = entry => `	['${entry.name}'] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`;
+                    const formatWeaponEntry = entry => `	[\`${entry.name}\`] = { name = '${entry.name}', label = '${entry.label}', weapontype = '${entry.weapontype}', ammotype = '${entry.ammotype}', damagereason = '${entry.damagereason}' },`;
                     const formatItemEntry = entry => `	${entry.name} = { name = '${entry.name}', label = '${entry.label}', weight = 1000, type = 'weapon', ammotype = '${entry.ammotype}', image = '${entry.image}', unique = true, useable = false, description =  '${entry.description}'},`;
                     const formatDurabilityEntry = entry => `	${entry.name} = 0.15,`;
                     const formatAttachmentEntry = entry => `    ${entry.name} = '${entry.component}',\n`;
